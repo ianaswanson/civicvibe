@@ -12,20 +12,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "CivicVibe - Digital Transformation for Local Government",
+    default: "CivicVibe",
     template: "%s | CivicVibe",
   },
   description:
-    "Free, open-source resources helping local government teams harness AI and digital transformation. Ideas, tactics, tools, and software for civic innovation.",
-  keywords: [
-    "government digital transformation",
-    "civic technology",
-    "local government AI",
-    "open source government",
-    "civic innovation",
-    "govtech",
-  ],
-  authors: [{ name: "CivicVibe" }],
+    "Everyone in government technology has a wall they stopped trying to get through. This is the toolkit for going through it.",
   openGraph: {
     type: "website",
     locale: "en_US",

@@ -42,3 +42,13 @@ Thumbs.db
 # Testing
 coverage
 .nyc_output
+
+# Raw Claude export and extraction scratch. Contains employer-specific material. Never commit.
+_working/
+content/source/MANIFEST.md
+
+# Extraction outputs from the private Claude export: personal stories, NEVER-tagged employer material. Never publish.
+content/source/
+
+# Boundary terms for the content sync. Naming them in a committed file would publish them.
+scripts/boundaries.local.json

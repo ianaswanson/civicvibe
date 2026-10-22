@@ -1,0 +1,282 @@
+{
+  "_generated": "by scripts/sync-content.mjs from digital-services/system/. Do not edit.",
+  "docs": [
+    {
+      "slug": "glossary",
+      "title": "Glossary",
+      "description": "The one place every term in the system is defined.",
+      "status": "Draft",
+      "order": 0,
+      "source": "system/00-glossary.md"
+    },
+    {
+      "slug": "shared-terms-and-artifacts",
+      "title": "Shared terms and artifacts",
+      "description": "This page names the artifacts we write and shows how each one leads to the next, so a counter clerk's idea can be traced all the way to the release note that tells her it shipped.",
+      "status": "Draft",
+      "order": 1,
+      "source": "system/01-shared-terms-and-artifacts.md"
+    },
+    {
+      "slug": "why-digital-services",
+      "title": "Why digital services",
+      "description": "The story we tell to bring a team or a leadership group into a digital services way of working: a run of before-and-after pictures, an honest \"here is how we start,\" and room for the people in the room to push back.",
+      "status": "Draft",
+      "order": 2,
+      "source": "system/02-why-digital-services.md"
+    },
+    {
+      "slug": "vision-and-strategy",
+      "title": "Vision and strategy",
+      "description": "Vision and strategy is the first section of the roadmap.",
+      "status": "Draft",
+      "order": 3,
+      "source": "system/03-vision-and-strategy.md"
+    },
+    {
+      "slug": "goals-and-goal-progress",
+      "title": "Goals and goal progress",
+      "description": "Goals are the second section of the roadmap.",
+      "status": "Draft",
+      "order": 4,
+      "source": "system/04-goals-and-goal-progress.md"
+    },
+    {
+      "slug": "now-next-later-grid",
+      "title": "Now, Next, Later grid",
+      "description": "The Now, Next, Later grid is the third section of the roadmap.",
+      "status": "Draft",
+      "order": 5,
+      "source": "system/05-now-next-later-grid.md"
+    },
+    {
+      "slug": "quarterly-planning-and-commitments",
+      "title": "Quarterly planning and commitments",
+      "description": "Quarterly planning is step 3 of the process flow.",
+      "status": "Draft",
+      "order": 6,
+      "source": "system/06-quarterly-planning-and-commitments.md"
+    },
+    {
+      "slug": "sprint-report",
+      "title": "Sprint report",
+      "description": "The sprint report is the fifth section of the roadmap.",
+      "status": "Draft",
+      "order": 7,
+      "source": "system/07-sprint-report.md"
+    },
+    {
+      "slug": "request-triage-and-idea-log",
+      "title": "Request triage and the idea log",
+      "description": "Requests reach the team every week, from staff, partners, leadership and the public.",
+      "status": "Draft",
+      "order": 8,
+      "source": "system/08-request-triage-and-idea-log.md"
+    },
+    {
+      "slug": "initiatives-and-solutions",
+      "title": "Initiatives and solutions",
+      "description": "An Initiative is the thing we track: a bet that pursuing an opportunity will move a goal, held to the outcome it is meant to change.",
+      "status": "Draft",
+      "order": 9,
+      "source": "system/09-initiatives-and-solutions.md"
+    },
+    {
+      "slug": "discovery",
+      "title": "Discovery",
+      "description": "Discovery is the learning work inside an Initiative.",
+      "status": "Draft",
+      "order": 10,
+      "source": "system/10-discovery.md"
+    },
+    {
+      "slug": "deliverables-and-user-stories",
+      "title": "Deliverables and user stories",
+      "description": "This document covers step 5, Slice the work.",
+      "status": "Draft",
+      "order": 11,
+      "source": "system/11-deliverables-and-user-stories.md"
+    },
+    {
+      "slug": "build-release-and-enable",
+      "title": "Build, release and enable",
+      "description": "This document covers process steps 6 (Build and release) and 8 (Enable).",
+      "status": "Draft",
+      "order": 12,
+      "source": "system/12-build-release-and-enable.md"
+    },
+    {
+      "slug": "team-rhythm",
+      "title": "Team rhythm",
+      "description": "A lot of product work is staying in sync with other people.",
+      "status": "Draft",
+      "order": 13,
+      "source": "system/13-team-rhythm.md"
+    },
+    {
+      "slug": "roles-and-decision-rights",
+      "title": "Roles and decision rights",
+      "description": "Who decides what, who advises, and who to ask.",
+      "status": "Draft",
+      "order": 14,
+      "source": "system/14-roles-and-decision-rights.md"
+    },
+    {
+      "slug": "leading-the-change",
+      "title": "Leading the change",
+      "description": "How to roll this system out to a team: who hears what, in what order, and what the first quarter looks like.",
+      "status": "Draft",
+      "order": 15,
+      "source": "system/15-leading-the-change.md"
+    }
+  ],
+  "planned": [
+    {
+      "order": 16,
+      "title": "Agent setup",
+      "status": "Later"
+    },
+    {
+      "order": 17,
+      "title": "Reference library",
+      "status": "Not yet drafted"
+    }
+  ],
+  "templates": [
+    {
+      "slug": "roadmap",
+      "title": "Roadmap",
+      "description": "The one document that says where the service is heading and whether it is getting there.",
+      "artifact": "Roadmap",
+      "changes": "Quarterly; sprint report each sprint",
+      "order": 1,
+      "source": "system/templates/roadmap.md"
+    },
+    {
+      "slug": "goal",
+      "title": "Goal",
+      "description": "A change in what people do, with a starting value and a target, held for one to two years.",
+      "artifact": "Goal",
+      "changes": "Yearly",
+      "order": 2,
+      "source": "system/templates/goal.md"
+    },
+    {
+      "slug": "idea",
+      "title": "Idea",
+      "description": "Any suggestion, from anyone, with no commitment attached.",
+      "artifact": "Idea",
+      "changes": "Ongoing",
+      "order": 3,
+      "source": "system/templates/idea.md"
+    },
+    {
+      "slug": "small-request",
+      "title": "Small request",
+      "description": "A bounded change to something that already exists, finished in less than a sprint, that doesn't advance a roadmap goal.",
+      "artifact": "Small request",
+      "changes": "Ongoing",
+      "order": 4,
+      "source": "system/templates/small-request.md"
+    },
+    {
+      "slug": "initiative",
+      "title": "Initiative",
+      "description": "The tracked bet that pursuing an opportunity will advance a goal.",
+      "artifact": "Initiative",
+      "changes": "Open until the outcome is reached",
+      "order": 5,
+      "source": "system/templates/initiative.md"
+    },
+    {
+      "slug": "solution",
+      "title": "Solution",
+      "description": "One way the team tries to reach an Initiative's outcome: an output that gets tested, built, kept or dropped.",
+      "artifact": "Solution",
+      "changes": "As tried, kept or dropped",
+      "order": 6,
+      "source": "system/templates/solution.md"
+    },
+    {
+      "slug": "discovery-brief",
+      "title": "Discovery brief",
+      "description": "The one-page summary of a round of discovery inside an Initiative: what we set out to learn, who we listened to, which Solutions we considered and what we decided about each.",
+      "artifact": "Discovery brief",
+      "changes": "Each round of discovery",
+      "order": 7,
+      "source": "system/templates/discovery-brief.md"
+    },
+    {
+      "slug": "assumption-log",
+      "title": "Assumption log",
+      "description": "The running list of what must be true for a Solution to work, how we tested each assumption, and whether it held.",
+      "artifact": "Assumption log",
+      "changes": "During discovery",
+      "order": 8,
+      "source": "system/templates/assumption-log.md"
+    },
+    {
+      "slug": "deliverable",
+      "title": "Deliverable",
+      "description": "A tangible thing handed over, so a commitment can be checked as met or not.",
+      "artifact": "Deliverable",
+      "changes": "Committed quarterly",
+      "order": 9,
+      "source": "system/templates/deliverable.md"
+    },
+    {
+      "slug": "epic",
+      "title": "Epic",
+      "description": "A flexible container the team uses to group related user stories.",
+      "artifact": "Epic (optional)",
+      "changes": "As the team needs",
+      "order": 10,
+      "source": "system/templates/epic.md"
+    },
+    {
+      "slug": "user-story",
+      "title": "User story",
+      "description": "The smallest piece of value the team builds, described from the user's side.",
+      "artifact": "User story",
+      "changes": "Each sprint",
+      "order": 11,
+      "source": "system/templates/user-story.md"
+    },
+    {
+      "slug": "sprint-report",
+      "title": "Sprint report",
+      "description": "The part of the roadmap updated every sprint: whether the sprint goal was met, where each commitment stands, and what is blocked.",
+      "artifact": "Sprint report",
+      "changes": "Each sprint",
+      "order": 12,
+      "source": "system/templates/sprint-report.md"
+    },
+    {
+      "slug": "release-notes",
+      "title": "Release notes",
+      "description": "Messages that tell staff, partners and the public what changed, written for the person whose experience changes.",
+      "artifact": "Release notes",
+      "changes": "Each release",
+      "order": 13,
+      "source": "system/templates/release-notes.md"
+    },
+    {
+      "slug": "launch-readiness-check",
+      "title": "Launch readiness check",
+      "description": "Before a launch, a short go/no-go question to every group the launch affects: are you ready?",
+      "artifact": "Launch readiness check",
+      "changes": "Each launch",
+      "order": 14,
+      "source": "system/templates/launch-readiness-check.md"
+    },
+    {
+      "slug": "enable-plan",
+      "title": "Enable plan",
+      "description": "How we make sure people can succeed with what was released: what we teach, who champions it, and how we listen.",
+      "artifact": "Enable plan",
+      "changes": "Each launch",
+      "order": 15,
+      "source": "system/templates/enable-plan.md"
+    }
+  ]
+}
