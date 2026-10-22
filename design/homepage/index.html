@@ -1,0 +1,911 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CivicVibe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;800;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Green on black for the way down; pink belongs to door 2. One axis: the door's. */
+  :root {
+    --bg: #f6f7f6;
+    --ink: #0a100c;
+    --deep: #030604;    /* the inside of the tree */
+    --green: #0cf256;   /* on ink 12.7:1 */
+    --pink: #f417ad;    /* door 2's light; on ink 5.9:1 */
+    --magenta: #cc008b; /* the hand-ruled stroke */
+
+    --s-1: 0.8475rem;
+    --s0: 1.125rem;
+    --s1: 1.487rem;
+    --s2: 1.966rem;
+    --s3: 2.599rem;
+    --s4: 3.436rem;
+    --s5: 4.542rem;
+    --s6: 6.005rem;
+    --s7: 7.939rem;
+
+    --display: "Schibsted Grotesk", system-ui, sans-serif;
+    --text: "Work Sans", system-ui, sans-serif;
+
+    --m: 48px;
+    --m-half: 24px;
+    --gutter: 48px;
+    --measure: 40rem;              /* the shaft: every reading column shares it */
+    --ww: clamp(56px, 15vw, 240px); /* passage wall width */
+
+    --ease-door: cubic-bezier(.45, .05, .2, 1);
+
+    --ruled: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' preserveAspectRatio='none'%3E%3Cpath d='M3 17 C 80 15, 190 15, 290 13 S 372 11, 397 10' fill='none' stroke='%23cc008b' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E");
+    /* the tree door's arch, as a mask in a unit box */
+    --arch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 100V31C0 16 22 3 50 0C78 3 100 16 100 31V100Z'/%3E%3C/svg%3E");
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; background: var(--ink); }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: var(--s0);
+    line-height: 1.5;
+    overflow-x: clip;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+  img { display: block; max-width: 100%; height: auto; }
+
+  .skip {
+    position: absolute; left: -9999px; top: 0;
+    background: var(--ink); color: var(--bg); padding: 8px 16px;
+  }
+  .skip:focus { left: 16px; top: 16px; z-index: 20; }
+  .wrap { padding-left: var(--gutter); padding-right: var(--gutter); }
+
+  /* ================= 1. The door in the tree ================= */
+  .entry { position: relative; background: var(--deep); }
+  .stage {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    background: var(--green);
+    isolation: isolate;
+  }
+  .mast {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px var(--m);
+    flex-wrap: wrap;
+    padding-top: var(--m-half);
+    padding-bottom: var(--m-half);
+  }
+  .mark {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: var(--s2);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+  }
+  .mast ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--m); }
+  .mast ul a {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: var(--s1);
+    line-height: 1;
+    text-decoration: none;
+    border-bottom: 4px solid transparent;
+    padding-bottom: 4px;
+  }
+  .mast ul a:hover { border-bottom-color: var(--ink); }
+
+  .headline {
+    position: relative;
+    z-index: 3;
+    max-width: calc(18.5em + 2 * var(--gutter));
+    margin: 0 auto;
+    padding-top: 1vh;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(var(--s2), min(5.2vw, 6.6svh), var(--s4));
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .ruled {
+    background-image: var(--ruled);
+    background-repeat: no-repeat;
+    background-position: -0.15em 100%;
+    background-size: calc(100% + 0.4em) 0.24em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding-bottom: 0.1em;
+  }
+
+  /* The engraving. Everything inside is placed in the image's own percentages,
+     so the door stays on its hinges at any width. */
+  .scene {
+    --sw: max(100vw, 100svh * 1.55);
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    bottom: calc(var(--sw) * -0.065);
+    width: var(--sw);
+    margin-left: calc(var(--sw) / -2);
+    aspect-ratio: 1544 / 672;
+    background: var(--green);
+    transform-origin: 50.32% 62.14%;   /* the middle of the doorway */
+  }
+  .scene::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    top: 96%;
+    height: 124%;
+    background: #000;
+  }
+  .tree {
+    width: 100%;
+    mix-blend-mode: multiply;
+    filter: contrast(1.25);
+    -webkit-mask-image: linear-gradient(transparent 4%, #000 32%);
+    mask-image: linear-gradient(transparent 4%, #000 32%);
+  }
+  .doorway {
+    position: absolute;
+    left: 44.819%;
+    top: 40.179%;
+    width: 11.01%;
+    height: 35.417%;
+    perspective: 700px;
+    perspective-origin: 30% 60%;
+    -webkit-mask: var(--arch) 0 0 / 100% 100% no-repeat;
+    mask: var(--arch) 0 0 / 100% 100% no-repeat;
+  }
+  .inside {
+    position: absolute;
+    inset: 0;
+    background: var(--deep);
+  }
+  /* inside: the first roots of the passage, and a light from somewhere below */
+  .inside img {
+    position: absolute;
+    top: 0;
+    width: 34%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    filter: url(#to-green);
+    mix-blend-mode: screen;
+    opacity: 0.42;
+  }
+  .inside img:first-child { left: 0; -webkit-mask-image: linear-gradient(90deg, #000, transparent); mask-image: linear-gradient(90deg, #000, transparent); }
+  .inside img:last-child { right: 0; transform: scaleX(-1); -webkit-mask-image: linear-gradient(90deg, #000, transparent); mask-image: linear-gradient(90deg, #000, transparent); }
+  .inside::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 25%, rgb(12 242 86 / 0.18) 70%, rgb(12 242 86 / 0.42));
+    opacity: var(--glow, 1);
+  }
+  /* the line of light at the latch, before the door moves */
+  .inside::after {
+    content: "";
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 9%;
+    background: linear-gradient(90deg, rgb(12 242 86 / 0), rgb(214 255 226 / 0.95) 70%, rgb(240 255 244));
+    opacity: var(--crack, 1);
+  }
+  .leaf-t {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: var(--green);
+    isolation: isolate;
+    transform-origin: 0 50%;
+    transform: rotateY(var(--open, 7deg));
+    filter: brightness(var(--lid, 1));
+    backface-visibility: hidden;
+  }
+  .leaf-t img {
+    position: absolute;
+    max-width: none;
+    width: 908.27%;
+    left: -407.08%;
+    top: -113.45%;
+    mix-blend-mode: multiply;
+    filter: contrast(1.25);
+  }
+  .rabbit {
+    position: absolute;
+    left: 21.5%;
+    top: 38%;
+    width: 12%;
+    pointer-events: none;
+    transform-origin: 70% 80%;
+    /* the White Rabbit: paper-white coat, ink lines, a shadow to lift it off the bank */
+    filter: grayscale(1) contrast(1.5) brightness(1.45) drop-shadow(0 6px 10px rgb(3 6 4 / 0.35));
+  }
+
+  .bypass {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    bottom: 14px;
+    translate: -50% 0;
+    padding: 6px 10px;
+    color: var(--bg);
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: var(--s-1);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    white-space: nowrap;
+    background: rgb(3 6 4 / 0.72);
+    border-radius: 999px;
+    opacity: 0.78;
+  }
+  .bypass:hover, .bypass:focus-visible { opacity: 1; text-decoration: underline; text-decoration-color: var(--green); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .dark { position: absolute; inset: 0; z-index: 4; background: var(--deep); opacity: 0; pointer-events: none; }
+
+  /* Scrubbed (JS on, motion welcome): pin the stage and let the scroll open the door */
+  .scrub .entry { height: calc(100svh + 230vh); }
+  .scrub .stage { position: sticky; top: 0; height: 100svh; }
+
+  /* ================= 2. The passage ================= */
+  .fall {
+    position: relative;
+    background: linear-gradient(var(--deep), var(--ink) 60vh);
+    color: var(--bg);
+    overflow: clip;
+    padding-bottom: 6vh;
+  }
+  /* Walls: engraved strips at the edges only, close to you, so they run faster than the words */
+  .walls {
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: calc(150% + 50vh);
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+  .fall::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 0; right: 0; top: 0;
+    height: 40vh;
+    background: linear-gradient(var(--deep), transparent);
+    pointer-events: none;
+  }
+  .fall::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 45vh;
+    background: linear-gradient(transparent, var(--ink) 85%);
+    pointer-events: none;
+  }
+  .wall {
+    width: var(--ww);
+    display: flex;
+    flex-direction: column;
+    mix-blend-mode: screen;
+    opacity: 0.24;
+    -webkit-mask-image: linear-gradient(90deg, #000 45%, transparent);
+    mask-image: linear-gradient(90deg, #000 45%, transparent);
+  }
+  .wall--r {
+    transform: scaleX(-1);
+    margin-top: calc(var(--ww) * -1.1);  /* out of step with the left, so it never mirrors */
+  }
+  .wall img {
+    flex: var(--h) 1 0px;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: url(#to-green);
+    -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
+    mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
+  }
+  .wall img + img { margin-top: calc(var(--ww) * -0.32); }
+
+  /* The shaft is the grid: the words read in one column down the middle,
+     the tags hang off alternating walls as you fall past them. */
+  .beat {
+    position: relative;
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    text-align: left;
+    width: min(100%, 72rem);
+    margin: 0 auto;
+    min-height: var(--room, 92svh);
+    padding: 8vh calc(var(--ww) * 0.55 + var(--gutter));
+  }
+  .beat > .said { justify-self: center; width: min(100%, 34rem); }
+  .lift {
+    position: relative;
+    z-index: 1;
+    margin: 0 0 0.32em;
+    max-width: 11em;
+    font-family: var(--display);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--green);
+    text-wrap: balance;
+  }
+  .said {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    max-width: var(--measure);
+    font-size: var(--s1);
+    line-height: 1.45;
+    text-wrap: pretty;
+  }
+  /* The crescendo: each tag a step bigger, each room a little shorter, as you pick up speed */
+  .b1 { --room: 100svh; padding-top: 22vh; }
+  .b1 .lift { font-size: var(--s5); justify-self: start; }
+  .b2 { --room: 92svh; }
+  .b2 .lift { font-size: var(--s6); justify-self: end; text-align: right; max-width: 8em; }
+  /* b3 is built the way it says: the words first, then the ground they stand on */
+  .b3 { --room: 88svh; }
+  .b3 .lift { order: 2; margin: 0.28em 0 0; font-size: var(--s6); max-width: 7.6em; justify-self: start; }
+  /* b4 is the crescendo: the whole width of the shaft, the biggest thing before the doors */
+  .b4 { --room: 100svh; }
+  .b4 .lift { font-size: clamp(var(--s6), 8.6vw, 8.5rem); max-width: 7.5em; line-height: 0.86; justify-self: center; text-align: center; }
+
+  .obj {
+    position: absolute;
+    z-index: 0;
+    margin: 0;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    opacity: 0.9;
+  }
+  .obj img { filter: invert(1) contrast(1.15); }
+  /* each trinket falls on the open side, across the shaft from its tag */
+  .b1 .obj { right: calc(var(--ww) * 0.75); top: 30%; width: clamp(110px, 15vw, 250px); --amp: 30vh; --r0: -28deg; --r1: 10deg; }
+  .b2 .obj--map { left: calc(var(--ww) * 0.2); top: 60%; width: clamp(90px, 11vw, 180px); --amp: 18vh; --r0: 14deg; --r1: -8deg; }
+  .b2 .obj--watch { left: calc(var(--ww) * 1.4); top: 10%; width: clamp(44px, 4.5vw, 70px); --amp: 60vh; --r0: -40deg; --r1: 220deg; }
+  .b3 .obj { right: calc(var(--ww) * 0.8); top: 40%; width: clamp(80px, 11vw, 180px); --amp: 26vh; --r0: 40deg; --r1: -5deg; }
+  .b4 .obj { right: calc(var(--ww) * 0.8); top: 14%; width: clamp(64px, 8vw, 120px); --amp: 40vh; --r0: 60deg; --r1: 140deg; }
+
+  /* ================= 3. The hall of doors ================= */
+  /* The bottom of the fall is where the lights come on: a lit room, two doors
+     printed in ink like the tree above, each standing open on its own world. */
+  .hall {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    padding: 14svh var(--gutter) 6svh;
+    background: linear-gradient(var(--ink), #2b302c 6svh, var(--bg) 26svh);
+    color: var(--ink);
+    overflow: clip;
+  }
+  .doors {
+    --dh: min(50svh, 500px);           /* door height drives the whole room */
+    --dw: calc(var(--dh) * 672 / 1242);
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 22rem) 4.5rem minmax(0, 22rem);
+    column-gap: clamp(16px, 3vw, 56px);
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+  }
+  /* the floor: one ruled line at the thresholds */
+  .doors::after {
+    content: "";
+    position: absolute;
+    left: -6%; right: -6%;
+    top: calc(var(--dh) * 0.988);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgb(10 16 12 / 0.35) 20%, rgb(10 16 12 / 0.35) 80%, transparent);
+  }
+  .door {
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    gap: 22px;
+    text-decoration: none;
+    color: var(--ink);
+    --lit: var(--green);
+  }
+  .door--1 { grid-column: 1; }
+  .door--2 { grid-column: 3; --lit: var(--pink); }
+  .door:focus-visible { outline: none; }
+
+  .door__fig {
+    position: relative;
+    width: var(--dw);
+    aspect-ratio: 672 / 1242;
+  }
+  .door--2 .door__fig { transform: scaleX(-1); }   /* hinged on the other side: the two open toward each other */
+  .door__frame {
+    width: 100%;
+    mix-blend-mode: multiply;
+  }
+  /* light from the other world, spilling across the floor */
+  .door__fig::after {
+    content: "";
+    position: absolute;
+    left: 0; right: -20%;
+    top: 97%;
+    height: 12%;
+    background: radial-gradient(ellipse 50% 60% at 55% 0%, var(--lit), transparent 72%);
+    opacity: 0.45;
+    transition: opacity 700ms var(--ease-door);
+    pointer-events: none;
+  }
+  .door__opening {
+    position: absolute;
+    left: 16.22%;
+    top: 8.857%;
+    width: 66.67%;
+    height: 83.74%;
+    overflow: hidden;
+    perspective: 900px;
+    perspective-origin: 20% 50%;
+    background: var(--lit);
+  }
+  .world {
+    position: absolute;
+    inset: 0;
+    isolation: isolate;
+    background: var(--lit);
+  }
+  .world img {
+    position: absolute;
+    inset: -8% -10%;
+    width: 120%;
+    height: 116%;
+    max-width: none;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+    filter: contrast(1.2);
+    scale: 1.1;
+    translate: 3% 0;
+    transition: scale 900ms var(--ease-door), translate 900ms var(--ease-door);
+  }
+  .door--2 .world img { transform: scaleX(-1); object-position: 14% 50%; } /* undo the mirror; keep the oil can and wrench in view */
+  /* at rest each door already stands open enough to see where it goes */
+  .leaf {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: var(--bg);
+    transform-origin: 0 50%;
+    transform: rotateY(48deg);
+    transition: transform 900ms var(--ease-door), filter 900ms var(--ease-door);
+    backface-visibility: hidden;
+    box-shadow: 0 0 0 1px rgb(10 16 12 / 0.4);
+  }
+  .leaf img {
+    position: absolute;
+    max-width: none;
+    width: 150%;
+    left: -24.33%;
+    top: -10.577%;
+    mix-blend-mode: multiply;
+  }
+  .door__text {
+    display: grid;
+    gap: 12px;
+    justify-items: center;
+    text-align: center;
+    max-width: 22rem;
+  }
+  .door__label {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(var(--s1), 2.1vw, var(--s2));
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  .door__sub { font-size: var(--s0); line-height: 1.4; color: rgb(10 16 12 / 0.78); text-wrap: pretty; }
+  .door__arrow {
+    display: block;
+    width: 96px;
+    height: 28px;
+    overflow: visible;
+    color: var(--ink);
+  }
+  .door__arrow path { stroke: currentColor; stroke-width: 5; fill: none; stroke-linecap: square; }
+  .door__arrow g { transition: transform 300ms cubic-bezier(.2,.7,.1,1); }
+
+  .or {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    margin-top: calc(var(--dh) * 0.45);
+    justify-self: center;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: var(--s3);
+    line-height: 1;
+    color: rgb(10 16 12 / 0.55);
+  }
+
+  .door:hover .leaf, .door:focus-visible .leaf { transform: rotateY(80deg); filter: brightness(0.7); }
+  .door:hover .world img, .door:focus-visible .world img { scale: 1.02; translate: 0 0; }
+  .door:hover .door__fig::after, .door:focus-visible .door__fig::after { opacity: 0.85; }
+  .door:hover .door__arrow g, .door:focus-visible .door__arrow g { transform: translateX(14px); }
+  .door:hover .door__label, .door:focus-visible .door__label {
+    text-decoration: underline;
+    text-decoration-color: var(--lit);
+    text-decoration-thickness: 4px;
+    text-underline-offset: 6px;
+  }
+  .door:focus-visible .door__opening { outline: 3px solid var(--ink); outline-offset: 6px; }
+
+  /* ================= Footer ================= */
+  .foot {
+    background: var(--ink);
+    color: var(--bg);
+    padding: var(--m) var(--gutter);
+    text-align: center;
+    border-top: 1px solid rgb(246 247 246 / 0.18);
+  }
+  .foot p { max-width: var(--measure); margin: 0 auto; font-size: var(--s0); line-height: 1.5; text-wrap: pretty; }
+  .foot .fine { margin-top: var(--m-half); font-size: var(--s-1); letter-spacing: 0.04em; color: rgb(246 247 246 / 0.75); }
+  .foot a {
+    color: var(--bg);
+    text-decoration: underline;
+    text-decoration-color: var(--green);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 5px;
+  }
+  .foot a:hover { color: var(--green); }
+
+  /* ================= Motion (progressive; nothing depends on it) ================= */
+  @media (prefers-reduced-motion: no-preference) {
+    .ruled { animation: rule 700ms 400ms cubic-bezier(.6,0,.2,1) both; }
+    @keyframes rule { from { background-size: 0% 0.24em; } to { background-size: calc(100% + 0.4em) 0.24em; } }
+
+    @supports (animation-timeline: view()) {
+      .walls {
+        animation: walls linear both;
+        animation-timeline: view();
+        animation-range: cover 0% cover 100%;
+      }
+      @keyframes walls { to { translate: 0 calc(-33.333% - 33.333vh); } }
+
+      .obj {
+        animation: drift linear both;
+        animation-timeline: view();
+        animation-range: cover 0% cover 100%;
+      }
+      @keyframes drift {
+        from { translate: 0 var(--amp, 20vh); rotate: var(--r0, -10deg); }
+        to   { translate: 0 calc(var(--amp, 20vh) * -1); rotate: var(--r1, 10deg); }
+      }
+      .lift {
+        animation: arrive linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 42%;
+      }
+      @keyframes arrive { from { opacity: 0; scale: 0.86; } to { opacity: 1; scale: 1; } }
+      .said {
+        animation: settle linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 40%;
+      }
+      @keyframes settle { from { opacity: 0; translate: 0 48px; } to { opacity: 1; translate: 0 0; } }
+
+      /* No hover on touch: the doors ease open part-way as they come into view */
+      @media (hover: none) {
+        .door .leaf {
+          animation: ajar linear both;
+          animation-timeline: view();
+          animation-range: entry 30% cover 55%;
+        }
+        @keyframes ajar { from { transform: rotateY(48deg); } to { transform: rotateY(60deg); } }
+      }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .leaf-t { transform: rotateY(64deg); filter: brightness(0.6); }
+    .inside { --crack: 0.25; }
+    .leaf, .world img, .door__arrow g, .door__fig::after { transition: none; }
+  }
+
+  /* ================= Mid widths ================= */
+  @media (max-width: 1100px) and (min-width: 861px) {
+    .b2 .lift, .b3 .lift { font-size: var(--s5); }
+    .b4 .lift { font-size: var(--s6); }
+    .door__sub { font-size: var(--s-1); }
+  }
+
+  /* ================= Phone ================= */
+  @media (max-width: 860px) {
+    :root { --gutter: 16px; --m: 32px; --m-half: 16px; --ww: 40px; }
+    .mast ul { gap: 16px; }
+    .mast ul a { font-size: var(--s0); }
+    .mark { font-size: var(--s1); }
+    .headline { font-size: clamp(1.6rem, 7.6vw, var(--s3)); line-height: 1.02; padding-top: 3vh; }
+    /* 300vw is right for a phone; capped so a narrow desktop window doesn't push the trunk up behind the words */
+    .scene { --sw: clamp(100vw, 300vw, 1300px); bottom: calc(var(--sw) * -0.035); }
+    .rabbit { left: 34%; width: 10%; }
+    .bypass { bottom: 8px; }
+
+    .beat { padding-left: 44px; padding-right: 44px; }
+    .said { font-size: var(--s0); }
+    .b1 .lift { font-size: var(--s3); }
+    .b2 .lift { font-size: var(--s3); }
+    .b3 .lift { font-size: var(--s4); }
+    .b4 .lift { font-size: var(--s5); }
+    .obj--watch, .obj--map { display: none; }
+    .b1 .obj { left: auto; right: 10px; top: 4%; width: 26vw; }
+    .b3 .obj { left: 8px; top: 2%; width: 20vw; }
+    .b4 .obj { right: 12px; top: 6%; width: 16vw; }
+
+    .hall { padding: 10svh var(--gutter) 4svh; }
+    /* one row per door: the door, then its words */
+    .doors {
+      --dh: min(30svh, 260px);
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0;
+    }
+    .doors::after { display: none; }
+    .door { grid-column: 1; grid-template-columns: var(--dw) minmax(0, 1fr); align-items: center; justify-items: start; column-gap: 16px; }
+    .door--1 { grid-row: 1; }
+    .door--2 { grid-row: 3; }
+    .door__text { justify-items: start; text-align: left; gap: 8px; }
+    .or { grid-column: 1; grid-row: 2; margin: 0; justify-self: start; font-size: var(--s1); padding: 10px 0 10px calc(var(--dw) * 0.38); }
+    .door__label { font-size: var(--s0); line-height: 1.08; letter-spacing: -0.015em; }
+    .door__sub { font-size: var(--s-1); line-height: 1.35; }
+    .door__arrow { width: 64px; height: 22px; }
+
+    .foot p { font-size: var(--s0); }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#doors">Skip to the two doors</a>
+
+<!-- invert an engraving and ink it green, for the passage walls -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="to-green" color-interpolation-filters="sRGB">
+    <feColorMatrix type="matrix" values="-1 0 0 0 1  -1 0 0 0 1  -1 0 0 0 1  0 0 0 1 0"/>
+    <feComponentTransfer>
+      <feFuncR type="linear" slope="2.8" intercept="-1.25"/>
+      <feFuncG type="linear" slope="2.8" intercept="-1.25"/>
+      <feFuncB type="linear" slope="2.8" intercept="-1.25"/>
+    </feComponentTransfer>
+    <feColorMatrix type="matrix" values="0.047 0 0 0 0  0 0.949 0 0 0  0 0 0.337 0 0  0 0 0 1 0"/>
+  </filter>
+</svg>
+
+<div class="entry">
+  <header class="stage">
+    <div class="wrap mast">
+      <a class="mark" href="/">CivicVibe</a>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="/start">Start</a></li>
+          <li><a href="/system">The system</a></li>
+          <li><a href="https://github.com">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+    <h1 class="wrap headline">Everyone in government tech who yearns for digital transformation but has hit the wall too many times, I'm gonna help you <span class="ruled">make a door</span>.</h1>
+    <div class="scene" aria-hidden="true">
+      <img class="tree" src="img/tree.jpg" alt="" width="1544" height="672">
+      <img class="rabbit" src="img/rabbit-cut.webp" alt="" width="716" height="318">
+      <div class="doorway">
+        <div class="inside"><img src="img/w-roots.jpg" alt=""><img src="img/w-roots.jpg" alt=""></div>
+        <div class="leaf-t"><img src="img/tree.jpg" alt="" width="1544" height="672"></div>
+      </div>
+    </div>
+    <a class="bypass" href="#doors">skip to the doors ↓</a>
+    <div class="dark" aria-hidden="true"></div>
+  </header>
+</div>
+
+<main id="main">
+  <section class="fall" aria-label="What this is">
+    <div class="walls" aria-hidden="true">
+      <div class="wall wall--l">
+        <img src="img/w-roots.jpg" alt="" style="--h:1.97">
+        <img src="img/w-brick2.jpg" alt="" style="--h:1.83">
+        <img src="img/w-shelves.jpg" alt="" loading="lazy" style="--h:3.93">
+        <img src="img/w-maps.jpg" alt="" loading="lazy" style="--h:3.24">
+        <img src="img/w-cupboards.jpg" alt="" loading="lazy" style="--h:3.84">
+        <img src="img/w-rock.jpg" alt="" loading="lazy" style="--h:3.19">
+        <img src="img/w-rock2.jpg" alt="" loading="lazy" style="--h:1.81">
+        <img src="img/w-hall.jpg" alt="" loading="lazy" style="--h:4.32">
+      </div>
+      <div class="wall wall--r">
+        <img src="img/w-roots.jpg" alt="" style="--h:1.97">
+        <img src="img/w-brick2.jpg" alt="" style="--h:1.83">
+        <img src="img/w-maps.jpg" alt="" loading="lazy" style="--h:3.24">
+        <img src="img/w-shelves.jpg" alt="" loading="lazy" style="--h:3.93">
+        <img src="img/w-cupboards.jpg" alt="" loading="lazy" style="--h:3.84">
+        <img src="img/w-rock2.jpg" alt="" loading="lazy" style="--h:1.81">
+        <img src="img/w-rock.jpg" alt="" loading="lazy" style="--h:3.19">
+        <img src="img/w-hall.jpg" alt="" loading="lazy" style="--h:4.32">
+      </div>
+    </div>
+
+    <div class="beat b1">
+      <figure class="obj" aria-hidden="true"><img src="img/jar.jpg" alt="" width="800" height="800"></figure>
+      <p class="lift">it's possible</p>
+      <p class="said">I believe Government Digital Services can take all the best things about how to develop great software from the private sector and then add in the best mission and a sincere commitment to impacting lives. I've been in the business of local digital government transformation for 4 years now and I've done it.</p>
+    </div>
+
+    <div class="beat b2">
+      <figure class="obj obj--map" aria-hidden="true"><img src="img/map.jpg" alt="" width="1200" height="896" loading="lazy"></figure>
+      <figure class="obj obj--watch" aria-hidden="true"><img src="img/watch.jpg" alt="" width="600" height="600" loading="lazy"></figure>
+      <p class="lift">this is how I did it</p>
+      <p class="said">Civic Vibe is where I have open sourced all the tools, tricks, techniques that helped make it possible... and a few stories on how it actually unfolds, because y'all, it ain't some straight and happy path.</p>
+    </div>
+
+    <div class="beat b3">
+      <figure class="obj" aria-hidden="true"><img src="img/bottle.jpg" alt="" width="597" height="800" loading="lazy"></figure>
+      <p class="said">Also here is the obligatory AI. It's a thing, you've heard. But I think AI is the moment government finally gets to rebuild how it works from the foundation up, do way more with way less, and be more radically human than ever. It just takes a full embrace, an open mind, and a willingness to take some risk on what's possible.</p>
+      <p class="lift">rebuild from the ground up</p>
+    </div>
+
+    <div class="beat b4">
+      <figure class="obj" aria-hidden="true"><img src="img/key.jpg" alt="" width="1024" height="1024" loading="lazy"></figure>
+      <p class="lift">go on,<br> look around</p>
+      <p class="said">Join me if you want the secrets, or you just want to hear all the wild stories of evolving technology in the most human way possible under the mountain of bureaucracy.</p>
+    </div>
+  </section>
+
+  <section class="hall" id="doors" aria-label="Two ways in">
+    <div class="doors">
+      <a class="door door--1" href="/start">
+        <span class="door__fig" aria-hidden="true">
+          <img class="door__frame" src="img/door.jpg" alt="" width="672" height="1242" loading="lazy">
+          <span class="door__opening">
+            <span class="world"><img src="img/portal-garden.jpg" alt="" width="600" height="804" loading="lazy"></span>
+            <span class="leaf"><img src="img/door.jpg" alt="" width="672" height="1242" loading="lazy"></span>
+          </span>
+        </span>
+      <span class="door__text">
+          <span class="door__label">We want to transform but need to convince people to let us try</span>
+          <span class="door__sub">Start here if this is new to you, or if you brought along someone who still needs convincing.</span>
+          <svg class="door__arrow" viewBox="0 0 132 28" aria-hidden="true" focusable="false"><g><path d="M0 14H112"/><path d="M99 2L114 14L99 26"/></g></svg>
+        </span>
+        </a>
+      <span class="or" aria-hidden="true">or</span>
+      <a class="door door--2" href="/system">
+        <span class="door__fig" aria-hidden="true">
+          <img class="door__frame" src="img/door.jpg" alt="" width="672" height="1242" loading="lazy">
+          <span class="door__opening">
+            <span class="world"><img src="img/portal-works.jpg" alt="" width="600" height="795" loading="lazy"></span>
+            <span class="leaf"><img src="img/door.jpg" alt="" width="672" height="1242" loading="lazy"></span>
+          </span>
+        </span>
+        <span class="door__text">
+          <span class="door__label">We run digital services, but it's not delivering what we'd hoped.</span>
+          <span class="door__sub">Start here if you want the system and the files, not the argument.</span>
+          <svg class="door__arrow" viewBox="0 0 132 28" aria-hidden="true" focusable="false"><g><path d="M0 14H112"/><path d="M99 2L114 14L99 26"/></g></svg>
+        </span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p>All of this came out of years of doing it inside government, after a long stretch doing it in a software company, and then relearning it with AI. The story of how is <a href="/story">here</a>, if you want it. It's not required reading.</p>
+  <p class="fine">Code MIT. Content CC-BY.</p>
+</footer>
+
+<script>
+/* The walk through the door: scroll opens it, then carries you in.
+   Progressive: without this (or with reduced motion) the page is a plain, static stack. */
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const root = document.documentElement;
+  root.classList.add('scrub');
+
+  const entry = document.querySelector('.entry');
+  const stage = document.querySelector('.stage');
+  const scene = document.querySelector('.scene');
+  const leaf = document.querySelector('.leaf-t');
+  const inside = document.querySelector('.inside');
+  const rabbit = document.querySelector('.rabbit');
+  const headline = document.querySelector('.headline');
+  const mast = document.querySelector('.mast');
+  const bypass = document.querySelector('.bypass');
+  const dark = document.querySelector('.dark');
+
+  // door geometry in scene fractions (matches the CSS)
+  const D = { x: 0.44819, y: 0.40179, w: 0.1101, h: 0.35417, ox: 0.5032, oy: 0.6214 };
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const seg = (p, a, b) => clamp((p - a) / (b - a));
+  const inOut = (t) => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  const inQuad = (t) => t * t;
+  const outQuad = (t) => 1 - (1 - t) * (1 - t);
+  let g = null;
+
+  // keep the trunk out from behind the words: fade the engraving in only below the headline
+  const tree = document.querySelector('.tree');
+  function clearHeadline() {
+    const th = tree.offsetHeight;
+    if (!th) return;
+    const treeTop = scene.offsetTop;
+    const hb = headline.offsetTop + headline.offsetHeight + 12;
+    const a = Math.max(4, ((hb - treeTop) / th) * 100);
+    const b = Math.max(32, a + 20);
+    const m = `linear-gradient(transparent ${a.toFixed(1)}%, #000 ${b.toFixed(1)}%)`;
+    tree.style.webkitMaskImage = m;
+    tree.style.maskImage = m;
+  }
+
+  function measure() {
+    clearHeadline();
+    const vw = stage.clientWidth, vh = stage.clientHeight;
+    const w = scene.offsetWidth, h = scene.offsetHeight;
+    const ox = scene.offsetLeft + w * D.ox, oy = scene.offsetTop + h * D.oy;
+    const dw = w * D.w, dh = h * D.h;
+    // big enough that the doorway's dark covers the whole screen, with room to spare
+    const S = 1.3 * Math.max(vw / dw, vh / (0.62 * dh));
+    g = { dx: vw / 2 - ox, dy: vh * 0.5 - oy, hy: vh * 0.22 - oy, lnS: Math.log(S) };
+  }
+
+  function frame() {
+    if (!g) measure();
+    const total = entry.offsetHeight - stage.offsetHeight;
+    const p = clamp(-entry.getBoundingClientRect().top / total);
+
+    // the rabbit goes first
+    const r = seg(p, 0, 0.2);
+    rabbit.style.transform = `translate(${r * 165}%, ${Math.pow(r, 1.6) * 205 - Math.sin(r * Math.PI) * 40}%) scale(${1 - 0.22 * r})`;
+    rabbit.style.opacity = 1 - seg(r, 0.85, 1);
+
+    // the door swings in on its hinge, and the leaf falls into shadow as it turns
+    const o = inOut(seg(p, 0.03, 0.36));
+    leaf.style.setProperty('--open', (7 + o * 81) + 'deg');
+    inside.style.setProperty('--crack', 1 - inOut(seg(p, 0.03, 0.22)));
+    leaf.style.setProperty('--lid', 1 - o * 0.55);
+
+    // push in: scale in log space so the approach feels like steady travel, not a zoom
+    const c = inOut(seg(p, 0.12, 0.72));
+    const u = seg(p, 0.1, 0.97);
+    const s = Math.exp(g.lnS * (0.3 * u + 0.7 * u * u * u));
+    scene.style.transform = `translate(${g.dx * c}px, ${g.dy * c}px) scale(${s})`;
+    scene.style.filter = s > 2.2 ? `blur(${((s - 2.2) * 0.09).toFixed(2)}px)` : 'none';
+    // the words ride on the near plane: as you walk in they slide up and out of frame
+    const lift = g.hy * (s - 1) + g.dy * c;
+    // hold the words until the push-in is under way, so the sky never sits empty
+    const fadeOut = 1 - inOut(seg(p, 0.24, 0.5));
+    headline.style.opacity = fadeOut;
+    headline.style.transform = `translateY(${Math.min(0, lift * 0.9)}px)`;
+    mast.style.opacity = 1 - seg(p, 0.03, 0.18);
+    mast.style.visibility = p > 0.18 ? 'hidden' : '';
+    bypass.style.opacity = 0.78 * (1 - seg(p, 0, 0.08));
+    bypass.style.visibility = p > 0.08 ? 'hidden' : '';
+    inside.style.setProperty('--glow', 1 - inOut(seg(p, 0.5, 0.88)));
+    dark.style.opacity = seg(p, 0.86, 0.99);
+  }
+
+  let ticking = false;
+  addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { ticking = false; frame(); });
+  }, { passive: true });
+  addEventListener('resize', () => { measure(); frame(); });
+  addEventListener('load', () => { measure(); frame(); });
+  measure(); frame();
+})();
+</script>
+</body>
+</html>
