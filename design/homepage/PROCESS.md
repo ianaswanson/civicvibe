@@ -119,6 +119,31 @@ The rest was done one stage at a time, with Ian's yes before each next stage:
 ![Final: the passage](process/11-final-passage.jpg)
 ![Final: the hall](process/12-final-hall.jpg)
 
+## Tweaks after the Safari check
+
+After the Safari check ("it looks fine"), Ian gave four notes:
+- "ditch the rabbit, the tree door effect are good enough"
+- "the whole thing is now very green dominant, i think we need to bring back in our pink/purple color more"
+- "rebuild from the ground up i want to move to above the paragraph"
+- "the transition to the door section is too clunky, it should be the culmination of reaching the bottom of the tunnel so there should be more of a ground and the doors built into the scene"
+
+**Color.** The pink came back with a meaning instead of as decoration: the left side of the shaft belongs to door 1, and the right side belongs to door 2.
+- The left wall is green and the right wall is pink, all the way down.
+- Tags hanging on the left are green and tags on the right are pink.
+- The last tag splits: "go on," in green, "look around" in pink.
+
+By the time you reach the doors, the two colors already mean the two choices.
+
+![Two walls, two colors](process/14-two-walls-two-colors.jpg)
+
+**The bottom of the tunnel.** The book again: Alice's fall ends "upon a heap of sticks and dry leaves" in "a long, low hall… lit up by a row of lamps". Four engraved scenes were generated (they're in `_working/design/landing/`).
+- The most Tenniel-like had a printed border and a small, far-off back wall.
+- The one chosen has a solid black top edge, so the dark passage runs straight into it with no seam. It also has a big plain back wall, the floor meeting it in one level line, the heap of sticks in the middle, and lamps only at the sides.
+
+The doors now stand on that floor line against the back wall, printed onto the stone, so the brick lines run right up to their frames. Each world throws green or pink light across the floor. The words wait below the room, in the dark foreground where you're standing. On phone the scene becomes a banner where you land, and the doors stand in rows beneath it.
+
+![The bottom of the tunnel](process/13-bottom-of-the-tunnel.jpg)
+
 ## What we'd do again, and what we wouldn't
 
 - **The brief is where sameness comes from.** Naming brand colors gave five identical palettes. Giving "transit map" as an example of "civic" gave five transit maps. Describe the feeling, never an example of it.
