@@ -224,16 +224,6 @@
     mix-blend-mode: multiply;
     filter: contrast(1.25);
   }
-  .rabbit {
-    position: absolute;
-    left: 21.5%;
-    top: 38%;
-    width: 12%;
-    pointer-events: none;
-    transform-origin: 70% 80%;
-    /* the White Rabbit: paper-white coat, ink lines, a shadow to lift it off the bank */
-    filter: grayscale(1) contrast(1.5) brightness(1.45) drop-shadow(0 6px 10px rgb(3 6 4 / 0.35));
-  }
 
   .bypass {
     position: absolute;
@@ -647,7 +637,6 @@
     .headline { font-size: clamp(1.6rem, 7.6vw, var(--s3)); line-height: 1.02; padding-top: 3vh; }
     /* 300vw is right for a phone; capped so a narrow desktop window doesn't push the trunk up behind the words */
     .scene { --sw: clamp(100vw, 300vw, 1300px); bottom: calc(var(--sw) * -0.035); }
-    .rabbit { left: 34%; width: 10%; }
     .bypass { bottom: 8px; }
 
     .beat { padding-left: 44px; padding-right: 44px; }
