@@ -10,6 +10,7 @@ Run the `design-prototype` config in `.claude/launch.json`, then open http://loc
 
 - `index.html`: the page. Copy is final and matches BRAND.md's opener.
 - `img/`: the engravings the page uses, all generated with Gemini in the style of John Tenniel's 1865 Alice illustrations.
+- `PROCESS.md`: how this design got made, round by round, with screenshots in `process/`.
 - `CRITIC-PROMPT-v2.md`: the critic prompt that ranks the page against reference sites from screenshots. `CRITIC-PROMPT.md` is the earlier version, which judged against an imagined studio bar instead.
 
 ## Making more images

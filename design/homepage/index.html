@@ -391,7 +391,7 @@
     display: grid;
     place-items: center;
     padding: 14svh var(--gutter) 6svh;
-    background: linear-gradient(var(--ink), #2b302c 6svh, var(--bg) 26svh);
+    background: linear-gradient(var(--ink), #2b302c 4svh, var(--bg) 12svh);
     color: var(--ink);
     overflow: clip;
   }
@@ -432,6 +432,7 @@
     position: relative;
     width: var(--dw);
     aspect-ratio: 672 / 1242;
+    background: var(--bg);   /* paper behind the print, so the flipped door's white blends away too */
   }
   .door--2 .door__fig { transform: scaleX(-1); }   /* hinged on the other side: the two open toward each other */
   .door__frame {
