@@ -52,3 +52,14 @@ content/source/
 
 # Boundary terms for the content sync. Naming them in a committed file would publish them.
 scripts/boundaries.local.json
+
+# Private working files: Claude Code project config and the strategy, voice and status docs.
+# They stay on disk for local use; only the site and the shareable design record are public.
+/.claude/
+/BOUNDARIES.md
+/VISION.md
+/IDEA-GRAPH.md
+/SITE-CONCEPT.md
+/BRAND.md
+/PRODUCT.md
+/STATUS.md
