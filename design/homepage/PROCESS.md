@@ -144,6 +144,47 @@ The doors now stand on that floor line against the back wall, printed onto the s
 
 ![The bottom of the tunnel](process/13-bottom-of-the-tunnel.jpg)
 
+## "Work harder at this"
+
+Ian's next notes:
+- The falling objects had stopped moving.
+- The stone room "does not resemble where alice ends up".
+- "the transition from the black to the white is better but still not good".
+- "i think you are responding to my ideas as tasks to be done and bypassing the strong design practice you should be using - go back to that".
+
+He was right on the last point. "Ground" had become a floor and "less clunky" had become a softer gradient: notes executed as tasks.
+
+**The animation** had been built on CSS scroll-driven timelines, which weren't firing reliably. It moved into the same small script that runs the door entry, so it works on every browser.
+
+**Back to the source.** The end of chapter 1: "a long, low hall… lit up by a row of lamps hanging from the roof. There were doors all round the hall, but they were all locked", and a little three-legged glass table with a tiny golden key. Two landings were built from it:
+- **A:** the hall of locked doors.
+- **B:** the table and key between the two open doors.
+
+A critic ranked them against Ian's references. B won on clarity, at 6/10. Ian: "b is better but its still clearly a cop out... look at the way the top image of the tree feels immersive and then this image is faded to be roughly wedged in... don't switch to white if that is causing the issue".
+
+![Wedged in](process/15-wedged-in-cop-out.jpg)
+
+**The fix was structural, not another picture.** The tree works because the engraving is the page: full-bleed, printed straight onto the color, with the words on the same ground. The hall had been a paper-white picture boxed into the dark.
+
+So underground the print reverses: white lines cut into black, the way wood engraving actually works (Bewick's white-line technique), which the passage walls already were.
+
+The new hall is generated that way:
+- a barrel vault with the hole you fell through;
+- locked, padlocked doors along both walls;
+- the glass table and key in the middle;
+- two open doorways throwing wedges of light across the floor.
+
+It's laid out like the tree: full-bleed, with everything placed in the engraving's own percentages.
+
+**The lighting:**
+- The hall is lit only by its doorways.
+- The left half catches green, the right half pink, the same sides as the passage walls, so the shaft runs into the vault with no seam.
+- The worlds glow inside the doorways, and reaching for a door brightens its world.
+- Each label stands at the foot of its beam of light, and "or" waits by the table.
+
+![The hall, lit by its doors](process/16-hall-lit-by-its-doors.jpg)
+![Arriving from the shaft](process/17-arriving-from-the-shaft.jpg)
+
 ## What we'd do again, and what we wouldn't
 
 - **The brief is where sameness comes from.** Naming brand colors gave five identical palettes. Giving "transit map" as an example of "civic" gave five transit maps. Describe the feeling, never an example of it.
@@ -151,6 +192,7 @@ The doors now stand on that floor line against the back wall, printed onto the s
 - **A critic needs a fixed bar.** "Imagine a top studio" never converged. Ranking against real reference sites was better, but it still stalled around 6/10. Every stall was broken by Ian's taste, not by another round.
 - **The model adds; the person decides.** The decisive notes were Ian's: "boring", "what doors?", "lost all design quality", the Alice motif, "portals, not people".
 - **Don't hand a fresh agent a long checklist.** It executes the list and loses the judgment. Small stages, each reviewed on screen before the next, worked.
+- **Integrate, don't insert.** When a section feels wedged in, the fix is to build it the way the part that works was built (full-bleed, the same print logic, placed in the image's own coordinates), not to find a better picture or a softer fade.
 - **Check what the person is actually seeing.** One "much worse" was a browser dropping images.
 - **The copy is Ian's.** Every design change after round 3 followed a copy change he made, not the other way round.
 

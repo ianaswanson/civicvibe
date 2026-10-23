@@ -256,7 +256,7 @@
     background: linear-gradient(var(--deep), var(--ink) 60vh);
     color: var(--bg);
     overflow: clip;
-    padding-bottom: 6vh;
+    padding-bottom: 0;
   }
   /* Walls: engraved strips at the edges only, close to you, so they run faster than the words */
   .walls {
@@ -314,6 +314,7 @@
      the tags hang off alternating walls as you fall past them. */
   .beat {
     position: relative;
+    z-index: 3;   /* the words stay above the hall rising underneath them */
     display: grid;
     align-content: center;
     justify-items: start;
@@ -354,7 +355,7 @@
   .b3 { --room: 88svh; }
   .b3 .lift { font-size: var(--s6); max-width: 7.6em; justify-self: start; }
   /* b4 is the crescendo: the whole width of the shaft, the biggest thing before the doors */
-  .b4 { --room: 100svh; }
+  .b4 { --room: 78svh; padding-bottom: 0; }   /* the last beat hands you straight down to the hall */
   .b4 .lift { font-size: clamp(var(--s6), 8.6vw, 8.5rem); max-width: 7.5em; line-height: 0.86; justify-self: center; text-align: center; }
 
   .obj {
@@ -374,173 +375,98 @@
   .b4 .obj { right: calc(var(--ww) * 0.8); top: 14%; width: clamp(64px, 8vw, 120px); --amp: 40vh; --r0: 60deg; --r1: 140deg; }
 
   /* ================= 3. The hall of doors ================= */
-  /* The bottom of the tunnel. The fall ends on a heap of sticks and dry leaves in a
-     low stone hall (chapter 1). The two doors stand on its floor against the back wall,
-     printed onto the stone; each world throws its own light into the room. You stand
-     in the dark foreground, where the words are. */
+  /* Underground the print reverses: white lines cut into black, like the walls of the
+     passage. The hall is lit by nothing but its two open doorways, green on the left and
+     pink on the right, the same sides the passage walls already belong to. Full bleed and
+     placed in the engraving's own percentages, the way the tree is above. */
   .hall {
     position: relative;
-    min-height: 100svh;
-    display: grid;
-    place-items: start center;
-    background: var(--ink);
-    color: var(--bg);
+    z-index: 1;
+    height: 100svh;
+    min-height: 600px;
+    margin-top: -22svh;               /* the hall rises into the bottom of the passage */
     overflow: clip;
-  }
-  /* scene geometry (fractions of the cropped scene, which keeps the bottom 82% of the engraving):
-     floor line 74.1% down, back wall from ~16%; scene width:height 1600:734 */
-  .room {
-    --band: 255px;                                        /* the dark foreground where the words sit */
-    --rw: min(100vw, calc((100svh - var(--band)) * 1600 / 734));
-    position: relative;
-    width: var(--rw);
-    aspect-ratio: 1600 / 734;
-    margin-bottom: var(--band);
-    container-type: inline-size;
-  }
-  .room__scene {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    max-width: none;
-    object-fit: cover;
-    object-position: 50% 100%;
-  }
-  /* the room sits in the dark: fade its sides and front into the ink, and let each world light it */
-  .room::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-    mix-blend-mode: multiply;
-    background:
-      radial-gradient(ellipse 22% 34% at 33% 70%, rgb(12 242 86 / 0.5), transparent 70%),
-      radial-gradient(ellipse 22% 34% at 67% 70%, rgb(244 23 173 / 0.42), transparent 70%);
-  }
-  .room::after {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    z-index: 1;
-    pointer-events: none;
-    background:
-      linear-gradient(var(--ink), transparent 12%, transparent 70%, var(--ink) 100%),
-      linear-gradient(90deg, var(--ink), transparent 9%, transparent 91%, var(--ink));
-  }
-
-  .doors { position: absolute; inset: 0; }   /* no z-index: the frames must print straight onto the stone */
-  .door {
-    --dh: 25.5cqw;                       /* door height, as a share of the room's width */
-    --dw: calc(var(--dh) * 672 / 1242);
-    position: absolute;
-    top: calc(74.1% - var(--dh) + 0.6cqw);  /* the threshold sits on the floor line */
-    width: 25cqw;
-    display: grid;
-    justify-items: center;
-    align-content: start;
-    text-decoration: none;
     color: var(--bg);
-    --lit: var(--green);
   }
-  .door--1 { left: calc(33% - 12.5cqw); }
-  .door--2 { left: calc(67% - 12.5cqw); --lit: var(--pink); }
-  .door:focus-visible { outline: none; }
-
-  .door__fig {
-    position: relative;
-    width: var(--dw);
-    aspect-ratio: 672 / 1242;
-  }
-  .door__frame { width: 100%; mix-blend-mode: multiply; }
-  .door--2 .door__frame { transform: scaleX(-1); }   /* hinged on the other side: the two open toward each other */
-  .door__opening {
+  /* the scene and the doors share one box: the engraving, covering the screen */
+  .hall__scene, .hall__doors {
     position: absolute;
-    left: 16.22%;
-    top: 8.857%;
-    width: 66.67%;
-    height: 83.74%;
-    overflow: hidden;
-    perspective: 900px;
-    perspective-origin: 20% 50%;
-    background: var(--lit);
+    left: 50%;
+    top: 50%;
+    width: max(100vw, (100svh + 0px) * 1376 / 768);
+    aspect-ratio: 1376 / 768;
+    translate: -50% -50%;
   }
-  .door--2 .door__opening { left: auto; right: 16.22%; perspective-origin: 80% 50%; }
-  .world { position: absolute; inset: 0; isolation: isolate; background: var(--lit); }
-  .world img {
-    position: absolute;
-    inset: -8% -10%;
-    width: 120%;
-    height: 116%;
-    max-width: none;
-    object-fit: cover;
-    mix-blend-mode: multiply;
-    filter: contrast(1.2);
-    scale: 1.1;
-    translate: 3% 0;
-    transition: scale 900ms var(--ease-door), translate 900ms var(--ease-door);
+  .hall__scene {
+    -webkit-mask-image: linear-gradient(transparent, #000 14%);
+    mask-image: linear-gradient(transparent, #000 14%);
   }
-  .door--2 .world img { object-position: 14% 50%; translate: -3% 0; }
-  /* at rest each door already stands open enough to see where it goes */
-  .leaf {
+  .hall__print { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
+  /* the light: each half of the hall catches its own door's colour; the table stands in plain lamplight */
+  .hall__light {
     position: absolute;
     inset: 0;
-    overflow: hidden;
-    background: var(--bg);
-    transform-origin: 0 50%;
-    transform: rotateY(48deg);
-    transition: transform 900ms var(--ease-door), filter 900ms var(--ease-door);
-    backface-visibility: hidden;
-    box-shadow: 0 0 0 1px rgb(10 16 12 / 0.4);
-  }
-  .door--2 .leaf { transform-origin: 100% 50%; transform: rotateY(-48deg); }
-  .leaf img {
-    position: absolute;
-    max-width: none;
-    width: 150%;
-    left: -24.33%;
-    top: -10.577%;
     mix-blend-mode: multiply;
+    background: linear-gradient(90deg, var(--green) 0%, var(--green) 33%, #fff 46%, #fff 54%, var(--pink) 67%, var(--pink) 100%);
   }
-  .door--2 .leaf img { transform: scaleX(-1); }
-  /* the words wait in the foreground, below the floor */
-  .door__text {
+  /* the doorways open onto their worlds */
+  .portal {
+    position: absolute;
+    top: 38.4%;
+    height: 20.6%;
+    width: 4.3%;
+    overflow: hidden;
+    border-radius: 45% 45% 0 0 / 14% 14% 0 0;
+    background: var(--lit);
+    transition: filter 600ms var(--ease-door);
+  }
+  .portal--1 { left: 38.65%; --lit: var(--green); }
+  .portal--2 { left: 57.1%; --lit: var(--pink); }
+  .portal img {
+    position: absolute;
+    left: 50%; top: 0;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    translate: -50% 0;
+    mix-blend-mode: multiply;
+    filter: contrast(1.25);
+    transition: scale 900ms var(--ease-door);
+  }
+  .portal--2 img { object-position: 20% 50%; }
+
+  /* the words stand at the foot of each beam of light */
+  .hall__doors { pointer-events: none; }
+  .door {
+    position: absolute;
+    top: 71%;
+    width: min(21rem, 24%);
+    translate: -50% 0;
     display: grid;
     gap: 10px;
     justify-items: center;
     text-align: center;
-    margin-top: calc(100cqw * 734 / 1600 * 0.259 - 0.6cqw + 18px);  /* floor line to the front edge of the room, then a breath */
-    max-width: 22rem;
+    text-decoration: none;
+    color: var(--bg);
+    pointer-events: auto;
+    --lit: var(--green);
+    text-shadow: 0 1px 14px var(--ink), 0 0 2px var(--ink);
   }
+  .door--1 { left: 27%; }
+  .door--2 { left: 73%; --lit: var(--pink); }
+  .door:focus-visible { outline: 3px solid var(--lit); outline-offset: 10px; }
   .door__label {
     font-family: var(--display);
     font-weight: 800;
-    font-size: clamp(var(--s1), 2cqw, var(--s2));
+    font-size: clamp(var(--s1), 1.9vw, var(--s2));
     line-height: 1.02;
     letter-spacing: -0.025em;
     text-wrap: balance;
   }
-  .door__sub { font-size: var(--s0); line-height: 1.4; color: rgb(246 247 246 / 0.78); text-wrap: pretty; }
+  .door__sub { font-size: var(--s0); line-height: 1.4; color: rgb(246 247 246 / 0.82); text-wrap: pretty; }
   .door__arrow { display: block; width: 96px; height: 28px; overflow: visible; color: var(--lit); }
   .door__arrow path { stroke: currentColor; stroke-width: 5; fill: none; stroke-linecap: square; }
   .door__arrow g { transition: transform 300ms cubic-bezier(.2,.7,.1,1); }
-
-  .or {
-    position: absolute;
-    left: 50%;
-    top: 46%;
-    translate: -50% -50%;
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: clamp(var(--s2), 3cqw, var(--s4));
-    line-height: 1;
-    color: rgb(10 16 12 / 0.6);
-  }
-
-  .door:hover .leaf, .door:focus-visible .leaf { transform: rotateY(80deg); filter: brightness(0.7); }
-  .door--2:hover .leaf, .door--2:focus-visible .leaf { transform: rotateY(-80deg); }
-  .door:hover .world img, .door:focus-visible .world img { scale: 1.02; translate: 0 0; }
   .door:hover .door__arrow g, .door:focus-visible .door__arrow g { transform: translateX(14px); }
   .door:hover .door__label, .door:focus-visible .door__label {
     text-decoration: underline;
@@ -548,7 +474,24 @@
     text-decoration-thickness: 4px;
     text-underline-offset: 6px;
   }
-  .door:focus-visible .door__opening { outline: 3px solid var(--lit); outline-offset: 6px; }
+  /* reaching for a door brightens its world */
+  .hall:has(.door--1:hover, .door--1:focus-visible) .portal--1,
+  .hall:has(.door--2:hover, .door--2:focus-visible) .portal--2 { filter: brightness(1.25) saturate(1.2); }
+  .hall:has(.door--1:hover, .door--1:focus-visible) .portal--1 img,
+  .hall:has(.door--2:hover, .door--2:focus-visible) .portal--2 img { scale: 1.12; }
+
+  /* "or" waits by the glass table, between the two beams */
+  .or {
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    translate: -50% 0;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(var(--s1), 2vw, var(--s3));
+    line-height: 1;
+    color: rgb(246 247 246 / 0.7);
+  }
 
   /* ================= Footer ================= */
   .foot {
@@ -574,51 +517,11 @@
     .ruled { animation: rule 700ms 400ms cubic-bezier(.6,0,.2,1) both; }
     @keyframes rule { from { background-size: 0% 0.24em; } to { background-size: calc(100% + 0.4em) 0.24em; } }
 
-    @supports (animation-timeline: view()) {
-      .walls {
-        animation: walls linear both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-      }
-      @keyframes walls { to { translate: 0 calc(-33.333% - 33.333vh); } }
-
-      .obj {
-        animation: drift linear both;
-        animation-timeline: view();
-        animation-range: cover 0% cover 100%;
-      }
-      @keyframes drift {
-        from { translate: 0 var(--amp, 20vh); rotate: var(--r0, -10deg); }
-        to   { translate: 0 calc(var(--amp, 20vh) * -1); rotate: var(--r1, 10deg); }
-      }
-      .lift {
-        animation: arrive linear both;
-        animation-timeline: view();
-        animation-range: entry 10% cover 42%;
-      }
-      @keyframes arrive { from { opacity: 0; scale: 0.86; } to { opacity: 1; scale: 1; } }
-      .said {
-        animation: settle linear both;
-        animation-timeline: view();
-        animation-range: entry 0% cover 40%;
-      }
-      @keyframes settle { from { opacity: 0; translate: 0 48px; } to { opacity: 1; translate: 0 0; } }
-
-      /* No hover on touch: the doors ease open part-way as they come into view */
-      @media (hover: none) {
-        .door .leaf {
-          animation: ajar linear both;
-          animation-timeline: view();
-          animation-range: entry 30% cover 55%;
-        }
-        @keyframes ajar { from { transform: rotateY(48deg); } to { transform: rotateY(60deg); } }
-      }
-    }
   }
   @media (prefers-reduced-motion: reduce) {
     .leaf-t { transform: rotateY(64deg); filter: brightness(0.6); }
     .inside { --crack: 0.25; }
-    .leaf, .world img, .door__arrow g, .door__fig::after { transition: none; }
+    .portal, .portal img, .door__arrow g { transition: none; }
   }
 
   /* ================= Mid widths ================= */
@@ -650,21 +553,15 @@
     .b3 .obj { left: 8px; top: 2%; width: 20vw; }
     .b4 .obj { right: 12px; top: 6%; width: 16vw; }
 
-    .hall { padding: 0 var(--gutter) 6svh; }
-    .room { --rw: 100vw; margin: 0 calc(var(--gutter) * -1) 0; aspect-ratio: auto; container-type: normal; }
-    .room__scene { position: relative; height: auto; aspect-ratio: 1600 / 734; }
-    .room::before, .room::after { bottom: auto; aspect-ratio: 1600 / 734; height: auto; }
-    .room::after { background: linear-gradient(var(--ink), transparent 14%, transparent 60%, var(--ink)); }
-    .doors { position: relative; inset: auto; display: grid; padding: 0 var(--gutter); margin-top: -4svh; }
-    .door { --dh: min(28svh, 240px); position: relative; top: auto; left: auto; width: auto;
-            grid-template-columns: var(--dw) minmax(0, 1fr); align-items: center; justify-items: start; column-gap: 16px; }
-    .door--1 { left: auto; } .door--2 { left: auto; }
-    .door__text { margin-top: 0; justify-items: start; text-align: left; gap: 8px; }
-    .or { position: static; translate: none; justify-self: start; color: rgb(246 247 246 / 0.6); font-size: var(--s1); padding: 10px 0 10px calc(var(--dw) * 0.38); }
-    .door__label { font-size: var(--s0); line-height: 1.08; letter-spacing: -0.015em; }
-    .door__sub { font-size: var(--s-1); line-height: 1.35; }
-    .door__arrow { width: 64px; height: 22px; }
-    .door__fig { background: var(--bg); }
+    .hall { height: auto; min-height: 0; margin-top: -10svh; padding-bottom: 6svh; }
+    .hall__scene { position: relative; left: auto; top: auto; translate: none; width: 230vw; margin-left: -65vw; }
+    .hall__scene { -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 80%, transparent); mask-image: linear-gradient(transparent, #000 14%, #000 80%, transparent); }
+    .hall__doors { position: relative; left: auto; top: auto; translate: none; width: auto; aspect-ratio: auto;
+                   display: grid; gap: 22px; padding: 0 var(--gutter); margin-top: -18vw; pointer-events: auto; }
+    .door { position: static; translate: none; width: auto; justify-items: start; text-align: left; gap: 8px; }
+    .door__label { font-size: var(--s1); }
+    .door__sub { font-size: var(--s0); }
+    .or { position: static; translate: none; font-size: var(--s1); }
 
     .foot p { font-size: var(--s0); }
   }
@@ -772,39 +669,26 @@
   </section>
 
   <section class="hall" id="doors" aria-label="Two ways in">
-    <div class="room">
-    <img class="room__scene" src="img/landing.jpg" alt="" width="1600" height="893" loading="lazy">
-    <div class="doors">
+    <!-- The bottom of the well: a long low hall, doors all round, all locked, and two standing open.
+         Everything below is placed in the engraving's own percentages, like the tree above. -->
+    <div class="hall__scene" aria-hidden="true">
+      <img class="hall__print" src="img/hall.jpg" alt="" width="1600" height="893" loading="lazy">
+      <span class="portal portal--1"><img src="img/portal-garden.jpg" alt="" width="600" height="804" loading="lazy"></span>
+      <span class="portal portal--2"><img src="img/portal-works.jpg" alt="" width="600" height="795" loading="lazy"></span>
+      <span class="hall__light"></span>
+    </div>
+    <div class="hall__doors">
       <a class="door door--1" href="/start">
-        <span class="door__fig" aria-hidden="true">
-          <img class="door__frame" src="img/door.jpg" alt="" width="672" height="1242" loading="lazy">
-          <span class="door__opening">
-            <span class="world"><img src="img/portal-garden.jpg" alt="" width="600" height="804" loading="lazy"></span>
-            <span class="leaf"><img src="img/door.jpg" alt="" width="672" height="1242" loading="lazy"></span>
-          </span>
-        </span>
-      <span class="door__text">
-          <span class="door__label">We want to transform but need to convince people to let us try</span>
-          <span class="door__sub">Start here if this is new to you, or if you brought along someone who still needs convincing.</span>
-          <svg class="door__arrow" viewBox="0 0 132 28" aria-hidden="true" focusable="false"><g><path d="M0 14H112"/><path d="M99 2L114 14L99 26"/></g></svg>
-        </span>
-        </a>
+        <span class="door__label">We want to transform but need to convince people to let us try</span>
+        <span class="door__sub">Start here if this is new to you, or if you brought along someone who still needs convincing.</span>
+        <svg class="door__arrow" viewBox="0 0 132 28" aria-hidden="true" focusable="false"><g><path d="M0 14H112"/><path d="M99 2L114 14L99 26"/></g></svg>
+      </a>
       <span class="or" aria-hidden="true">or</span>
       <a class="door door--2" href="/system">
-        <span class="door__fig" aria-hidden="true">
-          <img class="door__frame" src="img/door.jpg" alt="" width="672" height="1242" loading="lazy">
-          <span class="door__opening">
-            <span class="world"><img src="img/portal-works.jpg" alt="" width="600" height="795" loading="lazy"></span>
-            <span class="leaf"><img src="img/door.jpg" alt="" width="672" height="1242" loading="lazy"></span>
-          </span>
-        </span>
-        <span class="door__text">
-          <span class="door__label">We run digital services, but it's not delivering what we'd hoped.</span>
-          <span class="door__sub">Start here if you want the system and the files, not the argument.</span>
-          <svg class="door__arrow" viewBox="0 0 132 28" aria-hidden="true" focusable="false"><g><path d="M0 14H112"/><path d="M99 2L114 14L99 26"/></g></svg>
-        </span>
+        <span class="door__label">We run digital services, but it's not delivering what we'd hoped.</span>
+        <span class="door__sub">Start here if you want the system and the files, not the argument.</span>
+        <svg class="door__arrow" viewBox="0 0 132 28" aria-hidden="true" focusable="false"><g><path d="M0 14H112"/><path d="M99 2L114 14L99 26"/></g></svg>
       </a>
-    </div>
     </div>
   </section>
 </main>
@@ -907,6 +791,66 @@
   addEventListener('resize', () => { measure(); frame(); });
   addEventListener('load', () => { measure(); frame(); });
   measure(); frame();
+})();
+
+/* The way down: walls closer than the words, so they run faster; trinkets drift and turn
+   past you; each tag and paragraph arrives as you reach it. Same progressive rule as the
+   door: without this, or with reduced motion, everything simply sits in place. */
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const fall = document.querySelector('.fall');
+  const walls = document.querySelector('.walls');
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const num = (el, prop, fallback) => parseFloat(getComputedStyle(el).getPropertyValue(prop)) || fallback;
+  const objs = [...document.querySelectorAll('.obj')].map((el) => ({
+    el, amp: num(el, '--amp', 20), r0: num(el, '--r0', -10), r1: num(el, '--r1', 10),
+  }));
+  const lifts = [...document.querySelectorAll('.lift')];
+  const saids = [...document.querySelectorAll('.said')];
+  const leaves = [];
+
+  // how far an element has travelled through the screen: 0 as it enters at the bottom, 1 as it leaves at the top
+  const through = (r, vh) => clamp((vh - r.top) / (vh + r.height));
+  const arrival = (r, vh, from, span) => clamp((vh * (1 - from) - r.top) / (vh * span));
+
+  function frame() {
+    const vh = innerHeight;
+    const fr = fall.getBoundingClientRect();
+    if (fr.bottom > -vh && fr.top < 2 * vh) {
+      const p = through(fr, vh);
+      walls.style.translate = `0 ${-(walls.offsetHeight / 3 + vh / 3) * p}px`;
+      for (const o of objs) {
+        const q = through(o.el.getBoundingClientRect(), vh);
+        o.el.style.translate = `0 ${o.amp * (1 - 2 * q)}vh`;
+        o.el.style.rotate = `${o.r0 + (o.r1 - o.r0) * q}deg`;
+      }
+      for (const el of lifts) {
+        const a = arrival(el.getBoundingClientRect(), vh, 0.1, 0.45);
+        el.style.opacity = a;
+        el.style.scale = 0.86 + 0.14 * a;
+      }
+      for (const el of saids) {
+        const a = arrival(el.getBoundingClientRect(), vh, 0, 0.4);
+        el.style.opacity = a;
+        el.style.translate = `0 ${48 * (1 - a)}px`;
+      }
+    }
+    for (const l of leaves) {
+      const a = arrival(l.d.getBoundingClientRect(), vh, 0.3, 0.35);
+      l.leaf.style.transform = `rotateY(${l.sign * (48 + 16 * a)}deg)`;
+    }
+  }
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { ticking = false; frame(); });
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', frame);
+  addEventListener('load', frame);
+  frame();
 })();
 </script>
 </body>
