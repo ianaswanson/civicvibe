@@ -53,6 +53,14 @@ const config: Config = {
           900: "#134e4a",
           DEFAULT: "#14b8a6",
         },
+        // Homepage (design/homepage): the engraving inks. Green is door 1, pink is door 2.
+        ink: { DEFAULT: "#0a100c", deep: "#030604" },
+        paper: "#f6f7f6",
+        door: {
+          green: "#0cf256",
+          pink: "#f417ad",
+          magenta: "#cc008b",
+        },
         // Utility colors
         success: {
           50: "#f0fdf4",

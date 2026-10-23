@@ -185,6 +185,17 @@ It's laid out like the tree: full-bleed, with everything placed in the engraving
 ![The hall, lit by its doors](process/16-hall-lit-by-its-doors.jpg)
 ![Arriving from the shaft](process/17-arriving-from-the-shaft.jpg)
 
+## Ported to the site
+
+The prototype now runs as the real homepage at `/`:
+- **Markup:** `app/page.tsx`, rendered on the server, with fonts loaded through `next/font`.
+- **Styles:** `app/home.css`, generated from the prototype's stylesheet with every rule scoped to `.home`. The colors come from Tailwind tokens (`ink`, `paper`, `door.green`, `door.pink`, `door.magenta`).
+- **Motion:** `components/home/HomeMotion.tsx`, both scroll scripts in one client component.
+- **Images:** the engravings are served from `public/home/`.
+- **Other pages:** they moved into an `app/(site)/` route group that keeps the old header and footer. The homepage draws its own.
+
+The port also caught a bug that had crept into the prototype: a stacking layer on the passage beats stopped the falling objects from blending, so the map sat on a black box. The fix is in both.
+
 ## What we'd do again, and what we wouldn't
 
 - **The brief is where sameness comes from.** Naming brand colors gave five identical palettes. Giving "transit map" as an example of "civic" gave five transit maps. Describe the feeling, never an example of it.

@@ -1,0 +1,556 @@
+/* The homepage, ported from design/homepage/index.html. Every rule is scoped to .home so
+   none of it reaches the rest of the site; colours come from the Tailwind theme (ink, paper, door). */
+/* Green on black for the way down; pink belongs to door 2. One axis: the door's. */
+  .home {
+    --bg: theme('colors.paper');
+    --ink: theme('colors.ink.DEFAULT');
+    --deep: theme('colors.ink.deep');    /* the inside of the tree */
+    --green: theme('colors.door.green');   /* on ink 12.7:1 */
+    --pink: theme('colors.door.pink');    /* door 2's light; on ink 5.9:1 */
+    --magenta: theme('colors.door.magenta'); /* the hand-ruled stroke */
+
+    --s-1: 0.8475rem;
+    --s0: 1.125rem;
+    --s1: 1.487rem;
+    --s2: 1.966rem;
+    --s3: 2.599rem;
+    --s4: 3.436rem;
+    --s5: 4.542rem;
+    --s6: 6.005rem;
+    --s7: 7.939rem;
+
+    --display: var(--font-schibsted), system-ui, sans-serif;
+    --text: var(--font-work-sans), system-ui, sans-serif;
+
+    --m: 48px;
+    --m-half: 24px;
+    --gutter: 48px;
+    --measure: 40rem;              /* the shaft: every reading column shares it */
+    --ww: clamp(56px, 15vw, 240px); /* passage wall width */
+
+    --ease-door: cubic-bezier(.45, .05, .2, 1);
+
+    --ruled: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' preserveAspectRatio='none'%3E%3Cpath d='M3 17 C 80 15, 190 15, 290 13 S 372 11, 397 10' fill='none' stroke='%23cc008b' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E");
+    /* the tree door's arch, as a mask in a unit box */
+    --arch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 100V31C0 16 22 3 50 0C78 3 100 16 100 31V100Z'/%3E%3C/svg%3E");
+  }
+
+  .home, .home *, .home *::before, .home *::after { box-sizing: border-box; }
+  .home { -webkit-text-size-adjust: 100%; background: var(--ink); }
+  .home {
+    margin: 0;
+    background: var(--ink);
+    color: var(--ink);
+    font-family: var(--text);
+    font-size: var(--s0);
+    line-height: 1.5;
+    overflow-x: clip;
+  }
+  .home a { color: inherit; }
+  .home :focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
+  .home img { display: block; max-width: 100%; height: auto; }
+
+  .home .skip {
+    position: absolute; left: -9999px; top: 0;
+    background: var(--ink); color: var(--bg); padding: 8px 16px;
+  }
+  .home .skip:focus { left: 16px; top: 16px; z-index: 20; }
+  .home .wrap { padding-left: var(--gutter); padding-right: var(--gutter); }
+
+  /* ================= 1. The door in the tree ================= */
+  .home .entry { position: relative; background: var(--deep); }
+  .home .stage {
+    position: relative;
+    min-height: 100svh;
+    overflow: hidden;
+    background: var(--green);
+    isolation: isolate;
+  }
+  .home .mast {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px var(--m);
+    flex-wrap: wrap;
+    padding-top: var(--m-half);
+    padding-bottom: var(--m-half);
+  }
+  .home .mark {
+    font-family: var(--display);
+    font-weight: 900;
+    font-size: var(--s2);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+  }
+  .home .mast ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--m); }
+  .home .mast ul a {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: var(--s1);
+    line-height: 1;
+    text-decoration: none;
+    border-bottom: 4px solid transparent;
+    padding-bottom: 4px;
+  }
+  .home .mast ul a:hover { border-bottom-color: var(--ink); }
+
+  .home .headline {
+    position: relative;
+    z-index: 3;
+    max-width: calc(18.5em + 2 * var(--gutter));
+    margin: 0 auto;
+    padding-top: 1vh;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(var(--s2), min(5.2vw, 6.6svh), var(--s4));
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    text-align: center;
+    text-wrap: balance;
+  }
+  .home .ruled {
+    background-image: var(--ruled);
+    background-repeat: no-repeat;
+    background-position: -0.15em 100%;
+    background-size: calc(100% + 0.4em) 0.24em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding-bottom: 0.1em;
+  }
+
+  /* The engraving. Everything inside is placed in the image's own percentages,
+     so the door stays on its hinges at any width. */
+  .home .scene {
+    --sw: max(100vw, 100svh * 1.55);
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    bottom: calc(var(--sw) * -0.065);
+    width: var(--sw);
+    margin-left: calc(var(--sw) / -2);
+    aspect-ratio: 1544 / 672;
+    background: var(--green);
+    transform-origin: 50.32% 62.14%;   /* the middle of the doorway */
+  }
+  .home .scene::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    top: 96%;
+    height: 124%;
+    background: #000;
+  }
+  .home .tree {
+    width: 100%;
+    mix-blend-mode: multiply;
+    filter: contrast(1.25);
+    -webkit-mask-image: linear-gradient(transparent 4%, #000 32%);
+    mask-image: linear-gradient(transparent 4%, #000 32%);
+  }
+  .home .doorway {
+    position: absolute;
+    left: 44.819%;
+    top: 40.179%;
+    width: 11.01%;
+    height: 35.417%;
+    perspective: 700px;
+    perspective-origin: 30% 60%;
+    -webkit-mask: var(--arch) 0 0 / 100% 100% no-repeat;
+    mask: var(--arch) 0 0 / 100% 100% no-repeat;
+  }
+  .home .inside {
+    position: absolute;
+    inset: 0;
+    background: var(--deep);
+  }
+  /* inside: the first roots of the passage, and a light from somewhere below */
+  .home .inside img {
+    position: absolute;
+    top: 0;
+    width: 34%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    filter: url(#to-green);
+    mix-blend-mode: screen;
+    opacity: 0.42;
+  }
+  .home .inside img:first-child { left: 0; -webkit-mask-image: linear-gradient(90deg, #000, transparent); mask-image: linear-gradient(90deg, #000, transparent); }
+  .home .inside img:last-child { right: 0; transform: scaleX(-1); -webkit-mask-image: linear-gradient(90deg, #000, transparent); mask-image: linear-gradient(90deg, #000, transparent); }
+  .home .inside::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 25%, rgb(12 242 86 / 0.18) 70%, rgb(12 242 86 / 0.42));
+    opacity: var(--glow, 1);
+  }
+  /* the line of light at the latch, before the door moves */
+  .home .inside::after {
+    content: "";
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 9%;
+    background: linear-gradient(90deg, rgb(12 242 86 / 0), rgb(214 255 226 / 0.95) 70%, rgb(240 255 244));
+    opacity: var(--crack, 1);
+  }
+  .home .leaf-t {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: var(--green);
+    isolation: isolate;
+    transform-origin: 0 50%;
+    transform: rotateY(var(--open, 7deg));
+    filter: brightness(var(--lid, 1));
+    backface-visibility: hidden;
+  }
+  .home .leaf-t img {
+    position: absolute;
+    max-width: none;
+    width: 908.27%;
+    left: -407.08%;
+    top: -113.45%;
+    mix-blend-mode: multiply;
+    filter: contrast(1.25);
+  }
+
+  .home .bypass {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    bottom: 14px;
+    translate: -50% 0;
+    padding: 6px 10px;
+    color: var(--bg);
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: var(--s-1);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    white-space: nowrap;
+    background: rgb(3 6 4 / 0.72);
+    border-radius: 999px;
+    opacity: 0.78;
+  }
+  .home .bypass:hover, .home .bypass:focus-visible { opacity: 1; text-decoration: underline; text-decoration-color: var(--green); text-decoration-thickness: 2px; text-underline-offset: 4px; }
+  .home .dark { position: absolute; inset: 0; z-index: 4; background: var(--deep); opacity: 0; pointer-events: none; }
+
+  /* Scrubbed (JS on, motion welcome): pin the stage and let the scroll open the door */
+  .home.scrub .entry { height: calc(100svh + 230vh); }
+  .home.scrub .stage { position: sticky; top: 0; height: 100svh; }
+
+  /* ================= 2. The passage ================= */
+  .home .fall {
+    position: relative;
+    background: linear-gradient(var(--deep), var(--ink) 60vh);
+    color: var(--bg);
+    overflow: clip;
+    padding-bottom: 0;
+  }
+  /* Walls: engraved strips at the edges only, close to you, so they run faster than the words */
+  .home .walls {
+    position: absolute;
+    left: 0; right: 0; top: 0;
+    height: calc(150% + 50vh);
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+  }
+  .home .fall::before {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    left: 0; right: 0; top: 0;
+    height: 40vh;
+    background: linear-gradient(var(--deep), transparent);
+    pointer-events: none;
+  }
+  .home .fall::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 45vh;
+    background: linear-gradient(transparent, var(--ink) 85%);
+    pointer-events: none;
+  }
+  .home .wall {
+    width: var(--ww);
+    display: flex;
+    flex-direction: column;
+    mix-blend-mode: screen;
+    opacity: 0.24;
+    -webkit-mask-image: linear-gradient(90deg, #000 45%, transparent);
+    mask-image: linear-gradient(90deg, #000 45%, transparent);
+  }
+  .home .wall--r {
+    transform: scaleX(-1);
+    margin-top: calc(var(--ww) * -1.1);  /* out of step with the left, so it never mirrors */
+  }
+  .home .wall img {
+    flex: var(--h) 1 0px;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: url(#to-green);
+    -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
+    mask-image: linear-gradient(transparent, #000 14%, #000 86%, transparent);
+  }
+  .home .wall--r img { filter: url(#to-pink); }   /* the right wall belongs to door 2 */
+  .home .wall img + img { margin-top: calc(var(--ww) * -0.32); }
+
+  /* The shaft is the grid: the words read in one column down the middle,
+     the tags hang off alternating walls as you fall past them. */
+  .home .beat {
+    position: relative;
+    display: grid;
+    align-content: center;
+    justify-items: start;
+    text-align: left;
+    width: min(100%, 72rem);
+    margin: 0 auto;
+    min-height: var(--room, 92svh);
+    padding: 8vh calc(var(--ww) * 0.55 + var(--gutter));
+  }
+  .home .beat > .said { justify-self: center; width: min(100%, 34rem); }
+  .home .lift .pk { color: var(--pink); }
+  .home .lift {
+    position: relative;
+    z-index: 3;   /* above the hall rising underneath; on the words, not the beat, so the trinkets still blend */
+    margin: 0 0 0.32em;
+    max-width: 11em;
+    font-family: var(--display);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    color: var(--green);
+    text-wrap: balance;
+  }
+  .home .said {
+    position: relative;
+    z-index: 3;
+    margin: 0;
+    max-width: var(--measure);
+    font-size: var(--s1);
+    line-height: 1.45;
+    text-wrap: pretty;
+  }
+  /* The crescendo: each tag a step bigger, each room a little shorter, as you pick up speed */
+  .home .b1 { --room: 100svh; padding-top: 22vh; }
+  .home .b1 .lift { font-size: var(--s5); justify-self: start; }
+  .home .b2 { --room: 92svh; }
+  .home .b2 .lift { font-size: var(--s6); justify-self: end; text-align: right; max-width: 8em; color: var(--pink); }
+  .home .b3 { --room: 88svh; }
+  .home .b3 .lift { font-size: var(--s6); max-width: 7.6em; justify-self: start; }
+  /* b4 is the crescendo: the whole width of the shaft, the biggest thing before the doors */
+  .home .b4 { --room: 78svh; padding-bottom: 0; }   /* the last beat hands you straight down to the hall */
+  .home .b4 .lift { font-size: clamp(var(--s6), 8.6vw, 8.5rem); max-width: 7.5em; line-height: 0.86; justify-self: center; text-align: center; }
+
+  .home .obj {
+    position: absolute;
+    z-index: 0;
+    margin: 0;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    opacity: 0.9;
+  }
+  .home .obj img { filter: invert(1) contrast(1.15); }
+  /* each trinket falls on the open side, across the shaft from its tag */
+  .home .b1 .obj { right: calc(var(--ww) * 0.75); top: 30%; width: clamp(110px, 15vw, 250px); --amp: 30vh; --r0: -28deg; --r1: 10deg; }
+  .home .b2 .obj--map { left: calc(var(--ww) * 0.2); top: 60%; width: clamp(90px, 11vw, 180px); --amp: 18vh; --r0: 14deg; --r1: -8deg; }
+  .home .b2 .obj--watch { left: calc(var(--ww) * 1.4); top: 10%; width: clamp(44px, 4.5vw, 70px); --amp: 60vh; --r0: -40deg; --r1: 220deg; }
+  .home .b3 .obj { right: calc(var(--ww) * 0.8); top: 40%; width: clamp(80px, 11vw, 180px); --amp: 26vh; --r0: 40deg; --r1: -5deg; }
+  .home .b4 .obj { right: calc(var(--ww) * 0.8); top: 14%; width: clamp(64px, 8vw, 120px); --amp: 40vh; --r0: 60deg; --r1: 140deg; }
+
+  /* ================= 3. The hall of doors ================= */
+  /* Underground the print reverses: white lines cut into black, like the walls of the
+     passage. The hall is lit by nothing but its two open doorways, green on the left and
+     pink on the right, the same sides the passage walls already belong to. Full bleed and
+     placed in the engraving's own percentages, the way the tree is above. */
+  .home .hall {
+    position: relative;
+    z-index: 1;
+    height: 100svh;
+    min-height: 600px;
+    margin-top: -22svh;               /* the hall rises into the bottom of the passage */
+    overflow: clip;
+    color: var(--bg);
+  }
+  /* the scene and the doors share one box: the engraving, covering the screen */
+  .home .hall__scene, .home .hall__doors {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: max(100vw, (100svh + 0px) * 1376 / 768);
+    aspect-ratio: 1376 / 768;
+    translate: -50% -50%;
+  }
+  .home .hall__scene {
+    -webkit-mask-image: linear-gradient(transparent, #000 14%);
+    mask-image: linear-gradient(transparent, #000 14%);
+  }
+  .home .hall__print { position: absolute; inset: 0; width: 100%; height: 100%; max-width: none; }
+  /* the light: each half of the hall catches its own door's colour; the table stands in plain lamplight */
+  .home .hall__light {
+    position: absolute;
+    inset: 0;
+    mix-blend-mode: multiply;
+    background: linear-gradient(90deg, var(--green) 0%, var(--green) 33%, #fff 46%, #fff 54%, var(--pink) 67%, var(--pink) 100%);
+  }
+  /* the doorways open onto their worlds */
+  .home .portal {
+    position: absolute;
+    top: 38.4%;
+    height: 20.6%;
+    width: 4.3%;
+    overflow: hidden;
+    border-radius: 45% 45% 0 0 / 14% 14% 0 0;
+    background: var(--lit);
+    transition: filter 600ms var(--ease-door);
+  }
+  .home .portal--1 { left: 38.65%; --lit: var(--green); }
+  .home .portal--2 { left: 57.1%; --lit: var(--pink); }
+  .home .portal img {
+    position: absolute;
+    left: 50%; top: 0;
+    height: 100%;
+    width: auto;
+    max-width: none;
+    translate: -50% 0;
+    mix-blend-mode: multiply;
+    filter: contrast(1.25);
+    transition: scale 900ms var(--ease-door);
+  }
+  .home .portal--2 img { object-position: 20% 50%; }
+
+  /* the words stand at the foot of each beam of light */
+  .home .hall__doors { pointer-events: none; }
+  .home .door {
+    position: absolute;
+    top: 71%;
+    width: min(21rem, 24%);
+    translate: -50% 0;
+    display: grid;
+    gap: 10px;
+    justify-items: center;
+    text-align: center;
+    text-decoration: none;
+    color: var(--bg);
+    pointer-events: auto;
+    --lit: var(--green);
+    text-shadow: 0 1px 14px var(--ink), 0 0 2px var(--ink);
+  }
+  .home .door--1 { left: 27%; }
+  .home .door--2 { left: 73%; --lit: var(--pink); }
+  .home .door:focus-visible { outline: 3px solid var(--lit); outline-offset: 10px; }
+  .home .door__label {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(var(--s1), 1.9vw, var(--s2));
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  .home .door__sub { font-size: var(--s0); line-height: 1.4; color: rgb(246 247 246 / 0.82); text-wrap: pretty; }
+  .home .door__arrow { display: block; width: 96px; height: 28px; overflow: visible; color: var(--lit); }
+  .home .door__arrow path { stroke: currentColor; stroke-width: 5; fill: none; stroke-linecap: square; }
+  .home .door__arrow g { transition: transform 300ms cubic-bezier(.2,.7,.1,1); }
+  .home .door:hover .door__arrow g, .home .door:focus-visible .door__arrow g { transform: translateX(14px); }
+  .home .door:hover .door__label, .home .door:focus-visible .door__label {
+    text-decoration: underline;
+    text-decoration-color: var(--lit);
+    text-decoration-thickness: 4px;
+    text-underline-offset: 6px;
+  }
+  /* reaching for a door brightens its world */
+  .home .hall:has(.door--1:hover, .home .door--1:focus-visible) .portal--1, .home .hall:has(.door--2:hover, .home .door--2:focus-visible) .portal--2 { filter: brightness(1.25) saturate(1.2); }
+  .home .hall:has(.door--1:hover, .home .door--1:focus-visible) .portal--1 img, .home .hall:has(.door--2:hover, .home .door--2:focus-visible) .portal--2 img { scale: 1.12; }
+
+  /* "or" waits by the glass table, between the two beams */
+  .home .or {
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    translate: -50% 0;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(var(--s1), 2vw, var(--s3));
+    line-height: 1;
+    color: rgb(246 247 246 / 0.7);
+  }
+
+  /* ================= Footer ================= */
+  .home .foot {
+    background: var(--ink);
+    color: var(--bg);
+    padding: var(--m) var(--gutter);
+    text-align: center;
+    border-top: 1px solid rgb(246 247 246 / 0.18);
+  }
+  .home .foot p { max-width: var(--measure); margin: 0 auto; font-size: var(--s0); line-height: 1.5; text-wrap: pretty; }
+  .home .foot .fine { margin-top: var(--m-half); font-size: var(--s-1); letter-spacing: 0.04em; color: rgb(246 247 246 / 0.75); }
+  .home .foot a {
+    color: var(--bg);
+    text-decoration: underline;
+    text-decoration-color: var(--green);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 5px;
+  }
+  .home .foot a:hover { color: var(--green); }
+
+  /* ================= Motion (progressive; nothing depends on it) ================= */
+  @media (prefers-reduced-motion: no-preference) {
+    .home .ruled { animation: home-rule 700ms 400ms cubic-bezier(.6,0,.2,1) both; }
+    @keyframes home-rule { from { background-size: 0% 0.24em; } to { background-size: calc(100% + 0.4em) 0.24em; } }
+
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .home .leaf-t { transform: rotateY(64deg); filter: brightness(0.6); }
+    .home .inside { --crack: 0.25; }
+    .home .portal, .home .portal img, .home .door__arrow g { transition: none; }
+  }
+
+  /* ================= Mid widths ================= */
+  @media (max-width: 1100px) and (min-width: 861px) {
+    .home .b2 .lift, .home .b3 .lift { font-size: var(--s5); }
+    .home .b4 .lift { font-size: var(--s6); }
+    .home .door__sub { font-size: var(--s-1); }
+  }
+
+  /* ================= Phone ================= */
+  @media (max-width: 860px) {
+    .home { --gutter: 16px; --m: 32px; --m-half: 16px; --ww: 40px; }
+    .home .mast ul { gap: 16px; }
+    .home .mast ul a { font-size: var(--s0); }
+    .home .mark { font-size: var(--s1); }
+    .home .headline { font-size: clamp(1.6rem, 7.6vw, var(--s3)); line-height: 1.02; padding-top: 3vh; }
+    /* 300vw is right for a phone; capped so a narrow desktop window doesn't push the trunk up behind the words */
+    .home .scene { --sw: clamp(100vw, 300vw, 1300px); bottom: calc(var(--sw) * -0.035); }
+    .home .bypass { bottom: 8px; }
+
+    .home .beat { padding-left: 44px; padding-right: 44px; }
+    .home .said { font-size: var(--s0); }
+    .home .b1 .lift { font-size: var(--s3); }
+    .home .b2 .lift { font-size: var(--s3); }
+    .home .b3 .lift { font-size: var(--s4); }
+    .home .b4 .lift { font-size: var(--s5); }
+    .home .obj--watch, .home .obj--map { display: none; }
+    .home .b1 .obj { left: auto; right: 10px; top: 4%; width: 26vw; }
+    .home .b3 .obj { left: 8px; top: 2%; width: 20vw; }
+    .home .b4 .obj { right: 12px; top: 6%; width: 16vw; }
+
+    .home .hall { height: auto; min-height: 0; margin-top: -10svh; padding-bottom: 6svh; }
+    .home .hall__scene { position: relative; left: auto; top: auto; translate: none; width: 230vw; margin-left: -65vw; }
+    .home .hall__scene { -webkit-mask-image: linear-gradient(transparent, #000 14%, #000 80%, transparent); mask-image: linear-gradient(transparent, #000 14%, #000 80%, transparent); }
+    .home .hall__doors { position: relative; left: auto; top: auto; translate: none; width: auto; aspect-ratio: auto;
+                   display: grid; gap: 22px; padding: 0 var(--gutter); margin-top: -18vw; pointer-events: auto; }
+    .home .door { position: static; translate: none; width: auto; justify-items: start; text-align: left; gap: 8px; }
+    .home .door__label { font-size: var(--s1); }
+    .home .door__sub { font-size: var(--s0); }
+    .home .or { position: static; translate: none; font-size: var(--s1); }
+
+    .home .foot p { font-size: var(--s0); }
+  }

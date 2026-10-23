@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s | CivicVibe",
   },
   description:
-    "Everyone in government technology has a wall they stopped trying to get through. This is the toolkit for going through it.",
+    "Everyone in government tech who yearns for digital transformation but has hit the wall too many times, I'm gonna help you make a door.",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -31,11 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className="flex min-h-screen flex-col font-sans">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-      </body>
+      <body className="font-sans">{children}</body>
     </html>
   );
 }
