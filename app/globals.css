@@ -2,38 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Every page is printed like the homepage's hall: paper lines on ink, lit by one door.
+   A page behind door 1 (/start, /story) is lit green; behind door 2 (/system, /templates), pink.
+   `door-lit` in Tailwind reads --door, so one class on the page's wrapper relights everything. */
 @layer base {
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-white text-secondary-900 antialiased;
+    @apply bg-ink text-paper antialiased;
   }
+
+  ::selection {
+    @apply bg-door-lit text-ink;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-4 outline-door-lit;
+  }
+}
+
+/* Door 1 is the default, so a page outside both doors (a 404) still has a light. */
+:root,
+.door-1 {
+  --door: 12 242 86;
+}
+
+.door-2 {
+  --door: 244 23 173;
 }
 
 @layer components {
   .container-page {
-    @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+    @apply mx-auto max-w-6xl px-4 md:px-12;
   }
 
-  /* Orange 500 fails contrast as text on white; links use 700. */
+  /* Paper text, the door's colour underneath, as in the homepage footer. */
   .link {
-    @apply text-primary-700 underline decoration-primary-300 underline-offset-2 hover:decoration-primary-700;
+    @apply text-paper underline decoration-door-lit decoration-2 underline-offset-4 transition-colors hover:text-door-lit;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded bg-primary-700 px-5 py-2.5 font-medium text-white transition-colors hover:bg-primary-800 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+    @apply inline-flex items-center gap-3 bg-door-lit px-6 py-3 font-display text-body-lg font-extrabold text-ink transition-transform hover:translate-x-1;
   }
 
   .btn-small {
-    @apply rounded border border-secondary-300 bg-white px-3 py-1 text-sm font-medium text-secondary-700 transition-colors hover:border-secondary-500 hover:bg-secondary-50 focus:outline-none focus:ring-2 focus:ring-primary-500;
+    @apply border border-paper/30 px-3 py-1 font-display text-small font-bold text-paper transition-colors hover:border-door-lit hover:text-door-lit;
+  }
+
+  /* The door arrow (components/Arrow.tsx). Size it with w-/h- utilities; it takes the text colour. */
+  .arrow {
+    @apply block overflow-visible;
+  }
+
+  .arrow path {
+    stroke: currentColor;
+    stroke-width: 5;
+    fill: none;
+    stroke-linecap: square;
+  }
+
+  /* The homepage's hand-ruled magenta stroke under a phrase. */
+  .ruled {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 24' preserveAspectRatio='none'%3E%3Cpath d='M3 17 C 80 15, 190 15, 290 13 S 372 11, 397 10' fill='none' stroke='%23cc008b' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: -0.15em 100%;
+    background-size: calc(100% + 0.4em) 0.24em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding-bottom: 0.1em;
   }
 }
 
-/* Synced docs and templates. This is where most of the reading happens. */
+/* Synced docs and templates. This is where most of the reading happens, so the body text
+   sits a step back from pure paper and the headings carry the display face. */
 .prose {
-  @apply text-body text-secondary-800;
+  @apply text-body text-paper/85;
 }
 
 .prose > :first-child {
@@ -41,15 +86,15 @@
 }
 
 .prose h2 {
-  @apply mb-4 mt-12 border-b border-secondary-200 pb-2 text-h3 text-secondary-900;
+  @apply mb-4 mt-14 font-display text-h3 font-extrabold text-paper;
 }
 
 .prose h3 {
-  @apply mb-3 mt-8 text-h4 text-secondary-900;
+  @apply mb-3 mt-10 font-display text-h4 font-extrabold text-paper;
 }
 
 .prose h4 {
-  @apply mb-2 mt-6 text-body-lg font-semibold text-secondary-900;
+  @apply mb-2 mt-6 font-display text-body font-bold text-paper;
 }
 
 .prose p {
@@ -57,11 +102,11 @@
 }
 
 .prose a {
-  @apply text-primary-700 underline decoration-primary-300 underline-offset-2 hover:decoration-primary-700;
+  @apply text-paper underline decoration-door-lit decoration-2 underline-offset-4 hover:text-door-lit;
 }
 
 .prose strong {
-  @apply font-semibold text-secondary-900;
+  @apply font-semibold text-paper;
 }
 
 .prose ul {
@@ -82,48 +127,48 @@
 }
 
 .prose li::marker {
-  @apply text-secondary-400;
+  @apply text-door-lit;
 }
 
 .prose blockquote {
-  @apply my-6 border-l-4 border-primary-500 pl-4 text-secondary-700;
+  @apply my-6 border-l-4 border-door-lit pl-4 text-paper;
 }
 
 .prose hr {
-  @apply my-10 border-secondary-200;
+  @apply my-12 border-paper/15;
 }
 
 .prose code {
-  @apply rounded bg-secondary-100 px-1.5 py-0.5 font-mono text-sm text-secondary-900;
+  @apply bg-ink-raised px-1.5 py-0.5 font-mono text-small text-paper;
 }
 
 .prose pre {
-  @apply mb-6 overflow-x-auto rounded border border-secondary-200 bg-secondary-50 p-4 text-sm leading-relaxed;
+  @apply mb-6 overflow-x-auto border border-paper/15 bg-ink-raised p-4 text-small leading-relaxed;
 }
 
 .prose pre code {
-  @apply whitespace-pre bg-transparent p-0 text-secondary-800;
+  @apply whitespace-pre bg-transparent p-0;
 }
 
 /* Tables: scroll inside their box on narrow screens, never squash. */
 .prose .table-wrap {
-  @apply mb-6 overflow-x-auto rounded border border-secondary-200;
+  @apply mb-6 overflow-x-auto border border-paper/15;
 }
 
 .prose table {
-  @apply w-full border-collapse text-left text-base;
+  @apply w-full border-collapse text-left text-body;
 }
 
 .prose thead {
-  @apply bg-secondary-50;
+  @apply bg-ink-raised;
 }
 
 .prose th {
-  @apply whitespace-nowrap border-b border-secondary-200 px-4 py-2.5 font-semibold text-secondary-900;
+  @apply whitespace-nowrap border-b border-paper/15 px-4 py-2.5 font-display font-bold text-paper;
 }
 
 .prose td {
-  @apply min-w-40 border-b border-secondary-100 px-4 py-2.5 align-top;
+  @apply min-w-40 border-b border-paper/10 px-4 py-2.5 align-top;
 }
 
 .prose tr:last-child td {
@@ -131,5 +176,5 @@
 }
 
 .prose td:first-child {
-  @apply min-w-32 font-medium text-secondary-900;
+  @apply min-w-32 font-medium text-paper;
 }

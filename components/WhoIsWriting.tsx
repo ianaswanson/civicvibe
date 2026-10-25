@@ -4,7 +4,7 @@ import Link from "next/link";
 export function WhoIsWriting({ linkStory = true }: { linkStory?: boolean }) {
   return (
     <section className="container-page">
-      <p className="max-w-2xl border-t border-secondary-200 py-10 text-secondary-600">
+      <p className="max-w-measure border-t border-paper/15 py-12 text-body text-paper/75">
         All of this came out of years of doing it inside government, after a
         long stretch doing it in a software company, and then relearning it with
         AI.{" "}

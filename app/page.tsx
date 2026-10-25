@@ -3,26 +3,13 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Schibsted_Grotesk, Work_Sans } from "next/font/google";
+import { Arrow } from "@/components/Arrow";
 import { HomeMotion } from "@/components/home/HomeMotion";
 import { GITHUB_REPO } from "@/lib/system";
 import "./home.css";
 
 // The homepage, ported from design/homepage/index.html (see PROCESS.md there for how it was made).
-// Copy is Ian's, verbatim; it matches BRAND.md's opener.
-
-const display = Schibsted_Grotesk({
-  subsets: ["latin"],
-  weight: ["500", "700", "800", "900"],
-  display: "swap",
-  variable: "--font-schibsted",
-});
-const text = Work_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-  variable: "--font-work-sans",
-});
+// Copy is Ian's, verbatim; it matches BRAND.md's opener. Fonts load once, in app/layout.tsx.
 
 export const metadata: Metadata = {
   title: { absolute: "CivicVibe" },
@@ -69,20 +56,9 @@ function Wall({ side, strips }: { side: "l" | "r"; strips: [string, number][] })
   );
 }
 
-function Arrow() {
-  return (
-    <svg className="door__arrow" viewBox="0 0 132 28" aria-hidden="true" focusable="false">
-      <g>
-        <path d="M0 14H112" />
-        <path d="M99 2L114 14L99 26" />
-      </g>
-    </svg>
-  );
-}
-
 export default function HomePage() {
   return (
-    <div className={`home ${display.variable} ${text.variable}`}>
+    <div className="home">
       <a className="skip" href="#doors">
         Skip to the two doors
       </a>
@@ -237,7 +213,7 @@ export default function HomePage() {
                 Start here if this is new to you, or if you brought along someone who still needs
                 convincing.
               </span>
-              <Arrow />
+              <Arrow className="door__arrow" />
             </Link>
             <span className="or" aria-hidden="true">
               or
@@ -249,7 +225,7 @@ export default function HomePage() {
               <span className="door__sub">
                 Start here if you want the system and the files, not the argument.
               </span>
-              <Arrow />
+              <Arrow className="door__arrow" />
             </Link>
           </div>
         </section>

@@ -34,14 +34,14 @@ export default async function TemplatePage({ params }: Params) {
   ]);
 
   return (
-    <article className="container-page py-12 sm:py-16">
+    <article className="container-page py-12 md:py-16">
       <div className="max-w-4xl">
-        <p className="text-sm text-secondary-500">
-          <Link href="/system#templates" className="hover:text-primary-700 hover:underline">
+        <p className="font-display text-small font-bold text-paper/60">
+          <Link href="/system#templates" className="hover:text-door-lit hover:underline">
             Templates
           </Link>
         </p>
-        <h1 className="mt-4 text-h2 text-secondary-900 sm:text-h1">{meta.title}</h1>
+        <h1 className="mt-4 font-display text-h2 font-extrabold text-paper md:text-h1">{meta.title}</h1>
         <div className="mt-6">
           <Prose html={introHtml} />
         </div>
@@ -65,7 +65,7 @@ export default async function TemplatePage({ params }: Params) {
           />
         </div>
 
-        <p className="mt-12 text-sm">
+        <p className="mt-12 text-small">
           <a
             href={`${GITHUB_REPO}/blob/main/content/templates/${slug}.md`}
             className="link"

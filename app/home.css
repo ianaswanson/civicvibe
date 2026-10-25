@@ -6,7 +6,7 @@
     --ink: theme('colors.ink.DEFAULT');
     --deep: theme('colors.ink.deep');    /* the inside of the tree */
     --green: theme('colors.door.green');   /* on ink 12.7:1 */
-    --pink: theme('colors.door.pink');    /* door 2's light; on ink 5.9:1 */
+    --pink: theme('colors.door.pink');    /* door 2's light; on ink 5.1:1 */
     --magenta: theme('colors.door.magenta'); /* the hand-ruled stroke */
 
     --s-1: 0.8475rem;

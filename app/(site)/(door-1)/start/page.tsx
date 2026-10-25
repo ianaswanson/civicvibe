@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Arrow } from "@/components/Arrow";
 import { CopyNeeded } from "@/components/CopyNeeded";
+import { PageHead } from "@/components/PageHead";
 import { WhoIsWriting } from "@/components/WhoIsWriting";
 
 export const metadata: Metadata = {
@@ -12,17 +14,20 @@ export const metadata: Metadata = {
 export default function StartPage() {
   return (
     <>
-      <div className="container-page py-16 sm:py-20">
-        <div className="max-w-2xl space-y-6 text-body-lg text-secondary-800">
-          <p>
+      <div className="container-page py-12 md:py-20">
+        <PageHead door={1}>
+          <p className="font-display text-h4 font-extrabold text-paper md:text-h3">
             We have a big team full of committed people, and we&apos;re good at
             delivering technology projects. Still, work takes a long time, big
             projects don&apos;t succeed, the people we serve are frustrated, and
             the business side and the technology side rub against each other.
           </p>
+        </PageHead>
+
+        <div className="mt-14 max-w-measure space-y-6 text-body text-paper/85 md:ml-portal md:text-body-lg">
           <div>
-            <p className="font-semibold text-secondary-900">Does this feel familiar?</p>
-            <ul className="mt-3 list-disc space-y-2 pl-6">
+            <p className="font-display font-extrabold text-door-lit">Does this feel familiar?</p>
+            <ul className="mt-3 list-disc space-y-2 pl-6 marker:text-door-lit">
               <li>The request queue that never gets shorter.</li>
               <li>The timeline that gets re-estimated halfway through.</li>
               <li>
@@ -45,15 +50,16 @@ export default function StartPage() {
           </p>
         </div>
 
-        <div className="mt-16 max-w-2xl">
+        <div className="mt-16 max-w-measure md:ml-portal">
           <CopyNeeded what="one person's week" />
           <CopyNeeded what="the six shifts" />
           <CopyNeeded what="start Monday" />
         </div>
 
-        <p className="mt-12">
+        <p className="mt-12 md:ml-portal">
           <Link href="/system" className="btn-primary">
             The system
+            <Arrow className="h-5 w-16" />
           </Link>
         </p>
       </div>

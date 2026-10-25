@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDoc, getIndex, renderMarkdown, GITHUB_REPO } from "@/lib/system";
+import { Arrow } from "@/components/Arrow";
 import { Prose } from "@/components/Prose";
 import { StatusBadge } from "@/components/StatusBadge";
 
@@ -33,22 +34,22 @@ export default async function DocPage({ params }: Params) {
   const html = await renderMarkdown(doc.content);
 
   return (
-    <article className="container-page py-12 sm:py-16">
+    <article className="container-page py-12 md:py-16">
       <div className="max-w-3xl">
-        <p className="flex items-center gap-3 text-sm text-secondary-500">
-          <Link href="/system#documents" className="hover:text-primary-700 hover:underline">
+        <p className="flex flex-wrap items-center gap-3 font-display text-small font-bold text-paper/60">
+          <Link href="/system#documents" className="hover:text-door-lit hover:underline">
             The system
           </Link>
           <span aria-hidden="true">/</span>
-          <span className="font-mono">{String(doc.meta.order).padStart(2, "0")}</span>
+          <span className="font-mono text-door-lit">{String(doc.meta.order).padStart(2, "0")}</span>
           <StatusBadge status={doc.meta.status} />
         </p>
-        <h1 className="mt-4 text-h2 text-secondary-900 sm:text-h1">{doc.meta.title}</h1>
-        <div className="mt-8">
+        <h1 className="mt-4 font-display text-h2 font-extrabold text-paper md:text-h1">{doc.meta.title}</h1>
+        <div className="mt-10">
           <Prose html={html} />
         </div>
 
-        <p className="mt-12 text-sm">
+        <p className="mt-12 text-small">
           <a
             href={`${GITHUB_REPO}/blob/main/content/system/${slug}.md`}
             className="link"
@@ -57,11 +58,11 @@ export default async function DocPage({ params }: Params) {
           </a>
         </p>
 
-        <nav className="mt-8 grid gap-4 border-t border-secondary-200 pt-6 sm:grid-cols-2">
+        <nav aria-label="Documents" className="mt-8 grid gap-6 border-t border-paper/15 pt-6 sm:grid-cols-2">
           {prev ? (
             <Link href={`/system/${prev.slug}`} className="group block">
-              <span className="text-sm text-secondary-500">Previous</span>
-              <span className="block font-medium text-secondary-900 group-hover:text-primary-700 group-hover:underline">
+              <span className="text-small text-paper/60">Previous</span>
+              <span className="block font-display text-body-lg font-extrabold leading-tight text-paper decoration-door-lit decoration-4 underline-offset-4 group-hover:underline">
                 {prev.title}
               </span>
             </Link>
@@ -70,10 +71,11 @@ export default async function DocPage({ params }: Params) {
           )}
           {next && (
             <Link href={`/system/${next.slug}`} className="group block sm:text-right">
-              <span className="text-sm text-secondary-500">Next</span>
-              <span className="block font-medium text-secondary-900 group-hover:text-primary-700 group-hover:underline">
+              <span className="text-small text-paper/60">Next</span>
+              <span className="block font-display text-body-lg font-extrabold leading-tight text-paper decoration-door-lit decoration-4 underline-offset-4 group-hover:underline">
                 {next.title}
               </span>
+              <Arrow className="mt-2 h-4 w-14 text-door-lit transition-transform group-hover:translate-x-2 sm:ml-auto" />
             </Link>
           )}
         </nav>

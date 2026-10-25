@@ -2,14 +2,14 @@ import { GITHUB_REPO } from "@/lib/system";
 
 export function Footer() {
   return (
-    <footer className="border-t border-secondary-200 bg-secondary-50">
-      <div className="container-page space-y-3 py-10 text-sm text-secondary-600">
-        <p className="max-w-2xl">
+    <footer className="border-t border-paper/15 bg-ink">
+      <div className="container-page space-y-3 py-12 text-small text-paper/75">
+        <p className="max-w-measure">
           I work in local government technology. CivicVibe reflects what
           I&apos;ve learned and what I think might help others doing similar
           work. These are personal views, not official positions of my employer.
         </p>
-        <p>
+        <p className="tracking-wide">
           Code:{" "}
           <a href="https://opensource.org/license/mit" className="link">
             MIT

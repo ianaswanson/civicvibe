@@ -33,7 +33,7 @@ export function TemplateTabs({ panels }: { panels: Panel[] }) {
 
   return (
     <div>
-      <div className="flex flex-wrap items-end justify-between gap-4 border-b border-secondary-200">
+      <div className="flex flex-wrap items-end justify-between gap-4 border-b border-paper/15">
         <div role="tablist" className="flex gap-1">
           {panels.map((p, i) => (
             <button
@@ -44,8 +44,8 @@ export function TemplateTabs({ panels }: { panels: Panel[] }) {
               onClick={() => setActive(i)}
               className={
                 i === active
-                  ? "-mb-px border-b-2 border-primary-600 px-4 py-2 font-medium text-secondary-900"
-                  : "-mb-px border-b-2 border-transparent px-4 py-2 text-secondary-500 hover:text-secondary-900"
+                  ? "-mb-px border-b-4 border-door-lit px-4 py-2 font-display font-extrabold text-paper"
+                  : "-mb-px border-b-4 border-transparent px-4 py-2 font-display font-bold text-paper/60 hover:text-paper"
               }
             >
               {p.label}

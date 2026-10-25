@@ -1,11 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Schibsted_Grotesk, Work_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+// The homepage's two faces, for the whole site: Schibsted for anything you'd shout, Work Sans to read.
+const display = Schibsted_Grotesk({
   subsets: ["latin"],
+  weight: ["500", "700", "800", "900"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-schibsted",
+});
+const text = Work_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-work-sans",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${display.variable} ${text.variable}`}>
       <body className="font-sans">{children}</body>
     </html>
   );
