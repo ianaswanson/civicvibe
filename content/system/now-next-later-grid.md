@@ -6,6 +6,7 @@ description: "The Now, Next, Later grid is the third section of the roadmap."
 status: "Draft"
 order: 5
 source: "system/05-now-next-later-grid.md"
+inlineTemplate: false
 ---
 The Now, Next, Later grid is the third section of the roadmap. It shows the work ahead in three time horizons, one row per goal, so anyone can see what is shipping this quarter, what is coming over the next two quarters, and which problems we are still exploring.
 
@@ -65,10 +66,10 @@ The product manager moves items at quarterly planning, using these rules:
 5. **Dropped Solutions come off, and that is said out loud.** When a Solution fails a test or doesn't move the outcome, its card leaves the grid and the Initiative's next Solution takes its place. Nothing moves silently.
 
 ## Template
-Use [roadmap.md](/templates/roadmap), section 3, Now, Next, Later grid.
+Use [Roadmap](/templates/roadmap), section 3, Now, Next, Later grid.
 
 ## DMV example
-This is the DMV grid at Q1 planning, filled in as section 3 of the DMV example in [roadmap.md](/templates/roadmap). It starts from the team's real Q1 grid and fixes six placements that broke the rules above, listed below. The fixes are the lesson.
+This is the DMV grid at Q1 planning, filled in as section 3 of the DMV example in [Roadmap](/templates/roadmap). It starts from the team's real Q1 grid and fixes six placements that broke the rules above, listed below. The fixes are the lesson.
 
 Q1 runs 60/20/20 instead of the 50/25/25 default. Online renewal has a fixed public launch in Q2, and the team cleared its maintenance backlog in Q4, so Strategic gets the extra share this quarter.
 

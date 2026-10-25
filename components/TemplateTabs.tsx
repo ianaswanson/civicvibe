@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Panel {
   label: string;
   filename: string;
   markdown: string;
   html: string;
+  // URL hash that opens this tab, e.g. "dmv-example".
+  hash?: string;
 }
 
 // Blank template and DMV example as two tabs, each with Copy and Download.
@@ -14,6 +16,16 @@ export function TemplateTabs({ panels }: { panels: Panel[] }) {
   const [active, setActive] = useState(0);
   const [copied, setCopied] = useState<number | null>(null);
   const panel = panels[active];
+
+  useEffect(() => {
+    const open = () => {
+      const i = panels.findIndex((p) => p.hash && `#${p.hash}` === window.location.hash);
+      if (i !== -1) setActive(i);
+    };
+    open();
+    window.addEventListener("hashchange", open);
+    return () => window.removeEventListener("hashchange", open);
+  }, [panels]);
 
   async function copy() {
     await navigator.clipboard.writeText(panel.markdown);
@@ -32,7 +44,7 @@ export function TemplateTabs({ panels }: { panels: Panel[] }) {
   }
 
   return (
-    <div>
+    <div id={panels.find((p) => p.hash)?.hash} className="scroll-mt-8">
       <div className="flex flex-wrap items-end justify-between gap-4 border-b border-paper/15">
         <div role="tablist" className="flex gap-1">
           {panels.map((p, i) => (

@@ -6,6 +6,7 @@ description: "Who decides what, who advises, and who to ask."
 status: "Draft"
 order: 14
 source: "system/14-roles-and-decision-rights.md"
+inlineTemplate: true
 ---
 Who decides what, who advises, and who to ask. Most friction on a digital services team comes from two people who each think a decision is theirs, or from a decision nobody thinks is theirs. This page settles both.
 

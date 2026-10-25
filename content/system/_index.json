@@ -7,7 +7,9 @@
       "description": "The one place every term in the system is defined.",
       "status": "Draft",
       "order": 0,
-      "source": "system/00-glossary.md"
+      "source": "system/00-glossary.md",
+      "inlineTemplate": false,
+      "templates": []
     },
     {
       "slug": "shared-terms-and-artifacts",
@@ -15,7 +17,9 @@
       "description": "This page names the artifacts we write and shows how each one leads to the next, so a counter clerk's idea can be traced all the way to the release note that tells her it shipped.",
       "status": "Draft",
       "order": 1,
-      "source": "system/01-shared-terms-and-artifacts.md"
+      "source": "system/01-shared-terms-and-artifacts.md",
+      "inlineTemplate": true,
+      "templates": []
     },
     {
       "slug": "why-digital-services",
@@ -23,7 +27,9 @@
       "description": "The story we tell to bring a team or a leadership group into a digital services way of working: a run of before-and-after pictures, an honest \"here is how we start,\" and room for the people in the room to push back.",
       "status": "Draft",
       "order": 2,
-      "source": "system/02-why-digital-services.md"
+      "source": "system/02-why-digital-services.md",
+      "inlineTemplate": false,
+      "templates": []
     },
     {
       "slug": "vision-and-strategy",
@@ -31,7 +37,11 @@
       "description": "Vision and strategy is the first section of the roadmap.",
       "status": "Draft",
       "order": 3,
-      "source": "system/03-vision-and-strategy.md"
+      "source": "system/03-vision-and-strategy.md",
+      "inlineTemplate": false,
+      "templates": [
+        "roadmap"
+      ]
     },
     {
       "slug": "goals-and-goal-progress",
@@ -39,7 +49,12 @@
       "description": "Goals are the second section of the roadmap.",
       "status": "Draft",
       "order": 4,
-      "source": "system/04-goals-and-goal-progress.md"
+      "source": "system/04-goals-and-goal-progress.md",
+      "inlineTemplate": false,
+      "templates": [
+        "goal",
+        "roadmap"
+      ]
     },
     {
       "slug": "now-next-later-grid",
@@ -47,7 +62,11 @@
       "description": "The Now, Next, Later grid is the third section of the roadmap.",
       "status": "Draft",
       "order": 5,
-      "source": "system/05-now-next-later-grid.md"
+      "source": "system/05-now-next-later-grid.md",
+      "inlineTemplate": false,
+      "templates": [
+        "roadmap"
+      ]
     },
     {
       "slug": "quarterly-planning-and-commitments",
@@ -55,7 +74,11 @@
       "description": "Quarterly planning is step 3 of the process flow.",
       "status": "Draft",
       "order": 6,
-      "source": "system/06-quarterly-planning-and-commitments.md"
+      "source": "system/06-quarterly-planning-and-commitments.md",
+      "inlineTemplate": false,
+      "templates": [
+        "roadmap"
+      ]
     },
     {
       "slug": "sprint-report",
@@ -63,7 +86,11 @@
       "description": "The sprint report is the fifth section of the roadmap.",
       "status": "Draft",
       "order": 7,
-      "source": "system/07-sprint-report.md"
+      "source": "system/07-sprint-report.md",
+      "inlineTemplate": false,
+      "templates": [
+        "sprint-report"
+      ]
     },
     {
       "slug": "request-triage-and-idea-log",
@@ -71,7 +98,12 @@
       "description": "Requests reach the team every week, from staff, partners, leadership and the public.",
       "status": "Draft",
       "order": 8,
-      "source": "system/08-request-triage-and-idea-log.md"
+      "source": "system/08-request-triage-and-idea-log.md",
+      "inlineTemplate": true,
+      "templates": [
+        "small-request",
+        "idea"
+      ]
     },
     {
       "slug": "initiatives-and-solutions",
@@ -79,7 +111,12 @@
       "description": "An Initiative is the thing we track: a bet that pursuing an opportunity will move a goal, held to the outcome it is meant to change.",
       "status": "Draft",
       "order": 9,
-      "source": "system/09-initiatives-and-solutions.md"
+      "source": "system/09-initiatives-and-solutions.md",
+      "inlineTemplate": false,
+      "templates": [
+        "initiative",
+        "solution"
+      ]
     },
     {
       "slug": "discovery",
@@ -87,7 +124,12 @@
       "description": "Discovery is the learning work inside an Initiative.",
       "status": "Draft",
       "order": 10,
-      "source": "system/10-discovery.md"
+      "source": "system/10-discovery.md",
+      "inlineTemplate": false,
+      "templates": [
+        "discovery-brief",
+        "assumption-log"
+      ]
     },
     {
       "slug": "deliverables-and-user-stories",
@@ -95,7 +137,13 @@
       "description": "This document covers step 5, Slice the work.",
       "status": "Draft",
       "order": 11,
-      "source": "system/11-deliverables-and-user-stories.md"
+      "source": "system/11-deliverables-and-user-stories.md",
+      "inlineTemplate": false,
+      "templates": [
+        "deliverable",
+        "epic",
+        "user-story"
+      ]
     },
     {
       "slug": "build-release-and-enable",
@@ -103,7 +151,13 @@
       "description": "This document covers process steps 6 (Build and release) and 8 (Enable).",
       "status": "Draft",
       "order": 12,
-      "source": "system/12-build-release-and-enable.md"
+      "source": "system/12-build-release-and-enable.md",
+      "inlineTemplate": false,
+      "templates": [
+        "launch-readiness-check",
+        "release-notes",
+        "enable-plan"
+      ]
     },
     {
       "slug": "team-rhythm",
@@ -111,7 +165,9 @@
       "description": "A lot of product work is staying in sync with other people.",
       "status": "Draft",
       "order": 13,
-      "source": "system/13-team-rhythm.md"
+      "source": "system/13-team-rhythm.md",
+      "inlineTemplate": true,
+      "templates": []
     },
     {
       "slug": "roles-and-decision-rights",
@@ -119,7 +175,9 @@
       "description": "Who decides what, who advises, and who to ask.",
       "status": "Draft",
       "order": 14,
-      "source": "system/14-roles-and-decision-rights.md"
+      "source": "system/14-roles-and-decision-rights.md",
+      "inlineTemplate": true,
+      "templates": []
     },
     {
       "slug": "leading-the-change",
@@ -127,7 +185,9 @@
       "description": "How to roll this system out to a team: who hears what, in what order, and what the first quarter looks like.",
       "status": "Draft",
       "order": 15,
-      "source": "system/15-leading-the-change.md"
+      "source": "system/15-leading-the-change.md",
+      "inlineTemplate": true,
+      "templates": []
     }
   ],
   "planned": [
@@ -150,7 +210,17 @@
       "artifact": "Roadmap",
       "changes": "Quarterly; sprint report each sprint",
       "order": 1,
-      "source": "system/templates/roadmap.md"
+      "source": "system/templates/roadmap.md",
+      "docs": [
+        "vision-and-strategy",
+        "goals-and-goal-progress",
+        "now-next-later-grid",
+        "quarterly-planning-and-commitments"
+      ],
+      "visuals": {
+        "template": "/files/roadmap/template.html",
+        "example": "/files/roadmap/dmv-example.html"
+      }
     },
     {
       "slug": "goal",
@@ -159,7 +229,10 @@
       "artifact": "Goal",
       "changes": "Yearly",
       "order": 2,
-      "source": "system/templates/goal.md"
+      "source": "system/templates/goal.md",
+      "docs": [
+        "goals-and-goal-progress"
+      ]
     },
     {
       "slug": "idea",
@@ -168,7 +241,10 @@
       "artifact": "Idea",
       "changes": "Ongoing",
       "order": 3,
-      "source": "system/templates/idea.md"
+      "source": "system/templates/idea.md",
+      "docs": [
+        "request-triage-and-idea-log"
+      ]
     },
     {
       "slug": "small-request",
@@ -177,7 +253,10 @@
       "artifact": "Small request",
       "changes": "Ongoing",
       "order": 4,
-      "source": "system/templates/small-request.md"
+      "source": "system/templates/small-request.md",
+      "docs": [
+        "request-triage-and-idea-log"
+      ]
     },
     {
       "slug": "initiative",
@@ -186,7 +265,10 @@
       "artifact": "Initiative",
       "changes": "Open until the outcome is reached",
       "order": 5,
-      "source": "system/templates/initiative.md"
+      "source": "system/templates/initiative.md",
+      "docs": [
+        "initiatives-and-solutions"
+      ]
     },
     {
       "slug": "solution",
@@ -195,7 +277,10 @@
       "artifact": "Solution",
       "changes": "As tried, kept or dropped",
       "order": 6,
-      "source": "system/templates/solution.md"
+      "source": "system/templates/solution.md",
+      "docs": [
+        "initiatives-and-solutions"
+      ]
     },
     {
       "slug": "discovery-brief",
@@ -204,7 +289,10 @@
       "artifact": "Discovery brief",
       "changes": "Each round of discovery",
       "order": 7,
-      "source": "system/templates/discovery-brief.md"
+      "source": "system/templates/discovery-brief.md",
+      "docs": [
+        "discovery"
+      ]
     },
     {
       "slug": "assumption-log",
@@ -213,7 +301,10 @@
       "artifact": "Assumption log",
       "changes": "During discovery",
       "order": 8,
-      "source": "system/templates/assumption-log.md"
+      "source": "system/templates/assumption-log.md",
+      "docs": [
+        "discovery"
+      ]
     },
     {
       "slug": "deliverable",
@@ -222,7 +313,10 @@
       "artifact": "Deliverable",
       "changes": "Committed quarterly",
       "order": 9,
-      "source": "system/templates/deliverable.md"
+      "source": "system/templates/deliverable.md",
+      "docs": [
+        "deliverables-and-user-stories"
+      ]
     },
     {
       "slug": "epic",
@@ -231,7 +325,10 @@
       "artifact": "Epic (optional)",
       "changes": "As the team needs",
       "order": 10,
-      "source": "system/templates/epic.md"
+      "source": "system/templates/epic.md",
+      "docs": [
+        "deliverables-and-user-stories"
+      ]
     },
     {
       "slug": "user-story",
@@ -240,7 +337,10 @@
       "artifact": "User story",
       "changes": "Each sprint",
       "order": 11,
-      "source": "system/templates/user-story.md"
+      "source": "system/templates/user-story.md",
+      "docs": [
+        "deliverables-and-user-stories"
+      ]
     },
     {
       "slug": "sprint-report",
@@ -249,7 +349,10 @@
       "artifact": "Sprint report",
       "changes": "Each sprint",
       "order": 12,
-      "source": "system/templates/sprint-report.md"
+      "source": "system/templates/sprint-report.md",
+      "docs": [
+        "sprint-report"
+      ]
     },
     {
       "slug": "release-notes",
@@ -258,7 +361,10 @@
       "artifact": "Release notes",
       "changes": "Each release",
       "order": 13,
-      "source": "system/templates/release-notes.md"
+      "source": "system/templates/release-notes.md",
+      "docs": [
+        "build-release-and-enable"
+      ]
     },
     {
       "slug": "launch-readiness-check",
@@ -267,7 +373,10 @@
       "artifact": "Launch readiness check",
       "changes": "Each launch",
       "order": 14,
-      "source": "system/templates/launch-readiness-check.md"
+      "source": "system/templates/launch-readiness-check.md",
+      "docs": [
+        "build-release-and-enable"
+      ]
     },
     {
       "slug": "enable-plan",
@@ -276,7 +385,10 @@
       "artifact": "Enable plan",
       "changes": "Each launch",
       "order": 15,
-      "source": "system/templates/enable-plan.md"
+      "source": "system/templates/enable-plan.md",
+      "docs": [
+        "build-release-and-enable"
+      ]
     }
   ]
 }

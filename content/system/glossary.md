@@ -6,6 +6,7 @@ description: "The one place every term in the system is defined."
 status: "Draft"
 order: 0
 source: "system/00-glossary.md"
+inlineTemplate: false
 ---
 The one place every term in the system is defined. If a document uses a word differently from this page, one of them is wrong: settle it here, then fix the document.
 

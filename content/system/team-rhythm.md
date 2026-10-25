@@ -6,6 +6,7 @@ description: "A lot of product work is staying in sync with other people."
 status: "Draft"
 order: 13
 source: "system/13-team-rhythm.md"
+inlineTemplate: true
 ---
 A lot of product work is staying in sync with other people. This page lists the meetings a digital services team holds, how often, who comes, and which part of the roadmap each one updates.
 

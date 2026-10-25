@@ -6,6 +6,7 @@ description: "Vision and strategy is the first section of the roadmap."
 status: "Draft"
 order: 3
 source: "system/03-vision-and-strategy.md"
+inlineTemplate: false
 ---
 Vision and strategy is the first section of the roadmap. The vision describes life for the people we serve once this digital service has done its job. The strategy is our theory of how to get there from where we are now, and it is the compass we use when we have to choose between competing pieces of work.
 
@@ -39,10 +40,10 @@ Vision and strategy is the first section of the roadmap. The vision describes li
 8. **Use it.** At quarterly planning, any candidate that doesn't trace to a focus area or a key action needs a stated reason, such as a mandate, technical maintenance or a small request. At weekly triage, the tradeoffs supply the reason behind a "will not do."
 
 ## Template
-Use [roadmap.md](/templates/roadmap), section 1, Vision and strategy.
+Use [Roadmap](/templates/roadmap), section 1, Vision and strategy.
 
 ## DMV example
-The filled DMV vision and strategy is in [roadmap.md](/templates/roadmap) (DMV example, section 1).
+The filled DMV vision and strategy is in [Roadmap](/templates/roadmap) (DMV example, section 1).
 
 Each key action depends on another. Renewal can't serve everyone without staff ready for the cases that remain. The first-license journey can't reach a single trip without shared identity verification. Staff satisfaction rises only if renewal actually removes routine work from the counter. Take any one action away and the others weaken. That is the coherence test working.
 

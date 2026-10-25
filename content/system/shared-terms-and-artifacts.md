@@ -6,6 +6,7 @@ description: "This page names the artifacts we write and shows how each one lead
 status: "Draft"
 order: 1
 source: "system/01-shared-terms-and-artifacts.md"
+inlineTemplate: true
 ---
 This page names the artifacts we write and shows how each one leads to the next, so a counter clerk's idea can be traced all the way to the release note that tells her it shipped.
 

@@ -6,6 +6,7 @@ description: "Requests reach the team every week, from staff, partners, leadersh
 status: "Draft"
 order: 8
 source: "system/08-request-triage-and-idea-log.md"
+inlineTemplate: true
 ---
 Requests reach the team every week, from staff, partners, leadership and the public. Triage gives every request a clear outcome within five business days and tells the requester what happened, so small fixes get done, big ideas are kept, and the roadmap stays focused on goals.
 
@@ -102,9 +103,9 @@ Future consideration (after the product manager reviews an idea):
   something changes on your side, please tell us.
 ```
 
-**2. Small request board:** columns `Ready (first in, first out)` → `In sprint` → `Done` → `Requester told`. Card fields are in [small-request.md](/templates/small-request).
+**2. Small request board:** columns `Ready (first in, first out)` → `In sprint` → `Done` → `Requester told`. Card fields are in [Small request](/templates/small-request).
 
-**3. Idea log:** entry fields and statuses are in [idea.md](/templates/idea).
+**3. Idea log:** entry fields and statuses are in [Idea](/templates/idea).
 
 ## DMV example
 
@@ -118,7 +119,7 @@ Triage review, Tuesday Jan 21 (Sprint 2):
 | "Show a document checklist before someone comes in for a new license" (counter clerk) | Idea for improvement | Idea log, tagged to Goal 2 (zero multi-trip experiences) |
 | "Turn the paper renewal form into a fillable PDF" (records unit) | Will not do | Closed: strategy. We will not digitize existing broken processes |
 
-The sticker request became a small request card, pulled into the next sprint against the 2-week response commitment: see [small-request.md](/templates/small-request). The clerk's checklist idea became an idea log entry, later mined into the Initiative "Single-trip new driver licenses" at Q2 planning: see [idea.md](/templates/idea).
+The sticker request became a small request card, pulled into the next sprint against the 2-week response commitment: see [Small request](/templates/small-request). The clerk's checklist idea became an idea log entry, later mined into the Initiative "Single-trip new driver licenses" at Q2 planning: see [Idea](/templates/idea).
 
 Two more from the same quarter:
 

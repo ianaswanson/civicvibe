@@ -9,7 +9,11 @@
 // Along the way it:
 //   - adds frontmatter (title from the H1, status from the README table, order
 //     from the filename number, description from the first paragraph)
-//   - rewrites relative links to site routes
+//   - rewrites relative links to site routes, and file-name link labels
+//     ("deliverable.md") to the page's title
+//   - records which templates each doc uses, and whether a doc carries its own
+//     template and DMV example
+//   - copies the roadmap visuals into public/files/
 //   - strips the "Sources" / "Source materials" sections, which point at private
 //     working files
 //   - fails if anything BOUNDARIES.md rules out is still in the text
@@ -24,6 +28,16 @@ const SRC =
   path.join(os.homedir(), "ai-dev", "digital-services", "system");
 const OUT_SYSTEM = path.join(ROOT, "content", "system");
 const OUT_TEMPLATES = path.join(ROOT, "content", "templates");
+const OUT_FILES = path.join(ROOT, "public", "files");
+
+// The only files taken from outside system/: the one-page roadmap visuals,
+// which follow templates/roadmap.md and use the fictional DMV example.
+const VISUALS = {
+  roadmap: {
+    template: "../_working/roadmap_v3/roadmap_template_v3.html",
+    example: "../_working/roadmap_v3/dmv_roadmap_visual_v3.html",
+  },
+};
 
 // Sections that list private source files. Dropped whole, heading to next H2.
 const STRIPPED_SECTIONS = ["Sources", "Source materials"];
@@ -80,21 +94,35 @@ const docs = [];
 const docSlugs = new Map();
 for (const file of docFiles) docSlugs.set(file, docSlug(file));
 
+// Page titles by route, so links labelled with a file name read as the page.
+const titles = new Map();
+for (const file of docFiles) titles.set(`/system/${docSlug(file)}`, h1Of(path.join(SRC, file)));
+for (const file of fs.readdirSync(path.join(SRC, "templates"))) {
+  if (file.endsWith(".md") && file !== "README.md") {
+    titles.set(`/templates/${file.replace(/\.md$/, "")}`, h1Of(path.join(SRC, "templates", file)));
+  }
+}
+
 for (const file of docFiles) {
   const raw = fs.readFileSync(path.join(SRC, file), "utf8");
   const order = Number(file.slice(0, 2));
   const row = docRows.find((r) => r.file === file);
   const { title, body } = transform(raw, file, "");
+  const templateSection = section(body, "Template");
   const meta = {
     title,
     description: firstSentence(body),
     status: row ? row.status : "",
     order,
     source: `system/${file}`,
+    // A table or code block under "## Template" is a template of its own,
+    // not just a pointer to templates/.
+    inlineTemplate: /^(\||```)/m.test(templateSection) && /^## DMV example\s*$/m.test(body),
   };
   if (!row) warnings.push(`${file}: not in the README table, no status`);
   write(path.join(OUT_SYSTEM, `${docSlugs.get(file)}.md`), meta, body, `system/${file}`);
-  docs.push({ slug: docSlugs.get(file), ...meta });
+  const uses = [...templateSection.matchAll(/\]\(\/templates\/([\w-]+)/g)].map((m) => m[1]);
+  docs.push({ slug: docSlugs.get(file), ...meta, templates: [...new Set(uses)] });
 }
 
 // README rows without a file yet (planned docs)
@@ -130,9 +158,38 @@ for (const file of templateFiles) {
     }
   }
   write(path.join(OUT_TEMPLATES, `${slug}.md`), meta, body, `system/templates/${file}`);
-  templates.push({ slug, ...meta });
+  const usedBy = docs.filter((d) => d.templates.includes(slug)).map((d) => d.slug);
+  if (!usedBy.length) warnings.push(`templates/${file}: no doc's Template section links to it`);
+  templates.push({ slug, ...meta, docs: usedBy });
 }
 templates.sort((a, b) => a.order - b.order);
+
+// --- Visuals ----------------------------------------------------------------
+
+const visualFiles = [];
+for (const [slug, files] of Object.entries(VISUALS)) {
+  const t = templates.find((x) => x.slug === slug);
+  if (!t) {
+    failures.push(`visual for "${slug}": no such template`);
+    continue;
+  }
+  t.visuals = {};
+  for (const [kind, rel] of Object.entries(files)) {
+    const src = path.join(SRC, rel);
+    if (!fs.existsSync(src)) {
+      failures.push(`visual ${rel}: not found`);
+      continue;
+    }
+    const text = fs.readFileSync(src, "utf8");
+    for (const re of FORBIDDEN) {
+      const hit = text.match(re);
+      if (hit) failures.push(`${rel} line ${text.slice(0, hit.index).split("\n").length}: "${hit[0]}"`);
+    }
+    const name = `${slug}/${kind === "example" ? "dmv-example" : "template"}.html`;
+    t.visuals[kind] = `/files/${name}`;
+    visualFiles.push({ dest: path.join(OUT_FILES, name), text });
+  }
+}
 
 // --- Report -----------------------------------------------------------------
 
@@ -146,7 +203,11 @@ if (failures.length) {
 // Nothing is written until the boundary check passes.
 resetDir(OUT_SYSTEM);
 resetDir(OUT_TEMPLATES);
-for (const { dest, text } of pending) fs.writeFileSync(dest, text);
+resetDir(OUT_FILES);
+for (const { dest, text } of [...pending, ...visualFiles]) {
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.writeFileSync(dest, text);
+}
 fs.writeFileSync(
   path.join(OUT_SYSTEM, "_index.json"),
   JSON.stringify(
@@ -160,7 +221,9 @@ fs.writeFileSync(
     2,
   ) + "\n",
 );
-console.log(`sync: ${docs.length} docs, ${templates.length} templates, ${planned.length} planned docs.`);
+console.log(
+  `sync: ${docs.length} docs, ${templates.length} templates, ${planned.length} planned docs, ${visualFiles.length} visuals.`,
+);
 
 // --- Helpers ----------------------------------------------------------------
 
@@ -184,6 +247,8 @@ function transform(raw, file, dir) {
     if (bang) return m;
     const route = rewriteLink(target, dir);
     if (route === null) return label;
+    const page = route.split("#")[0];
+    if (/^[\w-]+\.md$/.test(label) && titles.has(page)) label = titles.get(page);
     return `[${label}](${route})`;
   });
 
@@ -213,6 +278,11 @@ function rewriteLink(target, dir) {
   if (/^\d\d-.+\.md$/.test(resolved)) return `/system/${docSlug(resolved)}${anchor}`;
   warnings.push(`unmapped link "${target}" in ${dir || "system"}; left as text`);
   return null;
+}
+
+function h1Of(file) {
+  const m = fs.readFileSync(file, "utf8").match(/^# (.+)$/m);
+  return m ? m[1].trim() : path.basename(file, ".md");
 }
 
 function docSlug(file) {

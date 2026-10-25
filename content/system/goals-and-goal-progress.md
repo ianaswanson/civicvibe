@@ -6,6 +6,7 @@ description: "Goals are the second section of the roadmap."
 status: "Draft"
 order: 4
 source: "system/04-goals-and-goal-progress.md"
+inlineTemplate: false
 ---
 Goals are the second section of the roadmap. They are the evidence we look for to know the vision and strategy are working: changes in what people do, measured against a starting point and a target. The vision says where we're headed and the strategy says how we'll choose. Goals tell us whether we're actually getting there.
 
@@ -47,7 +48,7 @@ Goals are the second section of the roadmap. They are the evidence we look for t
 Progress circles are for goals only. Deliverables in Quarterly commitments use the status labels Committed, On track, Off track and Done.
 
 ## Template
-Use [goal.md](/templates/goal) for each goal statement. The goal progress table is section 2 of [roadmap.md](/templates/roadmap), and the intended progress card is in section 4.
+Use [Goal](/templates/goal) for each goal statement. The goal progress table is section 2 of [Roadmap](/templates/roadmap), and the intended progress card is in section 4.
 
 ## DMV example
 **Goal statements**
@@ -58,7 +59,7 @@ Use [goal.md](/templates/goal) for each goal statement. The goal progress table 
 | Zero multi-trip experiences for standard licenses | By the end of fiscal year 2028, applicants for a standard new driver license will finish in a single interaction, measured by the share of applications needing more than one office visit (target 0%), ending the "bring documents and hope" experience. |
 | 30% staff satisfaction improvement | By the end of fiscal year 2028, DMV counter staff will spend their time solving complex cases instead of processing routine transactions, measured by the staff satisfaction survey (target +30% over baseline), creating a workforce that can help the people who most need it. |
 
-**Goal progress, Q1 planning update:** see section 2 of the DMV example in [roadmap.md](/templates/roadmap). Two goals are Grey; staff satisfaction is Green at +5% against a +30% target.
+**Goal progress, Q1 planning update:** see section 2 of the DMV example in [Roadmap](/templates/roadmap). Two goals are Grey; staff satisfaction is Green at +5% against a +30% target.
 
 **Intended progress, Q1 commitments**
 

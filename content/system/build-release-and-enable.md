@@ -6,6 +6,7 @@ description: "This document covers process steps 6 (Build and release) and 8 (En
 status: "Draft"
 order: 12
 source: "system/12-build-release-and-enable.md"
+inlineTemplate: false
 ---
 This document covers process steps 6 (Build and release) and 8 (Enable). The team builds Deliverables in sprints and releases them to production. Then it makes sure the people who use and support the service can succeed with it. Shipping is not the finish line. A service only counts as working once people use it well and their feedback flows back into the idea log.
 
@@ -78,13 +79,13 @@ Every piece of feedback gets a destination (see Request triage and the idea log)
 Results also feed goal progress. That data gets reviewed at quarterly planning.
 
 ## Template
-Use [launch-readiness-check.md](/templates/launch-readiness-check), [release-notes.md](/templates/release-notes) and [enable-plan.md](/templates/enable-plan).
+Use [Launch readiness check](/templates/launch-readiness-check), [Release notes](/templates/release-notes) and [Enable plan](/templates/enable-plan).
 
 ## DMV example
 
 **Context.** The roadmap commits this quarter to the Deliverables of Vehicle Renewal Service, a Solution of the Online vehicle renewal Initiative, which serve Goal 1: 75% of vehicle registration renewals completed online within 5 minutes. Last sprint the database integration went to production with no visible change. That was a release, not a launch.
 
-**Launch readiness check and release notes.** Online renewal launches to a beta group of 25 residents, the Q1 intended progress for Goal 1. The contact center says no, because its scripts don't cover beta users yet, so the launch moves a week while the scripts get written. The release itself is already in production, which is why moving the launch costs nothing. The filled check is in [launch-readiness-check.md](/templates/launch-readiness-check) and both release notes are in [release-notes.md](/templates/release-notes).
+**Launch readiness check and release notes.** Online renewal launches to a beta group of 25 residents, the Q1 intended progress for Goal 1. The contact center says no, because its scripts don't cover beta users yet, so the launch moves a week while the scripts get written. The release itself is already in production, which is why moving the launch costs nothing. The filled check is in [Launch readiness check](/templates/launch-readiness-check) and both release notes are in [Release notes](/templates/release-notes).
 
 **Enable.** The Staff Training Program had been marked Off track because training was waiting for the service to be finished. The team moved it into Enable and started in parallel with the build. One front-counter champion per pilot office tried the beta a week early. The content strategist wrote a one-page guide on "helping a customer who started online" and ran two 30-minute counter sessions.
 

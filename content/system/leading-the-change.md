@@ -6,6 +6,7 @@ description: "How to roll this system out to a team: who hears what, in what ord
 status: "Draft"
 order: 15
 source: "system/15-leading-the-change.md"
+inlineTemplate: true
 ---
 How to roll this system out to a team: who hears what, in what order, and what the first quarter looks like. The story itself, the questions people ask and how growth feels are in [02 Why digital services](/system/why-digital-services). This document is the sequence.
 

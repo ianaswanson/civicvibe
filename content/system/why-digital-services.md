@@ -6,6 +6,7 @@ description: "The story we tell to bring a team or a leadership group into a dig
 status: "Draft"
 order: 2
 source: "system/02-why-digital-services.md"
+inlineTemplate: false
 ---
 The story we tell to bring a team or a leadership group into a digital services way of working: a run of before-and-after pictures, an honest "here is how we start," and room for the people in the room to push back.
 

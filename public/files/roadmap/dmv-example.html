@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DMV Digital Service Roadmap (v3)</title><style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .roadmap-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #2c3e50;
+        }
+        
+        .outcomes-header {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #e8f4fd;
+            border-radius: 8px;
+        }
+        
+        .outcome {
+            text-align: center;
+            font-weight: 600;
+            color: #2980b9;
+        }
+        
+        .roadmap-grid {
+            display: grid;
+            grid-template-columns: 80px 120px 1fr 1fr 1fr;
+            gap: 2px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .header-cell {
+            background: #34495e;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .capacity-cell {
+            background: #ecf0f1;
+            padding: 20px 8px;
+            text-align: center;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .work-type-cell {
+            background: #bdc3c7;
+            padding: 20px 8px;
+            text-align: center;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .outcome-cell {
+            background: #f8f9fa;
+            padding: 15px 12px;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .strategic-cell {
+            background: #e3f2fd;
+            padding: 15px 12px;
+            border-left: 4px solid #2196f3;
+        }
+        
+        .strategic-cell-next {
+            background: #e3f2fd;
+            padding: 15px 12px;
+        }
+        
+        .strategic-cell-later {
+            background: #e3f2fd;
+            padding: 15px 12px;
+        }
+        
+        .small-requests-cell {
+            background: #f3e5f5;
+            padding: 15px 12px;
+            text-align: center;
+            border-left: 4px solid #9c27b0;
+        }
+        
+        .tech-maintenance-cell {
+            background: #fff3e0;
+            padding: 15px 12px;
+            text-align: center;
+            border-left: 4px solid #ff9800;
+        }
+        
+        .template-item {
+            background: #f8f9fa;
+            margin: 4px 0;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            line-height: 1.3;
+            color: #6c757d;
+            font-style: italic;
+            border: 1px dashed #dee2e6;
+        }
+        
+        .mandated-item {
+            background: #ffebee;
+            margin: 4px 0;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            line-height: 1.3;
+            border-left: 3px solid #f44336;
+        }
+        
+        .annotations {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+        
+        .annotation-left {
+            text-align: left;
+            flex: 1;
+        }
+        
+        .annotation-right {
+            text-align: right;
+            flex: 1;
+        }
+        
+        .percentage {
+            font-size: 18px;
+            color: #2c3e50;
+        }
+        
+        .work-type {
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+    
+        .field { margin-bottom: 12px; }
+        .field-label { font-weight: 600; color: #2c3e50; margin-bottom: 4px; font-size: 14px; }
+        .field-text { color: #4a5560; line-height: 1.45; font-size: 14px; }
+        .ph { color: #6c757d; font-style: italic; }
+        .card { background: #ffffff; margin: 4px 0; padding: 8px; border-radius: 4px; font-size: 13px; line-height: 1.3; color: #2c3e50; border: 1px solid #cfd8dc; }
+        .card.ph { background: #f8f9fa; border: 1px dashed #dee2e6; }
+        .card .of { color: #7f8c8d; font-size: 12px; }
+        .tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
+        .tbl th { background: #34495e; color: #fff; text-align: left; padding: 10px 8px; }
+        .tbl td { padding: 10px 8px; border-bottom: 1px solid #dee2e6; vertical-align: top; color: #2c3e50; }
+        .tbl tr.grp td { background: #e3f2fd; font-weight: bold; border-left: 4px solid #2196f3; }
+        .tbl tr.grp.sr td { background: #f3e5f5; border-left-color: #9c27b0; }
+        .tbl tr.grp.tm td { background: #fff3e0; border-left-color: #ff9800; }
+        .tbl tr.grp.rq td { background: #ffebee; border-left-color: #f44336; }
+        .st-Committed { color: #7f8c8d; font-weight: 600; } .st-On { color: #27ae60; font-weight: 600; }
+        .st-Off { color: #e74c3c; font-weight: 600; } .st-Done { color: #2c3e50; font-weight: 600; } .st-Met { color: #27ae60; font-weight: 600; }
+        .dot { font-size: 16px; } .dot-Grey { color: #95a5a6; } .dot-Green { color: #27ae60; } .dot-Yellow { color: #f1c40f; } .dot-Red { color: #e74c3c; }
+        .ip-row { display: grid; grid-template-columns: 110px 1fr; gap: 6px; font-size: 13px; margin-top: 6px; }
+        .ip-row b { color: #2c3e50; }
+        .version { text-align: center; color: #7f8c8d; font-size: 12px; margin-top: -20px; margin-bottom: 25px; }
+</style></head>
+<body><div class="roadmap-container">
+<div class="title">DMV Digital Service Roadmap</div><div class="version">Q1, as it reads after the Sprint 3 review on Feb 14. Fictional worked example.</div>
+<div style="margin-bottom:25px;padding:20px;background:#e8f4fd;border-radius:8px;border-left:4px solid #2196f3;">
+<div style="font-weight:bold;color:#2c3e50;margin-bottom:10px;font-size:16px;">VISION (5+ years)</div><div class="field-text">Oregon residents handle every vehicle and licensing need from any device, at the moment life calls for it, and finish feeling capable rather than processed. An office visit happens only for services that truly require one, and it means time with an expert who can help.</div></div>
+<div style="margin-bottom:25px;padding:20px;background:#f0f8e8;border-radius:8px;border-left:4px solid #4caf50;"><div style="font-weight:bold;color:#2c3e50;margin-bottom:15px;font-size:16px;">STRATEGY</div>
+<div class="field"><div class="field-label">Diagnosis</div><div class="field-text">The DMV is designed around government operational needs, not user outcomes. People need &quot;vehicle and identity authorization,&quot; but what they experience is &quot;navigate bureaucratic transactions.&quot; Multiple trips happen because our systems can&#x27;t verify eligibility in real time, so we make people bring documents and hope.</div></div>
+<div class="field"><div class="field-label">Guiding principles</div><div class="field-text">When choosing between competing initiatives, we&#x27;ll prioritize complete user outcomes over individual transaction efficiency. Our approach to balancing compliance and user experience will be real-time eligibility verification that ends &quot;bring documents and hope&quot; experiences.</div></div>
+<div class="field"><div class="field-label">Focus areas</div><div class="field-text">Life event moments (getting a first license, buying a car, moving to Oregon) get concentrated attention. We&#x27;ll actively investigate transaction completion barriers and staff workflow inefficiencies.</div></div>
+<div class="field"><div class="field-label">Key actions</div><div class="field-text">&bull; Move vehicle registration renewal fully online, end to end<br>&bull; Build identity verification once and share it<br>&bull; Redesign staff workflows alongside every release<br>&bull; Take on the first-license journey as one experience</div></div>
+<div class="field"><div class="field-label">Tradeoffs</div><div class="field-text">We will not digitize existing broken processes or optimize individual transactions in isolation. We will not pursue technology solutions without staff workflow redesign.</div></div>
+</div>
+<div style="margin-bottom:25px;padding:20px;background:#fff3e0;border-radius:8px;border-left:4px solid #ff9800;"><div style="font-weight:bold;color:#2c3e50;margin-bottom:15px;font-size:16px;">GOALS (1-2 years)</div>
+<div class="field"><div class="field-text"><strong>Goal 1:</strong> By the end of fiscal year 2028, Oregon vehicle owners will renew their registration online in under 5 minutes instead of an average of 45 minutes in an office, measured by the share of all renewals completed online in under 5 minutes (target 75%).</div></div>
+<div class="field"><div class="field-text"><strong>Goal 2:</strong> By the end of fiscal year 2028, applicants for a standard new driver license will finish in a single interaction, measured by the share of applications needing more than one office visit (target 0%).</div></div>
+<div class="field"><div class="field-text"><strong>Goal 3:</strong> By the end of fiscal year 2028, DMV counter staff will spend their time solving complex cases instead of processing routine transactions, measured by the staff satisfaction survey (target +30% over baseline).</div></div>
+</div>
+<div class="outcomes-header"><div style="text-align:center;font-weight:bold;color:#2c3e50;">Goal Progress (updated each quarter)</div></div>
+<div style="display:grid;grid-template-columns:1fr 80px 80px 80px 80px 150px;gap:10px;margin-bottom:20px;padding:15px;background:#f8f9fa;border-radius:8px;">
+<div style="font-weight:bold;color:#2c3e50;">Goal</div>
+<div style="font-weight:bold;color:#2c3e50;text-align:center;">Started</div>
+<div style="font-weight:bold;color:#2c3e50;text-align:center;">Last</div>
+<div style="font-weight:bold;color:#2c3e50;text-align:center;">Current</div>
+<div style="font-weight:bold;color:#2c3e50;text-align:center;">Target</div>
+<div style="font-weight:bold;color:#2c3e50;text-align:center;">Progress</div>
+<div style="color:#2c3e50;">75% of renewals online within 5 minutes</div><div style="text-align:center;color:#4a5560;">0%</div><div style="text-align:center;color:#4a5560;">0%</div><div style="text-align:center;color:#4a5560;">0%</div><div style="text-align:center;color:#4a5560;">75%</div>
+<div style="text-align:center;"><span class="dot dot-Grey">&#9679;</span> Grey: no data yet</div>
+<div style="color:#2c3e50;">Zero multi-trip experiences for standard licenses</div><div style="text-align:center;color:#4a5560;">85%</div><div style="text-align:center;color:#4a5560;">85%</div><div style="text-align:center;color:#4a5560;">85%</div><div style="text-align:center;color:#4a5560;">0%</div>
+<div style="text-align:center;"><span class="dot dot-Grey">&#9679;</span> Grey: no data yet</div>
+<div style="color:#2c3e50;">30% staff satisfaction improvement</div><div style="text-align:center;color:#4a5560;">Baseline</div><div style="text-align:center;color:#4a5560;">+2%</div><div style="text-align:center;color:#4a5560;">+5%</div><div style="text-align:center;color:#4a5560;">+30%</div>
+<div style="text-align:center;"><span class="dot dot-Green">&#9679;</span> Green: on pace</div>
+</div>
+<div style="color:#7f8c8d;font-size:12px;margin-bottom:6px;">Updated: December 12. Next update: Q2 planning, March. Team: three developers, a UX designer and researcher, a content strategist, plus product manager, product owner, scrum master and technical architect.</div>
+<div style="display:grid;grid-template-columns:200px 1fr 1fr 1fr;gap:2px;margin-bottom:10px;"><div></div>
+<div style="text-align:center;font-size:12px;color:#7f8c8d;padding:5px;">This quarter</div><div style="text-align:center;font-size:12px;color:#7f8c8d;padding:5px;">Following two quarters</div><div style="text-align:center;font-size:12px;color:#7f8c8d;padding:5px;">Beyond</div></div>
+<div class="roadmap-grid"><div class="header-cell">Capacity<br>(Time)</div><div class="header-cell">Goal<br>Connection</div>
+<div class="header-cell">Now<br><span style="font-size:10px;font-style:italic;">(Committed Deliverables)</span></div>
+<div class="header-cell">Next<br><span style="font-size:10px;font-style:italic;">(Solutions)</span></div>
+<div class="header-cell">Later<br><span style="font-size:10px;font-style:italic;">(Questions to explore)</span></div>
+<div class="capacity-cell" style="grid-row: span 3;"><div class="percentage">60%</div><div style="font-size:12px;color:#7f8c8d;margin-top:8px;">Strategic<br>(shared by<br>all goals)</div></div>
+<div class="work-type-cell">Goal 1:<br>75% of renewals online</div><div class="strategic-cell"><div class="card">Backend Integration: renewal transactions run against the DMV database<div class=of>(of Vehicle Renewal Service, Online vehicle renewal)</div></div><div class="card">User Interface: renewal form, payment and confirmation for 25 beta users<div class=of>(of Vehicle Renewal Service, Online vehicle renewal)</div></div></div><div class="strategic-cell-next"><div class="card">Vehicle Renewal Service: will enable all eligible owners to renew online (XL)<div class=of>(of Online vehicle renewal)</div></div></div><div class="strategic-cell-later"><div class="card">Insurance verification delays: why do they frustrate people renewing?</div><div class="card">Online abandonment: why do people start and not finish?</div></div>
+<div class="work-type-cell">Goal 2:<br>Zero multi-trip licenses</div><div class="strategic-cell"><div class="card">Digital Identity Verification System: in service with production data<div class=of>(of Shared identity verification, Real-time eligibility verification)</div></div><div class="mandated-item"><b>Required:</b> update the donor check to comply with the new law</div></div><div class="strategic-cell-next"><div class="card">Shared identity verification: will enable license staff to check eligibility rules in real time (L)<div class=of>(of Real-time eligibility verification)</div></div></div><div class="strategic-cell-later"><div class="card">Complex transactions: what causes multiple trips for title transfers and moving to Oregon?</div></div>
+<div class="work-type-cell">Goal 3:<br>30% staff satisfaction</div><div class="strategic-cell"><div class="card">Staff Training Program: 10 frontline staff ready for the new renewal process<div class=of>(of Staff workflow redesign, Counter staff on complex cases)</div></div></div><div class="strategic-cell-next"></div><div class="strategic-cell-later"></div>
+<div class="capacity-cell"><div class="percentage">20%</div></div><div class="work-type-cell">Technical<br>maintenance</div>
+<div class="tech-maintenance-cell" style="grid-column: span 3;">Technical maintenance: security patches within 48 hours, uptime above 99.5%, legacy system support. Required: accessibility audit compliance</div>
+<div class="capacity-cell"><div class="percentage">20%</div></div><div class="work-type-cell">Small<br>requests</div>
+<div class="small-requests-cell" style="grid-column: span 3;">Small requests: 2-week average response time for editor support, quick fixes and usability improvements, worked first in, first out</div></div>
+<div class="annotations"><div class="annotation-left"><strong>Goal progress:</strong><br>&#9679; Grey: no data yet<br>&#9679; Green: on pace<br>&#9679; Yellow: behind<br>&#9679; Red: moving the wrong way<br>Always write the word, not just the color</div>
+<div class="annotation-right"><strong>Organization:</strong><br>One row per goal shows all work advancing that outcome<br>Start mandated items with "Required:"<br><br><strong>Language progression:</strong><br>Now: Deliverable and its concrete output<br>Next: Solution that will enable a user group to do something<br>Later: questions to explore, in users' terms</div></div>
+<div style="margin-top:12px;font-size:13px;color:#4a5560;"><i>Q1 runs 60/20/20 instead of the 50/25/25 default: online renewal has a fixed public launch in Q2, and the team cleared its maintenance backlog in Q4.</i></div>
+<div style="margin-top:40px;border-top:3px solid #34495e;padding-top:30px;"><div style="text-align:center;font-size:22px;font-weight:bold;margin-bottom:30px;color:#2c3e50;">Q1 DMV Digital Service Team Commitments</div>
+<div style="margin-bottom:25px;padding:15px;background:#f8f9fa;border-radius:8px;border-left:3px solid #34495e;">
+<div style="font-weight:bold;color:#2c3e50;margin-bottom:10px;font-size:16px;">Q1 Planning Overview</div>
+<div style="margin-bottom:12px;color:#4a5560;font-size:14px;">Planning week Dec 9-12 • Jan 6 - Mar 31 • 59 working days • 6 sprints (Jan 6 to Mar 28) • Hands-on team: 5</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:15px;font-size:14px;color:#4a5560;">
+<div><strong style="color:#2c3e50;">Strategic:</strong> 60% (35 days per person, 3.5 sprints)</div><div><strong style="color:#2c3e50;">Technical maintenance:</strong> 20% (12 days, 1.2 sprints)</div><div><strong style="color:#2c3e50;">Small requests:</strong> 20% (12 days, 1.2 sprints)</div></div>
+<div style='margin-top:10px;font-size:13px;color:#4a5560;'>Changed from the 50/25/25 default for the Q2 renewal launch.</div></div>
+<div style="font-weight:bold;color:#2c3e50;margin-bottom:20px;font-size:18px;text-align:center;">Goals → Q1 Intended Progress</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:25px;">
+<div style="background:#f0f8e8;border-radius:8px;border-left:4px solid #4caf50;padding:15px;">
+<div style="font-weight:bold;color:#2c3e50;margin-bottom:4px;font-size:14px;">Goal 1: 75% of renewals online within 5 minutes</div>
+<div style="border-top:1px solid #ddd;padding-top:12px;margin-top:8px;"><div style="background:white;padding:10px;border-radius:4px;border-left:3px solid #2196f3;">
+<div style="font-weight:600;margin-bottom:4px;color:#2c3e50;font-size:13px;">Service ready</div><div style="color:#4a5560;font-size:12px;">Online renewal working, with 25 beta users completing renewals end to end</div></div>
+<div class="ip-row"><b>Initiative</b><span>Online vehicle renewal</span></div>
+<div class="ip-row"><b>Deliverables</b><span>Backend Integration, of Vehicle Renewal Service (Release, M, On track): in production by Feb 28<br>User Interface, of Vehicle Renewal Service (Release, L, On track): live for 25 beta users by Mar 28, help text by Feb 28</span></div>
+<div class="ip-row"><b>Dependencies</b><span>Usability test findings by Feb 4. Payment gateway legal approval by Feb 21.</span></div></div></div>
+<div style="background:#f0f8e8;border-radius:8px;border-left:4px solid #4caf50;padding:15px;">
+<div style="font-weight:bold;color:#2c3e50;margin-bottom:4px;font-size:14px;">Goal 2: Zero multi-trip experiences for standard licenses</div>
+<div style="border-top:1px solid #ddd;padding-top:12px;margin-top:8px;"><div style="background:white;padding:10px;border-radius:4px;border-left:3px solid #2196f3;">
+<div style="font-weight:600;margin-bottom:4px;color:#2c3e50;font-size:13px;">Infrastructure proven</div><div style="color:#4a5560;font-size:12px;">Digital identity verification at 99% uptime in production with real DMV data</div></div>
+<div class="ip-row"><b>Initiative</b><span>Real-time eligibility verification</span></div>
+<div class="ip-row"><b>Deliverables</b><span>Digital Identity Verification System, of Shared identity verification (In service, M, Committed): by Mar 28; starts Sprint 4<br>Required: donor check update (Release, S): live by Jan 31</span></div>
+<div class="ip-row"><b>Dependencies</b><span>Security architecture review in week 2 of Sprint 4.</span></div></div></div>
+<div style="background:#f0f8e8;border-radius:8px;border-left:4px solid #4caf50;padding:15px;">
+<div style="font-weight:bold;color:#2c3e50;margin-bottom:4px;font-size:14px;">Goal 3: 30% staff satisfaction improvement</div>
+<div style="border-top:1px solid #ddd;padding-top:12px;margin-top:8px;"><div style="background:white;padding:10px;border-radius:4px;border-left:3px solid #2196f3;">
+<div style="font-weight:600;margin-bottom:4px;color:#2c3e50;font-size:13px;">Staff ready</div><div style="color:#4a5560;font-size:12px;">10 frontline staff can show they are able to guide residents through the new online process</div></div>
+<div class="ip-row"><b>Initiative</b><span>Counter staff on complex cases</span></div>
+<div class="ip-row"><b>Deliverables</b><span>Staff Training Program, of Staff workflow redesign (Hand off, S, Off track): 10 staff ready by Mar 28; may push to early Q2</span></div>
+<div class="ip-row"><b>Dependencies</b><span>Two workflow sessions with counter staff by Jan 24. The finished renewal service.</span></div></div></div>
+</div>
+<div style="padding:15px;background:#f8f9fa;border-radius:6px;border-left:3px solid #95a5a6;margin-bottom:12px;"><div style="font-weight:600;margin-bottom:8px;color:#2c3e50;font-size:14px;">Ongoing commitments</div>
+<div style="color:#4a5560;font-size:13px;line-height:1.5;"><strong style="color:#2c3e50;">Technical maintenance:</strong> security patches within 48 hours, system uptime above 99.5%, legacy system support as needed<br><strong style="color:#2c3e50;">Small requests:</strong> 2-week average response time. Specific items come from weekly triage.</div></div>
+<div style="padding:15px;background:#f8f9fa;border-radius:6px;border-left:3px solid #95a5a6;"><div style="font-weight:600;margin-bottom:8px;color:#2c3e50;font-size:14px;">Quarter planning notes</div>
+<div style="color:#4a5560;font-size:13px;line-height:1.5;"><strong style="color:#2c3e50;">Days off:</strong> Martin Luther King Jr. Day (Jan 20), Presidents Day (Feb 17), spring break coverage (Mar 10-14)<br><strong style="color:#2c3e50;">Dependencies:</strong> Legal approval of the identity verification process (in progress); payment gateway (Feb 21); security architecture review (Sprint 4)<br><strong style="color:#2c3e50;">Risks:</strong> Staff training assumes no major system issues during rollout. If legal approval slips, the User Interface slips with it.</div></div></div>
+<div style="margin-top:40px;border-top:3px solid #34495e;padding-top:30px;"><div style="text-align:center;font-size:22px;font-weight:bold;margin-bottom:10px;color:#2c3e50;">Sprint 3 Report</div>
+<div style="text-align:center;margin-bottom:25px;color:#4a5560;font-size:14px;">Feb 3 - Feb 14 • Sprint 3 of 6 this quarter</div>
+<div style="margin-bottom:25px;padding:15px;background:#f8f9fa;border-radius:8px;border-left:3px solid #34495e;display:grid;grid-template-columns:150px 1fr;gap:8px;font-size:14px;color:#4a5560;">
+<b style="color:#2c3e50;">Sprint goal</b><span>Field office staff can walk through the full renewal form in staging, from vehicle lookup to confirmation, with payment stubbed until legal approves the gateway.</span><b style="color:#2c3e50;">Goal met?</b><span>Yes</span>
+<b style="color:#2c3e50;">Stories</b><span>12 committed, 11 completed</span><b style="color:#2c3e50;">Unplanned work</b><span>About three days answering legal&#x27;s questions on the payment gateway. The real-payment story did not finish.</span></div>
+<div style="border:2px solid #34495e;border-radius:8px;overflow:hidden;margin-bottom:25px;"><table class="tbl"><tr><th style="width:34%">Work commitment</th><th style="width:11%">Status</th><th style="width:30%">Status note</th><th style="width:25%">How to get back on track</th></tr>
+<tr class="grp "><td colspan="4">INITIATIVE: Online vehicle renewal / Solution: Vehicle Renewal Service</td></tr>
+<tr><td>Backend Integration: complete integration with the existing DMV database for renewal transactions</td><td class="st-On">On track</td><td>90% complete. Renewal API running in staging against a copy of production data. Load testing next. Done by end of Sprint 4, 90% confidence.</td><td></td></tr>
+<tr><td>User Interface: renewal form with payment processing and confirmation workflow</td><td class="st-On">On track</td><td>80% complete. Form, validation and confirmation demoed today. Real card payment waits on legal sign-off. Staging by Feb 28 if legal clears by Feb 21. 75% confidence.</td><td></td></tr>
+<tr class="grp "><td colspan="4">INITIATIVE: Real-time eligibility verification / Solution: Shared identity verification</td></tr>
+<tr><td>Digital Identity Verification System: secure verification in service and tested with production data</td><td class="st-Committed">Committed</td><td>Not started. Work starts Sprint 4; security architecture review in week 2. 70% confidence for end of quarter.</td><td></td></tr>
+<tr class="grp "><td colspan="4">INITIATIVE: Counter staff on complex cases / Solution: Staff workflow redesign</td></tr>
+<tr><td>Staff Training Program: training on supporting residents through the new renewal process</td><td class="st-Off">Off track</td><td>10% complete. Slipped because materials were waiting for the finished service. Without a change, training moves to early Q2.</td><td>Start in parallel with the build, with one counter champion per pilot office using the beta early. Product manager decides after hearing the advisory group.</td></tr>
+<tr class="grp rq"><td>REQUIRED: donor check update to comply with the new law</td><td class="st-Done">Done</td><td>Live Jan 31, in Sprint 2.</td><td></td></tr>
+<tr class="grp sr"><td>SMALL REQUESTS: 2-week average response time</td><td class="st-Met">Met</td><td>Four requests closed, 9-day average.</td><td></td></tr>
+<tr class="grp tm"><td>TECHNICAL MAINTENANCE: patches within 48 hours, uptime above 99.5%</td><td class="st-Met">Met</td><td>Two patches applied within 48 hours, 99.8% uptime.</td><td></td></tr>
+</table></div>
+<div style="padding:15px;background:#f8f9fa;border-radius:6px;border-left:3px solid #95a5a6;margin-bottom:20px;"><div style="font-weight:600;margin-bottom:8px;color:#2c3e50;font-size:14px;">Sprint notes</div>
+<div style="color:#4a5560;font-size:13px;line-height:1.5;"><strong style="color:#2c3e50;">Blockers and asks:</strong> Legal sign-off on the payment gateway by Feb 21; the product manager asks the steering group sponsor to help schedule it. Starting training in parallel goes to the Feb 18 advisory and Feb 25 steering meetings.<br><strong style="color:#2c3e50;">Changes to commitments:</strong> None added or dropped. Staff Training Program approach change proposed.<br><strong style="color:#2c3e50;">Next sprint:</strong> Real card payment in staging, identity verification security review, first training session drafted with champions.</div></div>
+<div style="font-weight:600;margin-bottom:8px;color:#2c3e50;font-size:14px;">Sprint history</div><div style="border:1px solid #dee2e6;border-radius:6px;overflow:hidden;margin-bottom:20px;"><table class="tbl"><tr><th>Sprint</th><th>Dates</th><th>Goal</th><th>Met?</th><th>Committed / completed</th></tr>
+<tr><td>3</td><td>Feb 3-14</td><td>Full renewal form walkthrough in staging</td><td>Yes</td><td>12 / 11</td></tr>
+<tr><td>2</td><td>Jan 20-31</td><td>Renewal form validation working in staging</td><td>Yes</td><td>10 / 10</td></tr>
+<tr><td>1</td><td>Jan 6-17</td><td>Renewal data mapped, API endpoints designed</td><td>Yes</td><td>10 / 9</td></tr>
+</table></div>
+<div class="annotations"><div class="annotation-left"><strong>Status:</strong><br><span style="color:#7f8c8d;">Committed</span> (planned, not started)<br><span style="color:#27ae60;">On track</span><br><span style="color:#e74c3c;">Off track</span> (fill in how to get back on track)<br>Done</div>
+<div class="annotation-right"><strong>Ongoing rows:</strong><br>Met or Not met, with the number<br><br><strong>Delivery type</strong> lives on the roadmap card:<br>Release, In service, Hand off</div></div></div>
+</div></body></html>

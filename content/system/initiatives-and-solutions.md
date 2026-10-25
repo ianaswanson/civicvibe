@@ -6,6 +6,7 @@ description: "An Initiative is the thing we track: a bet that pursuing an opport
 status: "Draft"
 order: 9
 source: "system/09-initiatives-and-solutions.md"
+inlineTemplate: false
 ---
 An **Initiative** is the thing we track: a bet that pursuing an opportunity will move a goal, held to the outcome it is meant to change. **Solutions** are the outputs the team tries along the way, tested, built, kept or dropped. We care about the outcome, not any one Solution, so an Initiative has room to try different ways until one works.
 
@@ -38,10 +39,10 @@ On the Now, Next, Later grid, an Initiative that hasn't started sits in **Later*
 6. **Close.** End the Initiative when the outcome is reached or the bet is disproven. Both are finished work.
 
 ## Template
-Use [initiative.md](/templates/initiative) and [solution.md](/templates/solution).
+Use [Initiative](/templates/initiative) and [Solution](/templates/solution).
 
 ## DMV example
-The filled DMV Initiative, **Single-trip new driver licenses**, is in [initiative.md](/templates/initiative): three Solutions, one dropped, one building and one on hold. Its second Solution, **License Ready Check**, is in [solution.md](/templates/solution).
+The filled DMV Initiative, **Single-trip new driver licenses**, is in [Initiative](/templates/initiative): three Solutions, one dropped, one building and one on hold. Its second Solution, **License Ready Check**, is in [Solution](/templates/solution).
 
 If the repeat-trip rate hasn't moved two quarters after the first slice launches, the Initiative doesn't end. The team goes back to its Solutions and tries Solution C, a real-time eligibility check at the counter, or a new one.
 

@@ -6,6 +6,7 @@ description: "Discovery is the learning work inside an Initiative."
 status: "Draft"
 order: 10
 source: "system/10-discovery.md"
+inlineTemplate: false
 ---
 Discovery is the learning work inside an Initiative. It is how the team finds which problems are worth solving and which Solutions actually work, before it spends delivery capacity on them. It doesn't end the Initiative: when one Solution fails, discovery tries the next.
 
@@ -39,10 +40,10 @@ Discovery is the learning work inside an Initiative. It is how the team finds wh
 ## Template
 Two artifacts. The brief is one page and lives with the Initiative. Research notes, maps and the tree are linked as evidence, not copied into the brief.
 
-Use [discovery-brief.md](/templates/discovery-brief) and [assumption-log.md](/templates/assumption-log).
+Use [Discovery brief](/templates/discovery-brief) and [Assumption log](/templates/assumption-log).
 
 ## DMV example
-The filled DMV discovery brief for **Single-trip new driver licenses** is in [discovery-brief.md](/templates/discovery-brief), and its four assumptions are in [assumption-log.md](/templates/assumption-log). The round in short: 12 listening sessions and a one-week counter log, three candidate Solutions, and a decision to build photo upload with staff review.
+The filled DMV discovery brief for **Single-trip new driver licenses** is in [Discovery brief](/templates/discovery-brief), and its four assumptions are in [Assumption log](/templates/assumption-log). The round in short: 12 listening sessions and a one-week counter log, three candidate Solutions, and a decision to build photo upload with staff review.
 
 A3, the self-serve checklist, broke in testing: 3 of 5 applicants picked the wrong birth certificate type. That is why staff review is part of the Solution and the checklist is not enough by itself.
 

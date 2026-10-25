@@ -6,6 +6,7 @@ description: "This document covers step 5, Slice the work."
 status: "Draft"
 order: 11
 source: "system/11-deliverables-and-user-stories.md"
+inlineTemplate: false
 ---
 This document covers step 5, Slice the work. The team cuts a committed Solution into Deliverables that fit a quarter, then cuts each Deliverable into user stories that fit a sprint. Teams may group stories into epics however helps them. Every slice has to give a real person something they can use.
 
@@ -98,18 +99,18 @@ All the work a story needs lives in the story or its tasks.
 A **spike** investigates one specific, uncertain question. It is timeboxed to a few days and ends in something concrete: a decision, an architecture decision record or a prototype. A spike is not a user story. Its job is to make a story estimable.
 
 ## Template
-Use [deliverable.md](/templates/deliverable), [epic.md](/templates/epic) (optional) and [user-story.md](/templates/user-story). The user story template holds the definitions of ready and done; review both at retrospectives.
+Use [Deliverable](/templates/deliverable), [Epic](/templates/epic) (optional) and [User story](/templates/user-story). The user story template holds the definitions of ready and done; review both at retrospectives.
 
 ## DMV example
 **Story map for License Ready Check.** Backbone: Find out what I need → Gather documents → Check documents → Book visit → Finish at the counter.
 
-**Deliverable: Pre-check for birth certificates and proof of address.** Q3, size M. Filled in as the DMV example in [deliverable.md](/templates/deliverable).
+**Deliverable: Pre-check for birth certificates and proof of address.** Q3, size M. Filled in as the DMV example in [Deliverable](/templates/deliverable).
 
 Later slices: all standard documents (Q4), then a name-mismatch flag linked to booking (Q1). Learning slice this quarter: staff handle name-mismatch cases by hand for 20 applicants.
 
 The team grouped this Deliverable's stories by document type, so both stories below belong to the Birth certificate check epic. Grouping by map column would have worked too.
 
-**Story 1: Submit a birth certificate photo.** Filled in, with acceptance criteria and the readiness notes, in [user-story.md](/templates/user-story). Privacy review came first, because document images are new data.
+**Story 1: Submit a birth certificate photo.** Filled in, with acceptance criteria and the readiness notes, in [User story](/templates/user-story). Privacy review came first, because document images are new data.
 
 **Story 2: Review a birth certificate**
 

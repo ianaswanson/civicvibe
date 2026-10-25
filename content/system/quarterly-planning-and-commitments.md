@@ -6,6 +6,7 @@ description: "Quarterly planning is step 3 of the process flow."
 status: "Draft"
 order: 6
 source: "system/06-quarterly-planning-and-commitments.md"
+inlineTemplate: false
 ---
 Quarterly planning is step 3 of the process flow. In one planning week the team turns the year's goals into work it believes it can finish in 12 weeks. It writes that work down as the Quarterly commitments section of the roadmap: what we promised, how much time we had, and what could get in the way.
 
@@ -94,10 +95,10 @@ T-shirt sizes go on the roadmap because stakeholders can read sprints. Story poi
 A commitment is a promise to try. You commit when you believe that, with focus, you can do your part without working extra hours. Some misses are assumed and nobody gets in trouble for one. The ask is to raise risks early. Commitment also asks for trust: size honestly with no sandbagging, assume positive intent, and trust the product manager's strategic calls.
 
 ## Template
-Use [roadmap.md](/templates/roadmap), section 4, Quarterly commitments: the planning overview, one intended progress card per goal, ongoing commitments and planning notes.
+Use [Roadmap](/templates/roadmap), section 4, Quarterly commitments: the planning overview, one intended progress card per goal, ongoing commitments and planning notes.
 
 ## DMV example
-The filled DMV Q1 commitments (planning overview, the three intended progress cards, ongoing commitments and planning notes, with statuses as of the Sprint 3 review on Feb 14) are section 4 of the DMV example in [roadmap.md](/templates/roadmap). Two moments from that planning week:
+The filled DMV Q1 commitments (planning overview, the three intended progress cards, ongoing commitments and planning notes, with statuses as of the Sprint 3 review on Feb 14) are section 4 of the DMV example in [Roadmap](/templates/roadmap). Two moments from that planning week:
 
 Cut-off line: the ranked list had five candidates. The line fell after the Staff Training Program. Renewal reminders by text (S) fell below it and went back to the idea log for Q2 planning.
 

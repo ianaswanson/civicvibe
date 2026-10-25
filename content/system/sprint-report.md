@@ -6,6 +6,7 @@ description: "The sprint report is the fifth section of the roadmap."
 status: "Draft"
 order: 7
 source: "system/07-sprint-report.md"
+inlineTemplate: false
 ---
 The sprint report is the fifth section of the roadmap. It shows what the team set out to do this sprint, what happened, and where each quarterly commitment stands. Anyone should be able to read it in five minutes and know whether the quarter is on track and what the team needs from them.
 
@@ -46,10 +47,10 @@ The sprint report is the fifth section of the roadmap. It shows what the team se
 **Delivery type** says how a Deliverable lands: **Release** ships to users, **In service** puts a system or shared component into production use behind the scenes, **Hand off** transfers to another team or to staff. Delivery type is a different thing from work type. A Strategic Deliverable can land as a hand off. It's set on the roadmap's intended progress card, so the sprint report doesn't repeat it.
 
 ## Template
-Use [sprint-report.md](/templates/sprint-report).
+Use [Sprint report](/templates/sprint-report).
 
 ## DMV example
-The filled DMV Sprint 3 report, with the sprint history, is in [sprint-report.md](/templates/sprint-report).
+The filled DMV Sprint 3 report, with the sprint history, is in [Sprint report](/templates/sprint-report).
 
 ## Rules of thumb
 

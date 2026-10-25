@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getDoc, getIndex, renderMarkdown, GITHUB_REPO } from "@/lib/system";
+import { getDoc, getDocTemplate, getIndex, renderMarkdown, GITHUB_REPO } from "@/lib/system";
 import { Arrow } from "@/components/Arrow";
 import { Prose } from "@/components/Prose";
 import { StatusBadge } from "@/components/StatusBadge";
+import { TemplateList } from "@/components/TemplateList";
+import { TemplateTabs } from "@/components/TemplateTabs";
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -27,11 +29,18 @@ export default async function DocPage({ params }: Params) {
   const doc = getDoc(slug);
   if (!doc) notFound();
 
-  const { docs } = getIndex();
+  const { docs, templates } = getIndex();
   const i = docs.findIndex((d) => d.slug === slug);
+  const meta = docs[i];
   const prev = docs[i - 1];
   const next = docs[i + 1];
-  const html = await renderMarkdown(doc.content);
+  const files = meta.templates.map((t) => templates.find((x) => x.slug === t)!);
+  const inline = meta.inlineTemplate ? getDocTemplate(doc.content) : null;
+  const [html, blankHtml, exampleHtml, afterHtml] = await Promise.all(
+    inline
+      ? [inline.before, inline.blank, inline.example, inline.after].map(renderMarkdown)
+      : [renderMarkdown(doc.content)],
+  );
 
   return (
     <article className="container-page py-12 md:py-16">
@@ -48,6 +57,41 @@ export default async function DocPage({ params }: Params) {
         <div className="mt-10">
           <Prose html={html} />
         </div>
+
+        {inline && (
+          <>
+            <div className="mt-10">
+              <TemplateTabs
+                panels={[
+                  {
+                    label: "Template",
+                    filename: `${slug}-template.md`,
+                    markdown: `# ${doc.meta.title}\n\n${inline.blank}`,
+                    html: blankHtml,
+                  },
+                  {
+                    label: "DMV example",
+                    filename: `${slug}-dmv-example.md`,
+                    markdown: `# ${doc.meta.title}: DMV example\n\n${inline.example}`,
+                    html: exampleHtml,
+                    hash: "dmv-example",
+                  },
+                ]}
+              />
+            </div>
+            <div className="mt-10">
+              <Prose html={afterHtml} />
+            </div>
+          </>
+        )}
+
+        {files.length > 0 && (
+          <section className="mt-12 border-t border-paper/15 pt-6">
+            <h2 className="font-display text-h4 font-extrabold text-paper">Files for this chapter</h2>
+            <p className="mt-2 text-small text-paper/60">Blank template plus a filled DMV example for each.</p>
+            <TemplateList templates={files} />
+          </section>
+        )}
 
         <p className="mt-12 text-small">
           <a
