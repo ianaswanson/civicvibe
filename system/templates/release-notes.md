@@ -1,0 +1,38 @@
+# Release notes
+
+Messages that tell staff, partners and the public what changed, written for the person whose experience changes. Internal notes go out before the change; external notes go out when it goes live.
+
+- **Definition:** [Glossary: Release notes, Release, Launch](../00-glossary.md)
+- **How it works:** [12 Build, release and enable](../12-build-release-and-enable.md)
+- **Owner:** product owner; product manager for Solution launches
+- **Links to:** Parent: [Deliverable](deliverable.md)
+
+## Template
+
+| Field | What goes here |
+|---|---|
+| What | The change, in benefit language |
+| When | Release date |
+| Why | The problem it solves, tied to a goal |
+| How to get it | Who has access and what they need to do |
+| What you need to know | Impacts, requirements, known limits |
+| Internal only: support notes | FAQs for staff, who to contact |
+| Learn more | Link to the guide |
+
+Fixes get a short form: what, when, what you need to know.
+
+## DMV example
+
+**Internal release note: online renewal beta**
+
+| Field | Entry |
+|---|---|
+| What | Residents in the beta group can renew their vehicle registration online. |
+| When | Week 10, Monday |
+| Why | Renewals take about 45 minutes in an office, counting the wait. Online renewal targets under 5 minutes (Goal 1). |
+| How to get it | Invite code printed on the renewal notice |
+| What you need to know | 25 residents in the beta. Lapsed registrations still need an office visit. |
+| Internal only: support notes | Stickers mail within 10 business days. Contact the product owner with questions. |
+| Learn more | Counter guide: "Helping a customer who started online" |
+
+**External release note:** "Skip the line. You can now renew your registration online in about five minutes. Your sticker arrives by mail within 10 business days."

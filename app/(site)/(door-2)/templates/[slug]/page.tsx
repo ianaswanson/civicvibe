@@ -108,7 +108,7 @@ export default async function TemplatePage({ params }: Params) {
 
         <p className="mt-12 text-small">
           <a
-            href={`${GITHUB_REPO}/blob/main/content/templates/${slug}.md`}
+            href={`${GITHUB_REPO}/blob/main/${meta.source}`}
             className="link"
           >
             Source

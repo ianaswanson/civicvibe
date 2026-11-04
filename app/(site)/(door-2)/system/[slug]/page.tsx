@@ -95,7 +95,7 @@ export default async function DocPage({ params }: Params) {
 
         <p className="mt-12 text-small">
           <a
-            href={`${GITHUB_REPO}/blob/main/content/system/${slug}.md`}
+            href={`${GITHUB_REPO}/blob/main/${meta.source}`}
             className="link"
           >
             Source
