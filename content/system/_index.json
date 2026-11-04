@@ -537,5 +537,20 @@
       "width": 2400,
       "height": 1521
     }
-  }
+  },
+  "decks": [
+    {
+      "slug": "how-we-plan-the-quarter",
+      "title": "How We Plan the Quarter",
+      "slides": 19,
+      "sections": [
+        "Why we are here and how the planning week runs.",
+        "Three work types plus organization business, and how we split our time.",
+        "Size the effort, not the calendar: T-shirt sizes in sprints.",
+        "The cut-off line, the vote of confidence, and what a commitment means.",
+        "The trust this asks for, and living with productive tension."
+      ],
+      "source": "system/decks/how-we-plan-the-quarter"
+    }
+  ]
 }

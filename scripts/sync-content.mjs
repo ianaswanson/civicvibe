@@ -18,7 +18,9 @@
 //     images (system/visuals/board/) into public/images/system/board/
 //   - strips any "Sources" / "Source materials" section, should one come back
 //     (they listed private working files; they live in the private repo now)
-//   - fails if anything BOUNDARIES.md rules out is in the text
+//   - lists the decks in system/decks/ (rendered by cv-vy1.7; for now only
+//     indexed and scanned)
+//   - fails if anything BOUNDARIES.md rules out is in the text, decks included
 
 import fs from "node:fs";
 import path from "node:path";
@@ -243,6 +245,35 @@ for (const ch of boardManifest.chapters) {
   }
 }
 
+// --- Decks ------------------------------------------------------------------
+// system/decks/<slug>/deck.json + slides/*.html (+ assets/), as exported from
+// the Slides artifacts and DMV-ified. Every text file is scanned.
+
+const DECKS_DIR = path.join(SRC, "decks");
+const decks = [];
+if (fs.existsSync(DECKS_DIR)) {
+  for (const slug of fs.readdirSync(DECKS_DIR).sort()) {
+    const dir = path.join(DECKS_DIR, slug);
+    if (!fs.statSync(dir).isDirectory()) continue;
+    const deck = JSON.parse(fs.readFileSync(path.join(dir, "deck.json"), "utf8"));
+    for (const file of walk(dir)) {
+      if (!/\.(html|json|md)$/.test(file)) continue;
+      const text = fs.readFileSync(file, "utf8");
+      for (const re of FORBIDDEN) {
+        const hit = text.match(re);
+        if (hit) failures.push(`${path.relative(ROOT, file)} line ${text.slice(0, hit.index).split("\n").length}: "${hit[0]}"`);
+      }
+    }
+    decks.push({
+      slug,
+      title: deck.title,
+      slides: deck.order.length,
+      sections: Object.values(deck.sections || {}).map((s) => s.description),
+      source: `system/decks/${slug}`,
+    });
+  }
+}
+
 // --- Report -----------------------------------------------------------------
 
 for (const w of warnings) console.warn(`sync warning: ${w}`);
@@ -270,13 +301,14 @@ fs.writeFileSync(
       planned,
       templates,
       board,
+      decks,
     },
     null,
     2,
   ) + "\n",
 );
 console.log(
-  `sync: ${docs.length} docs, ${templates.length} templates, ${planned.length} planned docs, ${visualFiles.length} visuals, ${boardFiles.length} board chapters.`,
+  `sync: ${docs.length} docs, ${templates.length} templates, ${planned.length} planned docs, ${visualFiles.length} visuals, ${boardFiles.length} board chapters, ${decks.length} decks.`,
 );
 
 // --- Helpers ----------------------------------------------------------------
@@ -390,6 +422,13 @@ function write(dest, meta, body, source) {
     "",
   ].join("\n");
   pending.push({ dest, text: fm + body });
+}
+
+function walk(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) => {
+    const p = path.join(dir, e.name);
+    return e.isDirectory() ? walk(p) : [p];
+  });
 }
 
 // Width and height from a PNG's IHDR chunk.
