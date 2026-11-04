@@ -38,7 +38,7 @@ One file per artifact in [templates/](templates/README.md): a blank template and
 - **Words:** the [Glossary](00-glossary.md). Nothing else defines terms.
 - **How each part works:** the numbered documents.
 - **Fields and filled DMV examples:** [templates/](templates/README.md). Each artifact's fields and its filled example live there once. The numbered documents link to them and keep only the lesson.
-- **Visuals:** the FigJam board, "Digital services system." The files are the source of truth and the board is drawn from them. When a file changes, check the chapters listed below in the same sitting.
+- **Visuals:** the FigJam board, "Digital services system." The files are the source of truth and the board is drawn from them. When a file changes, check the chapters listed below in the same sitting, and re-export any chapter in [visuals/board/](visuals/board/board.json), which is what the site shows.
 
 | File changed | Board chapters to check |
 |---|---|

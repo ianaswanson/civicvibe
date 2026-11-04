@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDoc, getDocTemplate, getIndex, renderMarkdown, GITHUB_REPO } from "@/lib/system";
+import { BoardFigure } from "@/components/BoardFigure";
 import { Arrow } from "@/components/Arrow";
 import { Prose } from "@/components/Prose";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -90,6 +91,15 @@ export default async function DocPage({ params }: Params) {
             <h2 className="font-display text-h4 font-extrabold text-paper">Files for this chapter</h2>
             <p className="mt-2 text-small text-paper/60">Blank template plus a filled DMV example for each.</p>
             <TemplateList templates={files} />
+          </section>
+        )}
+
+        {meta.visuals.length > 0 && (
+          <section className="mt-14 space-y-10">
+            <h2 className="font-display text-h4 font-extrabold text-paper">On the board</h2>
+            {meta.visuals.map((v) => (
+              <BoardFigure key={v.chapter} visual={v} />
+            ))}
           </section>
         )}
 

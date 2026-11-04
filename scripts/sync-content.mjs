@@ -14,7 +14,8 @@
 //     ("deliverable.md") to the page's title
 //   - records which templates each doc uses, and whether a doc carries its own
 //     template and DMV example
-//   - copies the roadmap visuals into public/files/
+//   - copies the roadmap visuals into public/files/ and the board chapter
+//     images (system/visuals/board/) into public/images/system/board/
 //   - strips any "Sources" / "Source materials" section, should one come back
 //     (they listed private working files; they live in the private repo now)
 //   - fails if anything BOUNDARIES.md rules out is in the text
@@ -27,6 +28,8 @@ const SRC = process.env.CV_SYSTEM_SRC || path.join(ROOT, "system");
 const OUT_SYSTEM = path.join(ROOT, "content", "system");
 const OUT_TEMPLATES = path.join(ROOT, "content", "templates");
 const OUT_FILES = path.join(ROOT, "public", "files");
+const OUT_BOARD = path.join(ROOT, "public", "images", "system", "board");
+const BOARD_DIR = path.join(SRC, "visuals", "board");
 
 // The one-page roadmap visuals, which follow templates/roadmap.md and use the
 // fictional DMV example.
@@ -194,6 +197,52 @@ for (const [slug, files] of Object.entries(VISUALS)) {
   }
 }
 
+// --- Board chapters ---------------------------------------------------------
+// system/visuals/board/board.json lists each exported chapter: file, title,
+// caption, alt, and the docs it illustrates ("system" is the /system page).
+
+const boardManifest = JSON.parse(fs.readFileSync(path.join(BOARD_DIR, "board.json"), "utf8"));
+const board = { url: boardManifest.url };
+const boardFiles = [];
+for (const d of docs) d.visuals = [];
+for (const ch of boardManifest.chapters) {
+  const file = path.join(BOARD_DIR, ch.file);
+  if (!fs.existsSync(file)) {
+    failures.push(`board chapter ${ch.chapter}: ${ch.file} not found`);
+    continue;
+  }
+  const png = fs.readFileSync(file);
+  const { width, height } = pngSize(png, ch.file);
+  for (const k of ["title", "caption", "alt"]) {
+    for (const re of FORBIDDEN) {
+      const hit = (ch[k] || "").match(re);
+      if (hit) failures.push(`board.json chapter ${ch.chapter} ${k}: "${hit[0]}"`);
+    }
+  }
+  const visual = {
+    chapter: ch.chapter,
+    title: ch.title,
+    caption: ch.caption,
+    alt: ch.alt,
+    src: `/images/system/board/${ch.file}`,
+    width,
+    height,
+  };
+  boardFiles.push({ dest: path.join(OUT_BOARD, ch.file), text: png });
+  for (const target of ch.docs) {
+    if (target === "system") {
+      board.overview = visual;
+      continue;
+    }
+    const d = docs.find((x) => x.slug === target);
+    if (!d) {
+      failures.push(`board chapter ${ch.chapter}: no doc "${target}"`);
+      continue;
+    }
+    d.visuals.push(visual);
+  }
+}
+
 // --- Report -----------------------------------------------------------------
 
 for (const w of warnings) console.warn(`sync warning: ${w}`);
@@ -207,7 +256,8 @@ if (failures.length) {
 resetDir(OUT_SYSTEM);
 resetDir(OUT_TEMPLATES);
 resetDir(OUT_FILES);
-for (const { dest, text } of [...pending, ...visualFiles]) {
+resetDir(OUT_BOARD);
+for (const { dest, text } of [...pending, ...visualFiles, ...boardFiles]) {
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.writeFileSync(dest, text);
 }
@@ -219,13 +269,14 @@ fs.writeFileSync(
       docs,
       planned,
       templates,
+      board,
     },
     null,
     2,
   ) + "\n",
 );
 console.log(
-  `sync: ${docs.length} docs, ${templates.length} templates, ${planned.length} planned docs, ${visualFiles.length} visuals.`,
+  `sync: ${docs.length} docs, ${templates.length} templates, ${planned.length} planned docs, ${visualFiles.length} visuals, ${boardFiles.length} board chapters.`,
 );
 
 // --- Helpers ----------------------------------------------------------------
@@ -339,6 +390,12 @@ function write(dest, meta, body, source) {
     "",
   ].join("\n");
   pending.push({ dest, text: fm + body });
+}
+
+// Width and height from a PNG's IHDR chunk.
+function pngSize(buf, name) {
+  if (buf.toString("ascii", 1, 4) !== "PNG") throw new Error(`${name} is not a PNG`);
+  return { width: buf.readUInt32BE(16), height: buf.readUInt32BE(20) };
 }
 
 function resetDir(dir) {

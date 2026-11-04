@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getIndex, getProcessMap } from "@/lib/system";
+import { BoardFigure } from "@/components/BoardFigure";
 import { CopyNeeded } from "@/components/CopyNeeded";
 import { PageHead } from "@/components/PageHead";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -23,7 +24,7 @@ const artifactChain = [
 
 // Door 2. First screen is wireframe sentences 12-15, verbatim.
 export default function SystemPage() {
-  const { docs, planned, templates } = getIndex();
+  const { docs, planned, templates, board } = getIndex();
   const map = getProcessMap();
   const processFlow = map.map((s) => ({ label: s.step, href: `#step-${s.step.toLowerCase().replace(/\s+/g, "-")}` }));
 
@@ -46,6 +47,19 @@ export default function SystemPage() {
           Every example below runs on the same made-up Oregon DMV service, so
           the pieces connect and you can see how one thing becomes the next.
         </p>
+
+        {board.overview && (
+          <section className="mt-12">
+            <BoardFigure visual={board.overview} priority />
+            <p className="mt-3 text-small text-paper/60">
+              From the{" "}
+              <a href={board.url} className="link">
+                board
+              </a>
+              , where the whole system is drawn chapter by chapter.
+            </p>
+          </section>
+        )}
 
         <section id="map" aria-label="The process flow, step by step" className="mt-12 scroll-mt-8">
           <ol className="max-w-4xl divide-y divide-paper/15 border-y border-paper/15">

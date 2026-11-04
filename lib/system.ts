@@ -27,6 +27,26 @@ export interface DocMeta {
   templates: string[];
   // The doc carries its own blank template and DMV example.
   inlineTemplate: boolean;
+  // Chapters of the FigJam board that illustrate this doc, in board order.
+  visuals: BoardVisual[];
+}
+
+// One chapter (or sub-chapter) of the board, exported as an image. From
+// system/visuals/board/board.json via the sync.
+export interface BoardVisual {
+  chapter: string;
+  title: string;
+  caption: string;
+  alt: string;
+  src: string;
+  width: number;
+  height: number;
+}
+
+export interface BoardMeta {
+  url: string;
+  // Chapter 1, the system on one page, for /system.
+  overview?: BoardVisual;
 }
 
 export interface PlannedDoc {
@@ -53,6 +73,7 @@ interface SystemIndex {
   docs: DocMeta[];
   planned: PlannedDoc[];
   templates: TemplateMeta[];
+  board: BoardMeta;
 }
 
 export function getIndex(): SystemIndex {

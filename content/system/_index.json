@@ -9,7 +9,8 @@
       "order": 0,
       "source": "system/00-glossary.md",
       "inlineTemplate": false,
-      "templates": []
+      "templates": [],
+      "visuals": []
     },
     {
       "slug": "shared-terms-and-artifacts",
@@ -19,7 +20,18 @@
       "order": 1,
       "source": "system/01-shared-terms-and-artifacts.md",
       "inlineTemplate": true,
-      "templates": []
+      "templates": [],
+      "visuals": [
+        {
+          "chapter": "3",
+          "title": "What gets made",
+          "caption": "Every artifact with a one-line definition and how it connects to the next. Epic is a dashed, optional link.",
+          "alt": "Artifact map. Yellow cards, each with a name and one line: Roadmap (published quarterly, one document with five sections); Goal (1-2 years, a change in what people do with a starting value and target); Idea (ongoing, any suggestion from anyone); Initiative (open until the outcome is reached, the tracked bet that an opportunity will move a goal); Solution (one of several tried, tested, built, kept or dropped); Deliverable (committed this quarter, a tangible thing handed over); User story (the smallest piece of value, built in one sprint); Sprint report (each sprint); Release notes; Small request (ongoing, a bounded change under a sprint that does not advance a goal); Discovery brief; Assumption log; Launch readiness check; Enable plan. Labelled arrows connect them: Idea can become Initiative, Initiative is pursued by Solutions, a Solution is sliced into Deliverables, Deliverables are broken into user stories, and so on.",
+          "src": "/images/system/board/3-what-gets-made.png",
+          "width": 2400,
+          "height": 1170
+        }
+      ]
     },
     {
       "slug": "why-digital-services",
@@ -29,7 +41,8 @@
       "order": 2,
       "source": "system/02-why-digital-services.md",
       "inlineTemplate": false,
-      "templates": []
+      "templates": [],
+      "visuals": []
     },
     {
       "slug": "vision-and-strategy",
@@ -41,6 +54,17 @@
       "inlineTemplate": false,
       "templates": [
         "roadmap"
+      ],
+      "visuals": [
+        {
+          "chapter": "2a",
+          "title": "Set direction and plan the quarter",
+          "caption": "What feeds the yearly direction review, what it produces, and how those artifacts feed the four quarterly planning sessions.",
+          "alt": "Flow diagram in three columns. Left, four blue inputs: leadership priorities and mandates, user research and feedback, last year's goal progress, and patterns from the idea log. They point to the green step 2 Set direction (yearly direction review). It produces yellow artifacts: vision and strategy, and goals for 1 to 2 years. Those, plus the idea log, active Initiatives and their Solutions, the small request board, and last quarter's commitments, point to the green step 3 Plan the quarter (four sessions). It produces updated goal progress, new Initiatives, the Now Next Later grid, and the quarterly commitments (Deliverables, intended progress, capacity).",
+          "src": "/images/system/board/2a-set-direction-and-plan-the-quarter.png",
+          "width": 1940,
+          "height": 2301
+        }
       ]
     },
     {
@@ -54,6 +78,17 @@
       "templates": [
         "goal",
         "roadmap"
+      ],
+      "visuals": [
+        {
+          "chapter": "2a",
+          "title": "Set direction and plan the quarter",
+          "caption": "What feeds the yearly direction review, what it produces, and how those artifacts feed the four quarterly planning sessions.",
+          "alt": "Flow diagram in three columns. Left, four blue inputs: leadership priorities and mandates, user research and feedback, last year's goal progress, and patterns from the idea log. They point to the green step 2 Set direction (yearly direction review). It produces yellow artifacts: vision and strategy, and goals for 1 to 2 years. Those, plus the idea log, active Initiatives and their Solutions, the small request board, and last quarter's commitments, point to the green step 3 Plan the quarter (four sessions). It produces updated goal progress, new Initiatives, the Now Next Later grid, and the quarterly commitments (Deliverables, intended progress, capacity).",
+          "src": "/images/system/board/2a-set-direction-and-plan-the-quarter.png",
+          "width": 1940,
+          "height": 2301
+        }
       ]
     },
     {
@@ -66,7 +101,8 @@
       "inlineTemplate": false,
       "templates": [
         "roadmap"
-      ]
+      ],
+      "visuals": []
     },
     {
       "slug": "quarterly-planning-and-commitments",
@@ -78,6 +114,17 @@
       "inlineTemplate": false,
       "templates": [
         "roadmap"
+      ],
+      "visuals": [
+        {
+          "chapter": "2a",
+          "title": "Set direction and plan the quarter",
+          "caption": "What feeds the yearly direction review, what it produces, and how those artifacts feed the four quarterly planning sessions.",
+          "alt": "Flow diagram in three columns. Left, four blue inputs: leadership priorities and mandates, user research and feedback, last year's goal progress, and patterns from the idea log. They point to the green step 2 Set direction (yearly direction review). It produces yellow artifacts: vision and strategy, and goals for 1 to 2 years. Those, plus the idea log, active Initiatives and their Solutions, the small request board, and last quarter's commitments, point to the green step 3 Plan the quarter (four sessions). It produces updated goal progress, new Initiatives, the Now Next Later grid, and the quarterly commitments (Deliverables, intended progress, capacity).",
+          "src": "/images/system/board/2a-set-direction-and-plan-the-quarter.png",
+          "width": 1940,
+          "height": 2301
+        }
       ]
     },
     {
@@ -90,6 +137,17 @@
       "inlineTemplate": false,
       "templates": [
         "sprint-report"
+      ],
+      "visuals": [
+        {
+          "chapter": "2c",
+          "title": "One sprint, every two weeks",
+          "caption": "Deliverables, ready stories and the small request board go into sprint planning; the sprint ends with a review, a sprint report and a retro.",
+          "alt": "Flow diagram, left to right. Three inputs, Deliverables in Now, ready user stories, and the small request board, feed sprint planning, which sets a sprint goal and committed stories. Build, test and release runs alongside mid-sprint refinement, which readies stories for the next sprint. The sprint produces released changes and release notes. Step 7 Review the sprint produces the sprint report and commitment status, then a retro that updates the team working agreements.",
+          "src": "/images/system/board/2c-one-sprint.png",
+          "width": 2400,
+          "height": 1031
+        }
       ]
     },
     {
@@ -103,6 +161,17 @@
       "templates": [
         "small-request",
         "idea"
+      ],
+      "visuals": [
+        {
+          "chapter": "2d",
+          "title": "Requests: how they are reviewed",
+          "caption": "Every request gets an answer. Some join the roadmap, some are small work, some are a no. Bugs skip triage.",
+          "alt": "Flow diagram. A submitted request goes to a weekly team triage review (within 5 business days) with five outcomes: already on the roadmap, link to the roadmap item; small request, add to the small request board; large or strategic, add to the idea log; idea for improvement, add to the idea log; will not do, close it. Every outcome ends with telling the requester. Ideas for improvement go to a product manager review at intake or quarterly planning with three results: mined into an Initiative; future consideration (not yes, not no, and we won't follow up); or closed with the reason. A separate row: a reported bug skips triage and goes to the technical architect, urgent fixes now, otherwise the technical maintenance list. Definitions of each outcome follow below the diagram.",
+          "src": "/images/system/board/2d-requests.png",
+          "width": 2140,
+          "height": 2451
+        }
       ]
     },
     {
@@ -116,6 +185,17 @@
       "templates": [
         "initiative",
         "solution"
+      ],
+      "visuals": [
+        {
+          "chapter": "2b",
+          "title": "Inside an Initiative, until the outcome is reached",
+          "caption": "Discover, decide, slice, build, enable, measure. If a Solution doesn't hold up, or the outcome isn't reached, the loop goes back to Discover with another Solution.",
+          "alt": "Flow diagram, left to right. An Initiative (hypothesis and outcome measure) feeds step 4 Discover, which produces a discovery brief and an assumption log. A purple decision asks: Solution holds up? No loops back to Discover with another Solution; yes produces a Solution. Step 5 Slice the work produces a story map and Deliverables. Step 6 Build and release (sprints) produces user stories and release notes. Step 8 Enable produces an enable plan and readiness check, feedback to triage, and a Measure the outcome step that updates goal progress. A final decision asks: Outcome reached? Yes closes the Initiative; no goes back to Discover with another Solution.",
+          "src": "/images/system/board/2b-inside-an-initiative.png",
+          "width": 2400,
+          "height": 695
+        }
       ]
     },
     {
@@ -129,6 +209,17 @@
       "templates": [
         "discovery-brief",
         "assumption-log"
+      ],
+      "visuals": [
+        {
+          "chapter": "2b",
+          "title": "Inside an Initiative, until the outcome is reached",
+          "caption": "Discover, decide, slice, build, enable, measure. If a Solution doesn't hold up, or the outcome isn't reached, the loop goes back to Discover with another Solution.",
+          "alt": "Flow diagram, left to right. An Initiative (hypothesis and outcome measure) feeds step 4 Discover, which produces a discovery brief and an assumption log. A purple decision asks: Solution holds up? No loops back to Discover with another Solution; yes produces a Solution. Step 5 Slice the work produces a story map and Deliverables. Step 6 Build and release (sprints) produces user stories and release notes. Step 8 Enable produces an enable plan and readiness check, feedback to triage, and a Measure the outcome step that updates goal progress. A final decision asks: Outcome reached? Yes closes the Initiative; no goes back to Discover with another Solution.",
+          "src": "/images/system/board/2b-inside-an-initiative.png",
+          "width": 2400,
+          "height": 695
+        }
       ]
     },
     {
@@ -143,6 +234,17 @@
         "deliverable",
         "epic",
         "user-story"
+      ],
+      "visuals": [
+        {
+          "chapter": "2b",
+          "title": "Inside an Initiative, until the outcome is reached",
+          "caption": "Discover, decide, slice, build, enable, measure. If a Solution doesn't hold up, or the outcome isn't reached, the loop goes back to Discover with another Solution.",
+          "alt": "Flow diagram, left to right. An Initiative (hypothesis and outcome measure) feeds step 4 Discover, which produces a discovery brief and an assumption log. A purple decision asks: Solution holds up? No loops back to Discover with another Solution; yes produces a Solution. Step 5 Slice the work produces a story map and Deliverables. Step 6 Build and release (sprints) produces user stories and release notes. Step 8 Enable produces an enable plan and readiness check, feedback to triage, and a Measure the outcome step that updates goal progress. A final decision asks: Outcome reached? Yes closes the Initiative; no goes back to Discover with another Solution.",
+          "src": "/images/system/board/2b-inside-an-initiative.png",
+          "width": 2400,
+          "height": 695
+        }
       ]
     },
     {
@@ -157,6 +259,17 @@
         "launch-readiness-check",
         "release-notes",
         "enable-plan"
+      ],
+      "visuals": [
+        {
+          "chapter": "2b",
+          "title": "Inside an Initiative, until the outcome is reached",
+          "caption": "Discover, decide, slice, build, enable, measure. If a Solution doesn't hold up, or the outcome isn't reached, the loop goes back to Discover with another Solution.",
+          "alt": "Flow diagram, left to right. An Initiative (hypothesis and outcome measure) feeds step 4 Discover, which produces a discovery brief and an assumption log. A purple decision asks: Solution holds up? No loops back to Discover with another Solution; yes produces a Solution. Step 5 Slice the work produces a story map and Deliverables. Step 6 Build and release (sprints) produces user stories and release notes. Step 8 Enable produces an enable plan and readiness check, feedback to triage, and a Measure the outcome step that updates goal progress. A final decision asks: Outcome reached? Yes closes the Initiative; no goes back to Discover with another Solution.",
+          "src": "/images/system/board/2b-inside-an-initiative.png",
+          "width": 2400,
+          "height": 695
+        }
       ]
     },
     {
@@ -167,7 +280,27 @@
       "order": 13,
       "source": "system/13-team-rhythm.md",
       "inlineTemplate": true,
-      "templates": []
+      "templates": [],
+      "visuals": [
+        {
+          "chapter": "2c",
+          "title": "One sprint, every two weeks",
+          "caption": "Deliverables, ready stories and the small request board go into sprint planning; the sprint ends with a review, a sprint report and a retro.",
+          "alt": "Flow diagram, left to right. Three inputs, Deliverables in Now, ready user stories, and the small request board, feed sprint planning, which sets a sprint goal and committed stories. Build, test and release runs alongside mid-sprint refinement, which readies stories for the next sprint. The sprint produces released changes and release notes. Step 7 Review the sprint produces the sprint report and commitment status, then a retro that updates the team working agreements.",
+          "src": "/images/system/board/2c-one-sprint.png",
+          "width": 2400,
+          "height": 1031
+        },
+        {
+          "chapter": "5",
+          "title": "When it happens: team rhythm",
+          "caption": "One example quarter, December to March, with a lane for each cadence: yearly, quarterly, monthly, sprints, ongoing.",
+          "alt": "Timeline of one quarter across four months, December to March, in five lanes. Yearly: a direction review (vision, strategy, goals) in early December. Quarterly: quarterly planning (grid, commitments) in mid December, roadmap published in early January, next quarter planning in late March, quarter review (goal progress) at the end of March. Monthly: advisory and steering meetings in late January, February and March. Sprints: six two-week sprints from early January to the end of March, each ending in a sprint review that updates the sprint report. Ongoing: weekly request intake and discovery inside active Initiatives.",
+          "src": "/images/system/board/5-when-it-happens.png",
+          "width": 1960,
+          "height": 1311
+        }
+      ]
     },
     {
       "slug": "roles-and-decision-rights",
@@ -177,7 +310,8 @@
       "order": 14,
       "source": "system/14-roles-and-decision-rights.md",
       "inlineTemplate": true,
-      "templates": []
+      "templates": [],
+      "visuals": []
     },
     {
       "slug": "leading-the-change",
@@ -187,7 +321,8 @@
       "order": 15,
       "source": "system/15-leading-the-change.md",
       "inlineTemplate": true,
-      "templates": []
+      "templates": [],
+      "visuals": []
     }
   ],
   "planned": [
@@ -390,5 +525,17 @@
         "build-release-and-enable"
       ]
     }
-  ]
+  ],
+  "board": {
+    "url": "https://www.figma.com/board/tYv1TagaCGeNKZmaquh1qZ",
+    "overview": {
+      "chapter": "1",
+      "title": "The system on one page",
+      "caption": "Eight steps run around one document, the roadmap. Steps 2 and 3 set direction; steps 4 to 8 do the work; what people say comes back in at step 1. Dashed lines show which roadmap section a step updates.",
+      "alt": "Flow diagram. Eight green step boxes form a loop around a yellow box labelled Roadmap, which lists its five sections: vision and strategy, goal progress, Now Next Later grid, quarterly commitments, sprint report. Clockwise from the left: 1 Capture ideas (ongoing), 2 Set direction (yearly), 3 Plan the quarter (quarterly), 4 Discover (inside an Initiative), 5 Slice the work, 6 Build and release (sprints), 7 Review the sprint (every two weeks), 8 Enable (each launch). Under each step, what it makes. Dashed arrows run from Set direction to roadmap sections 1-2, from Plan the quarter to sections 3-4, and from Review the sprint to section 5. An arrow labelled feedback runs from Enable back to Capture ideas.",
+      "src": "/images/system/board/1-system-on-one-page.png",
+      "width": 2400,
+      "height": 1521
+    }
+  }
 }
