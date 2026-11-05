@@ -552,6 +552,18 @@
       "source": "system/decks/a-new-way-of-working"
     },
     {
+      "slug": "from-request-fulfillers-to-outcome-owners",
+      "title": "From Request Fulfillers to Outcome Owners",
+      "slides": 19,
+      "sections": [
+        "Name the pain leaders already feel: the request queue, slipping timelines, successful failures, IT as a black box.",
+        "Why it happens: pulled in every direction, two competing systems, and treating enduring services like temporary projects.",
+        "The shift from project to product, and proof that public organizations already work this way.",
+        "What changes for our people, how we make the transition, what we gain and what will be hard."
+      ],
+      "source": "system/decks/from-request-fulfillers-to-outcome-owners"
+    },
+    {
       "slug": "how-requests-are-reviewed",
       "title": "How Requests Are Reviewed",
       "slides": 16,
