@@ -1,5 +1,5 @@
 {
-  "_generated": "by scripts/sync-content.mjs from digital-services/system/. Do not edit.",
+  "_generated": "by scripts/sync-content.mjs from system/. Do not edit.",
   "docs": [
     {
       "slug": "glossary",
@@ -7,7 +7,10 @@
       "description": "The one place every term in the system is defined.",
       "status": "Draft",
       "order": 0,
-      "source": "system/00-glossary.md"
+      "source": "system/00-glossary.md",
+      "inlineTemplate": false,
+      "templates": [],
+      "visuals": []
     },
     {
       "slug": "shared-terms-and-artifacts",
@@ -15,7 +18,20 @@
       "description": "This page names the artifacts we write and shows how each one leads to the next, so a counter clerk's idea can be traced all the way to the release note that tells her it shipped.",
       "status": "Draft",
       "order": 1,
-      "source": "system/01-shared-terms-and-artifacts.md"
+      "source": "system/01-shared-terms-and-artifacts.md",
+      "inlineTemplate": true,
+      "templates": [],
+      "visuals": [
+        {
+          "chapter": "3",
+          "title": "What gets made",
+          "caption": "Every artifact with a one-line definition and how it connects to the next. Epic is a dashed, optional link.",
+          "alt": "Artifact map. Yellow cards, each with a name and one line: Roadmap (published quarterly, one document with five sections); Goal (1-2 years, a change in what people do with a starting value and target); Idea (ongoing, any suggestion from anyone); Initiative (open until the outcome is reached, the tracked bet that an opportunity will move a goal); Solution (one of several tried, tested, built, kept or dropped); Deliverable (committed this quarter, a tangible thing handed over); User story (the smallest piece of value, built in one sprint); Sprint report (each sprint); Release notes; Small request (ongoing, a bounded change under a sprint that does not advance a goal); Discovery brief; Assumption log; Launch readiness check; Enable plan. Labelled arrows connect them: Idea can become Initiative, Initiative is pursued by Solutions, a Solution is sliced into Deliverables, Deliverables are broken into user stories, and so on.",
+          "src": "/images/system/board/3-what-gets-made.png",
+          "width": 2400,
+          "height": 1170
+        }
+      ]
     },
     {
       "slug": "why-digital-services",
@@ -23,7 +39,10 @@
       "description": "The story we tell to bring a team or a leadership group into a digital services way of working: a run of before-and-after pictures, an honest \"here is how we start,\" and room for the people in the room to push back.",
       "status": "Draft",
       "order": 2,
-      "source": "system/02-why-digital-services.md"
+      "source": "system/02-why-digital-services.md",
+      "inlineTemplate": false,
+      "templates": [],
+      "visuals": []
     },
     {
       "slug": "vision-and-strategy",
@@ -31,7 +50,22 @@
       "description": "Vision and strategy is the first section of the roadmap.",
       "status": "Draft",
       "order": 3,
-      "source": "system/03-vision-and-strategy.md"
+      "source": "system/03-vision-and-strategy.md",
+      "inlineTemplate": false,
+      "templates": [
+        "roadmap"
+      ],
+      "visuals": [
+        {
+          "chapter": "2a",
+          "title": "Set direction and plan the quarter",
+          "caption": "What feeds the yearly direction review, what it produces, and how those artifacts feed the four quarterly planning sessions.",
+          "alt": "Flow diagram in three columns. Left, four blue inputs: leadership priorities and mandates, user research and feedback, last year's goal progress, and patterns from the idea log. They point to the green step 2 Set direction (yearly direction review). It produces yellow artifacts: vision and strategy, and goals for 1 to 2 years. Those, plus the idea log, active Initiatives and their Solutions, the small request board, and last quarter's commitments, point to the green step 3 Plan the quarter (four sessions). It produces updated goal progress, new Initiatives, the Now Next Later grid, and the quarterly commitments (Deliverables, intended progress, capacity).",
+          "src": "/images/system/board/2a-set-direction-and-plan-the-quarter.png",
+          "width": 1940,
+          "height": 2301
+        }
+      ]
     },
     {
       "slug": "goals-and-goal-progress",
@@ -39,7 +73,23 @@
       "description": "Goals are the second section of the roadmap.",
       "status": "Draft",
       "order": 4,
-      "source": "system/04-goals-and-goal-progress.md"
+      "source": "system/04-goals-and-goal-progress.md",
+      "inlineTemplate": false,
+      "templates": [
+        "goal",
+        "roadmap"
+      ],
+      "visuals": [
+        {
+          "chapter": "2a",
+          "title": "Set direction and plan the quarter",
+          "caption": "What feeds the yearly direction review, what it produces, and how those artifacts feed the four quarterly planning sessions.",
+          "alt": "Flow diagram in three columns. Left, four blue inputs: leadership priorities and mandates, user research and feedback, last year's goal progress, and patterns from the idea log. They point to the green step 2 Set direction (yearly direction review). It produces yellow artifacts: vision and strategy, and goals for 1 to 2 years. Those, plus the idea log, active Initiatives and their Solutions, the small request board, and last quarter's commitments, point to the green step 3 Plan the quarter (four sessions). It produces updated goal progress, new Initiatives, the Now Next Later grid, and the quarterly commitments (Deliverables, intended progress, capacity).",
+          "src": "/images/system/board/2a-set-direction-and-plan-the-quarter.png",
+          "width": 1940,
+          "height": 2301
+        }
+      ]
     },
     {
       "slug": "now-next-later-grid",
@@ -47,7 +97,12 @@
       "description": "The Now, Next, Later grid is the third section of the roadmap.",
       "status": "Draft",
       "order": 5,
-      "source": "system/05-now-next-later-grid.md"
+      "source": "system/05-now-next-later-grid.md",
+      "inlineTemplate": false,
+      "templates": [
+        "roadmap"
+      ],
+      "visuals": []
     },
     {
       "slug": "quarterly-planning-and-commitments",
@@ -55,7 +110,22 @@
       "description": "Quarterly planning is step 3 of the process flow.",
       "status": "Draft",
       "order": 6,
-      "source": "system/06-quarterly-planning-and-commitments.md"
+      "source": "system/06-quarterly-planning-and-commitments.md",
+      "inlineTemplate": false,
+      "templates": [
+        "roadmap"
+      ],
+      "visuals": [
+        {
+          "chapter": "2a",
+          "title": "Set direction and plan the quarter",
+          "caption": "What feeds the yearly direction review, what it produces, and how those artifacts feed the four quarterly planning sessions.",
+          "alt": "Flow diagram in three columns. Left, four blue inputs: leadership priorities and mandates, user research and feedback, last year's goal progress, and patterns from the idea log. They point to the green step 2 Set direction (yearly direction review). It produces yellow artifacts: vision and strategy, and goals for 1 to 2 years. Those, plus the idea log, active Initiatives and their Solutions, the small request board, and last quarter's commitments, point to the green step 3 Plan the quarter (four sessions). It produces updated goal progress, new Initiatives, the Now Next Later grid, and the quarterly commitments (Deliverables, intended progress, capacity).",
+          "src": "/images/system/board/2a-set-direction-and-plan-the-quarter.png",
+          "width": 1940,
+          "height": 2301
+        }
+      ]
     },
     {
       "slug": "sprint-report",
@@ -63,7 +133,22 @@
       "description": "The sprint report is the fifth section of the roadmap.",
       "status": "Draft",
       "order": 7,
-      "source": "system/07-sprint-report.md"
+      "source": "system/07-sprint-report.md",
+      "inlineTemplate": false,
+      "templates": [
+        "sprint-report"
+      ],
+      "visuals": [
+        {
+          "chapter": "2c",
+          "title": "One sprint, every two weeks",
+          "caption": "Deliverables, ready stories and the small request board go into sprint planning; the sprint ends with a review, a sprint report and a retro.",
+          "alt": "Flow diagram, left to right. Three inputs, Deliverables in Now, ready user stories, and the small request board, feed sprint planning, which sets a sprint goal and committed stories. Build, test and release runs alongside mid-sprint refinement, which readies stories for the next sprint. The sprint produces released changes and release notes. Step 7 Review the sprint produces the sprint report and commitment status, then a retro that updates the team working agreements.",
+          "src": "/images/system/board/2c-one-sprint.png",
+          "width": 2400,
+          "height": 1031
+        }
+      ]
     },
     {
       "slug": "request-triage-and-idea-log",
@@ -71,7 +156,23 @@
       "description": "Requests reach the team every week, from staff, partners, leadership and the public.",
       "status": "Draft",
       "order": 8,
-      "source": "system/08-request-triage-and-idea-log.md"
+      "source": "system/08-request-triage-and-idea-log.md",
+      "inlineTemplate": true,
+      "templates": [
+        "small-request",
+        "idea"
+      ],
+      "visuals": [
+        {
+          "chapter": "2d",
+          "title": "Requests: how they are reviewed",
+          "caption": "Every request gets an answer. Some join the roadmap, some are small work, some are a no. Bugs skip triage.",
+          "alt": "Flow diagram. A submitted request goes to a weekly team triage review (within 5 business days) with five outcomes: already on the roadmap, link to the roadmap item; small request, add to the small request board; large or strategic, add to the idea log; idea for improvement, add to the idea log; will not do, close it. Every outcome ends with telling the requester. Ideas for improvement go to a product manager review at intake or quarterly planning with three results: mined into an Initiative; future consideration (not yes, not no, and we won't follow up); or closed with the reason. A separate row: a reported bug skips triage and goes to the technical architect, urgent fixes now, otherwise the technical maintenance list. Definitions of each outcome follow below the diagram.",
+          "src": "/images/system/board/2d-requests.png",
+          "width": 2140,
+          "height": 2451
+        }
+      ]
     },
     {
       "slug": "initiatives-and-solutions",
@@ -79,7 +180,23 @@
       "description": "An Initiative is the thing we track: a bet that pursuing an opportunity will move a goal, held to the outcome it is meant to change.",
       "status": "Draft",
       "order": 9,
-      "source": "system/09-initiatives-and-solutions.md"
+      "source": "system/09-initiatives-and-solutions.md",
+      "inlineTemplate": false,
+      "templates": [
+        "initiative",
+        "solution"
+      ],
+      "visuals": [
+        {
+          "chapter": "2b",
+          "title": "Inside an Initiative, until the outcome is reached",
+          "caption": "Discover, decide, slice, build, enable, measure. If a Solution doesn't hold up, or the outcome isn't reached, the loop goes back to Discover with another Solution.",
+          "alt": "Flow diagram, left to right. An Initiative (hypothesis and outcome measure) feeds step 4 Discover, which produces a discovery brief and an assumption log. A purple decision asks: Solution holds up? No loops back to Discover with another Solution; yes produces a Solution. Step 5 Slice the work produces a story map and Deliverables. Step 6 Build and release (sprints) produces user stories and release notes. Step 8 Enable produces an enable plan and readiness check, feedback to triage, and a Measure the outcome step that updates goal progress. A final decision asks: Outcome reached? Yes closes the Initiative; no goes back to Discover with another Solution.",
+          "src": "/images/system/board/2b-inside-an-initiative.png",
+          "width": 2400,
+          "height": 695
+        }
+      ]
     },
     {
       "slug": "discovery",
@@ -87,7 +204,23 @@
       "description": "Discovery is the learning work inside an Initiative.",
       "status": "Draft",
       "order": 10,
-      "source": "system/10-discovery.md"
+      "source": "system/10-discovery.md",
+      "inlineTemplate": false,
+      "templates": [
+        "discovery-brief",
+        "assumption-log"
+      ],
+      "visuals": [
+        {
+          "chapter": "2b",
+          "title": "Inside an Initiative, until the outcome is reached",
+          "caption": "Discover, decide, slice, build, enable, measure. If a Solution doesn't hold up, or the outcome isn't reached, the loop goes back to Discover with another Solution.",
+          "alt": "Flow diagram, left to right. An Initiative (hypothesis and outcome measure) feeds step 4 Discover, which produces a discovery brief and an assumption log. A purple decision asks: Solution holds up? No loops back to Discover with another Solution; yes produces a Solution. Step 5 Slice the work produces a story map and Deliverables. Step 6 Build and release (sprints) produces user stories and release notes. Step 8 Enable produces an enable plan and readiness check, feedback to triage, and a Measure the outcome step that updates goal progress. A final decision asks: Outcome reached? Yes closes the Initiative; no goes back to Discover with another Solution.",
+          "src": "/images/system/board/2b-inside-an-initiative.png",
+          "width": 2400,
+          "height": 695
+        }
+      ]
     },
     {
       "slug": "deliverables-and-user-stories",
@@ -95,7 +228,24 @@
       "description": "This document covers step 5, Slice the work.",
       "status": "Draft",
       "order": 11,
-      "source": "system/11-deliverables-and-user-stories.md"
+      "source": "system/11-deliverables-and-user-stories.md",
+      "inlineTemplate": false,
+      "templates": [
+        "deliverable",
+        "epic",
+        "user-story"
+      ],
+      "visuals": [
+        {
+          "chapter": "2b",
+          "title": "Inside an Initiative, until the outcome is reached",
+          "caption": "Discover, decide, slice, build, enable, measure. If a Solution doesn't hold up, or the outcome isn't reached, the loop goes back to Discover with another Solution.",
+          "alt": "Flow diagram, left to right. An Initiative (hypothesis and outcome measure) feeds step 4 Discover, which produces a discovery brief and an assumption log. A purple decision asks: Solution holds up? No loops back to Discover with another Solution; yes produces a Solution. Step 5 Slice the work produces a story map and Deliverables. Step 6 Build and release (sprints) produces user stories and release notes. Step 8 Enable produces an enable plan and readiness check, feedback to triage, and a Measure the outcome step that updates goal progress. A final decision asks: Outcome reached? Yes closes the Initiative; no goes back to Discover with another Solution.",
+          "src": "/images/system/board/2b-inside-an-initiative.png",
+          "width": 2400,
+          "height": 695
+        }
+      ]
     },
     {
       "slug": "build-release-and-enable",
@@ -103,7 +253,24 @@
       "description": "This document covers process steps 6 (Build and release) and 8 (Enable).",
       "status": "Draft",
       "order": 12,
-      "source": "system/12-build-release-and-enable.md"
+      "source": "system/12-build-release-and-enable.md",
+      "inlineTemplate": false,
+      "templates": [
+        "launch-readiness-check",
+        "release-notes",
+        "enable-plan"
+      ],
+      "visuals": [
+        {
+          "chapter": "2b",
+          "title": "Inside an Initiative, until the outcome is reached",
+          "caption": "Discover, decide, slice, build, enable, measure. If a Solution doesn't hold up, or the outcome isn't reached, the loop goes back to Discover with another Solution.",
+          "alt": "Flow diagram, left to right. An Initiative (hypothesis and outcome measure) feeds step 4 Discover, which produces a discovery brief and an assumption log. A purple decision asks: Solution holds up? No loops back to Discover with another Solution; yes produces a Solution. Step 5 Slice the work produces a story map and Deliverables. Step 6 Build and release (sprints) produces user stories and release notes. Step 8 Enable produces an enable plan and readiness check, feedback to triage, and a Measure the outcome step that updates goal progress. A final decision asks: Outcome reached? Yes closes the Initiative; no goes back to Discover with another Solution.",
+          "src": "/images/system/board/2b-inside-an-initiative.png",
+          "width": 2400,
+          "height": 695
+        }
+      ]
     },
     {
       "slug": "team-rhythm",
@@ -111,7 +278,29 @@
       "description": "A lot of product work is staying in sync with other people.",
       "status": "Draft",
       "order": 13,
-      "source": "system/13-team-rhythm.md"
+      "source": "system/13-team-rhythm.md",
+      "inlineTemplate": true,
+      "templates": [],
+      "visuals": [
+        {
+          "chapter": "2c",
+          "title": "One sprint, every two weeks",
+          "caption": "Deliverables, ready stories and the small request board go into sprint planning; the sprint ends with a review, a sprint report and a retro.",
+          "alt": "Flow diagram, left to right. Three inputs, Deliverables in Now, ready user stories, and the small request board, feed sprint planning, which sets a sprint goal and committed stories. Build, test and release runs alongside mid-sprint refinement, which readies stories for the next sprint. The sprint produces released changes and release notes. Step 7 Review the sprint produces the sprint report and commitment status, then a retro that updates the team working agreements.",
+          "src": "/images/system/board/2c-one-sprint.png",
+          "width": 2400,
+          "height": 1031
+        },
+        {
+          "chapter": "5",
+          "title": "When it happens: team rhythm",
+          "caption": "One example quarter, December to March, with a lane for each cadence: yearly, quarterly, monthly, sprints, ongoing.",
+          "alt": "Timeline of one quarter across four months, December to March, in five lanes. Yearly: a direction review (vision, strategy, goals) in early December. Quarterly: quarterly planning (grid, commitments) in mid December, roadmap published in early January, next quarter planning in late March, quarter review (goal progress) at the end of March. Monthly: advisory and steering meetings in late January, February and March. Sprints: six two-week sprints from early January to the end of March, each ending in a sprint review that updates the sprint report. Ongoing: weekly request intake and discovery inside active Initiatives.",
+          "src": "/images/system/board/5-when-it-happens.png",
+          "width": 1960,
+          "height": 1311
+        }
+      ]
     },
     {
       "slug": "roles-and-decision-rights",
@@ -119,7 +308,10 @@
       "description": "Who decides what, who advises, and who to ask.",
       "status": "Draft",
       "order": 14,
-      "source": "system/14-roles-and-decision-rights.md"
+      "source": "system/14-roles-and-decision-rights.md",
+      "inlineTemplate": true,
+      "templates": [],
+      "visuals": []
     },
     {
       "slug": "leading-the-change",
@@ -127,7 +319,10 @@
       "description": "How to roll this system out to a team: who hears what, in what order, and what the first quarter looks like.",
       "status": "Draft",
       "order": 15,
-      "source": "system/15-leading-the-change.md"
+      "source": "system/15-leading-the-change.md",
+      "inlineTemplate": true,
+      "templates": [],
+      "visuals": []
     }
   ],
   "planned": [
@@ -150,7 +345,17 @@
       "artifact": "Roadmap",
       "changes": "Quarterly; sprint report each sprint",
       "order": 1,
-      "source": "system/templates/roadmap.md"
+      "source": "system/templates/roadmap.md",
+      "docs": [
+        "vision-and-strategy",
+        "goals-and-goal-progress",
+        "now-next-later-grid",
+        "quarterly-planning-and-commitments"
+      ],
+      "visuals": {
+        "template": "/files/roadmap/template.html",
+        "example": "/files/roadmap/dmv-example.html"
+      }
     },
     {
       "slug": "goal",
@@ -159,7 +364,10 @@
       "artifact": "Goal",
       "changes": "Yearly",
       "order": 2,
-      "source": "system/templates/goal.md"
+      "source": "system/templates/goal.md",
+      "docs": [
+        "goals-and-goal-progress"
+      ]
     },
     {
       "slug": "idea",
@@ -168,7 +376,10 @@
       "artifact": "Idea",
       "changes": "Ongoing",
       "order": 3,
-      "source": "system/templates/idea.md"
+      "source": "system/templates/idea.md",
+      "docs": [
+        "request-triage-and-idea-log"
+      ]
     },
     {
       "slug": "small-request",
@@ -177,7 +388,10 @@
       "artifact": "Small request",
       "changes": "Ongoing",
       "order": 4,
-      "source": "system/templates/small-request.md"
+      "source": "system/templates/small-request.md",
+      "docs": [
+        "request-triage-and-idea-log"
+      ]
     },
     {
       "slug": "initiative",
@@ -186,7 +400,10 @@
       "artifact": "Initiative",
       "changes": "Open until the outcome is reached",
       "order": 5,
-      "source": "system/templates/initiative.md"
+      "source": "system/templates/initiative.md",
+      "docs": [
+        "initiatives-and-solutions"
+      ]
     },
     {
       "slug": "solution",
@@ -195,7 +412,10 @@
       "artifact": "Solution",
       "changes": "As tried, kept or dropped",
       "order": 6,
-      "source": "system/templates/solution.md"
+      "source": "system/templates/solution.md",
+      "docs": [
+        "initiatives-and-solutions"
+      ]
     },
     {
       "slug": "discovery-brief",
@@ -204,7 +424,10 @@
       "artifact": "Discovery brief",
       "changes": "Each round of discovery",
       "order": 7,
-      "source": "system/templates/discovery-brief.md"
+      "source": "system/templates/discovery-brief.md",
+      "docs": [
+        "discovery"
+      ]
     },
     {
       "slug": "assumption-log",
@@ -213,7 +436,10 @@
       "artifact": "Assumption log",
       "changes": "During discovery",
       "order": 8,
-      "source": "system/templates/assumption-log.md"
+      "source": "system/templates/assumption-log.md",
+      "docs": [
+        "discovery"
+      ]
     },
     {
       "slug": "deliverable",
@@ -222,7 +448,10 @@
       "artifact": "Deliverable",
       "changes": "Committed quarterly",
       "order": 9,
-      "source": "system/templates/deliverable.md"
+      "source": "system/templates/deliverable.md",
+      "docs": [
+        "deliverables-and-user-stories"
+      ]
     },
     {
       "slug": "epic",
@@ -231,7 +460,10 @@
       "artifact": "Epic (optional)",
       "changes": "As the team needs",
       "order": 10,
-      "source": "system/templates/epic.md"
+      "source": "system/templates/epic.md",
+      "docs": [
+        "deliverables-and-user-stories"
+      ]
     },
     {
       "slug": "user-story",
@@ -240,7 +472,10 @@
       "artifact": "User story",
       "changes": "Each sprint",
       "order": 11,
-      "source": "system/templates/user-story.md"
+      "source": "system/templates/user-story.md",
+      "docs": [
+        "deliverables-and-user-stories"
+      ]
     },
     {
       "slug": "sprint-report",
@@ -249,7 +484,10 @@
       "artifact": "Sprint report",
       "changes": "Each sprint",
       "order": 12,
-      "source": "system/templates/sprint-report.md"
+      "source": "system/templates/sprint-report.md",
+      "docs": [
+        "sprint-report"
+      ]
     },
     {
       "slug": "release-notes",
@@ -258,7 +496,10 @@
       "artifact": "Release notes",
       "changes": "Each release",
       "order": 13,
-      "source": "system/templates/release-notes.md"
+      "source": "system/templates/release-notes.md",
+      "docs": [
+        "build-release-and-enable"
+      ]
     },
     {
       "slug": "launch-readiness-check",
@@ -267,7 +508,10 @@
       "artifact": "Launch readiness check",
       "changes": "Each launch",
       "order": 14,
-      "source": "system/templates/launch-readiness-check.md"
+      "source": "system/templates/launch-readiness-check.md",
+      "docs": [
+        "build-release-and-enable"
+      ]
     },
     {
       "slug": "enable-plan",
@@ -276,7 +520,148 @@
       "artifact": "Enable plan",
       "changes": "Each launch",
       "order": 15,
-      "source": "system/templates/enable-plan.md"
+      "source": "system/templates/enable-plan.md",
+      "docs": [
+        "build-release-and-enable"
+      ]
+    }
+  ],
+  "board": {
+    "url": "https://www.figma.com/board/tYv1TagaCGeNKZmaquh1qZ",
+    "overview": {
+      "chapter": "1",
+      "title": "The system on one page",
+      "caption": "Eight steps run around one document, the roadmap. Steps 2 and 3 set direction; steps 4 to 8 do the work; what people say comes back in at step 1. Dashed lines show which roadmap section a step updates.",
+      "alt": "Flow diagram. Eight green step boxes form a loop around a yellow box labelled Roadmap, which lists its five sections: vision and strategy, goal progress, Now Next Later grid, quarterly commitments, sprint report. Clockwise from the left: 1 Capture ideas (ongoing), 2 Set direction (yearly), 3 Plan the quarter (quarterly), 4 Discover (inside an Initiative), 5 Slice the work, 6 Build and release (sprints), 7 Review the sprint (every two weeks), 8 Enable (each launch). Under each step, what it makes. Dashed arrows run from Set direction to roadmap sections 1-2, from Plan the quarter to sections 3-4, and from Review the sprint to section 5. An arrow labelled feedback runs from Enable back to Capture ideas.",
+      "src": "/images/system/board/1-system-on-one-page.png",
+      "width": 2400,
+      "height": 1521
+    }
+  },
+  "decks": [
+    {
+      "slug": "from-request-fulfillers-to-outcome-owners",
+      "title": "From Request Fulfillers to Outcome Owners",
+      "order": 1,
+      "step": "Leadership session",
+      "audience": "Executive steering group, functional managers",
+      "leaves": "Agreement on the why. A named steering group and advisory group. A date for the first direction review.",
+      "run": null,
+      "slides": 19,
+      "fonts": [
+        "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+      ],
+      "pdf": "/files/decks/from-request-fulfillers-to-outcome-owners.pdf",
+      "source": "system/decks/from-request-fulfillers-to-outcome-owners"
+    },
+    {
+      "slug": "a-new-way-of-working",
+      "title": "A New Way of Working",
+      "order": 2,
+      "step": "Partner introduction",
+      "audience": "Advisory group, partner managers, frequent requesters",
+      "leaves": "Partners know how to work with the team: how requests get an answer, when planning happens, what they will hear and when.",
+      "run": null,
+      "slides": 30,
+      "fonts": [
+        "https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap",
+        "https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      ],
+      "pdf": "/files/decks/a-new-way-of-working.pdf",
+      "source": "system/decks/a-new-way-of-working"
+    },
+    {
+      "slug": "team-kickoff",
+      "title": "Team Kickoff: A Vision for Our Future",
+      "order": 3,
+      "step": "Team kickoff",
+      "audience": "The whole team",
+      "leaves": "The vision, the roles, what starts now, and the red flags written down.",
+      "run": null,
+      "slides": 36,
+      "fonts": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      ],
+      "pdf": "/files/decks/team-kickoff.pdf",
+      "source": "system/decks/team-kickoff"
+    },
+    {
+      "slug": "how-requests-are-reviewed",
+      "title": "How Requests Are Reviewed",
+      "order": 4,
+      "step": "Practice: request triage",
+      "audience": "The people who run triage",
+      "leaves": "Every request gets an answer within five business days.",
+      "run": "The week before the first weekly triage. It can start before the first quarter, and it is the fastest visible win.",
+      "slides": 16,
+      "fonts": [
+        "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      ],
+      "pdf": "/files/decks/how-requests-are-reviewed.pdf",
+      "source": "system/decks/how-requests-are-reviewed"
+    },
+    {
+      "slug": "how-we-map-and-slice-the-work",
+      "title": "How We Map and Slice the Work",
+      "order": 5,
+      "step": "Practice: mapping and slicing",
+      "audience": "Product owner, UX, developers",
+      "leaves": "Candidate Solutions arrive in pieces small enough to size.",
+      "run": "Before the planning week.",
+      "slides": 16,
+      "fonts": [
+        "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap"
+      ],
+      "pdf": "/files/decks/how-we-map-and-slice-the-work.pdf",
+      "source": "system/decks/how-we-map-and-slice-the-work"
+    },
+    {
+      "slug": "how-we-plan-the-quarter",
+      "title": "How We Plan the Quarter",
+      "order": 6,
+      "step": "Practice: quarterly planning",
+      "audience": "The whole team",
+      "leaves": "A plan the team believes it can keep, and the habit of making one.",
+      "run": "Day 1 of the planning week, before the first session.",
+      "slides": 19,
+      "fonts": [
+        "https://fonts.googleapis.com/css2?family=Lora:wght@500;700&display=swap",
+        "https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+      ],
+      "pdf": "/files/decks/how-we-plan-the-quarter.pdf",
+      "source": "system/decks/how-we-plan-the-quarter"
+    },
+    {
+      "slug": "how-we-run-a-sprint",
+      "title": "How We Run a Sprint",
+      "order": 7,
+      "step": "Practice: sprints and the sprint report",
+      "audience": "The whole team",
+      "leaves": "Ready stories, a sprint goal, and a sprint report everyone can read.",
+      "run": "The week before Sprint 1 planning.",
+      "slides": 21,
+      "fonts": [
+        "https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap",
+        "https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      ],
+      "pdf": "/files/decks/how-we-run-a-sprint.pdf",
+      "source": "system/decks/how-we-run-a-sprint"
+    },
+    {
+      "slug": "how-we-learn-before-we-build",
+      "title": "How We Learn Before We Build",
+      "order": 8,
+      "step": "Practice: discovery",
+      "audience": "The product trio",
+      "leaves": "A discovery brief with a decision in it.",
+      "run": "When the first Initiative goes active and discovery starts on it.",
+      "slides": 17,
+      "fonts": [
+        "https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600&display=swap",
+        "https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap"
+      ],
+      "pdf": "/files/decks/how-we-learn-before-we-build.pdf",
+      "source": "system/decks/how-we-learn-before-we-build"
     }
   ]
 }

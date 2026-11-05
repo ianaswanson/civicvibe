@@ -51,9 +51,18 @@ export default function StartPage() {
         </div>
 
         <div className="mt-16 max-w-measure md:ml-portal">
-          <CopyNeeded what="one person's week" />
-          <CopyNeeded what="the six shifts" />
-          <CopyNeeded what="start Monday" />
+          <CopyNeeded
+            what="one person's week"
+            see={{ href: "/system/why-digital-services#the-story-beat-by-beat", label: "Why digital services: the story, beat by beat" }}
+          />
+          <CopyNeeded
+            what="the six shifts"
+            see={{ href: "/system/why-digital-services#the-principles", label: "Why digital services: the principles" }}
+          />
+          <CopyNeeded
+            what="start Monday"
+            see={{ href: "/system/leading-the-change#how-it-works", label: "Leading the change: how it works" }}
+          />
         </div>
 
         <p className="mt-12 md:ml-portal">

@@ -1,6 +1,6 @@
 # CivicVibe
 
-Free, open-source resources helping local government teams harness AI and digital transformation.
+An open source playbook for government teams who want to work the way working software gets made.
 
 ## Quick Start
 
@@ -18,7 +18,7 @@ npm run build
 ## Tech Stack
 
 - **Framework**: Next.js 15 (App Router)
-- **Content**: MDX with gray-matter
+- **Content**: Markdown with gray-matter, rendered with unified
 - **Styling**: Tailwind CSS
 - **Hosting**: Vercel
 
@@ -26,37 +26,23 @@ npm run build
 
 ```
 civicvibe/
-├── app/                    # Next.js App Router pages
-│   ├── articles/           # Article listing and detail
-│   ├── resources/          # Guides and templates
-│   ├── projects/           # Open source showcase
-│   ├── about/              # About page
-│   └── contact/            # Contact page
-├── components/             # React components
+├── app/
+│   ├── page.tsx                    # Homepage: two doors
+│   └── (site)/
+│       ├── (door-1)/start, story   # Door 1
+│       └── (door-2)/system, templates  # Door 2: the map, docs, templates
+├── components/
 ├── content/
-│   └── articles/           # MDX article files
-├── lib/
-│   └── mdx.ts              # MDX utilities
-└── public/                 # Static assets
+│   ├── system/             # Synced docs + _index.json (generated)
+│   └── templates/          # Synced templates (generated)
+├── lib/system.ts           # Reads the synced content
+├── public/files/           # Synced roadmap visuals (generated)
+└── scripts/sync-content.mjs
 ```
 
 ## Adding Content
 
-### Articles
-
-Create MDX files in `content/articles/`:
-
-```mdx
----
-title: "Your Article Title"
-description: "Brief description for previews"
-date: "2026-01-11"
-category: "Guide"
-tags: ["ai", "transformation"]
----
-
-Your content here...
-```
+The docs and templates are written in a separate folder (`~/ai-dev/digital-services/system/`) and copied in by `npm run sync`, which also runs before every build. Don't edit `content/system/`, `content/templates/` or `public/files/` by hand; edit the source and sync. The sync fails if anything outside the project's boundaries is in the text.
 
 ## Contributing
 

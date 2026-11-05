@@ -20,10 +20,7 @@ export function Footer() {
           </a>
           .
         </p>
-        <p className="flex flex-wrap gap-x-6 gap-y-1">
-          <a href="mailto:hello@civicvibe.com" className="link">
-            hello@civicvibe.com
-          </a>
+        <p>
           <a href={GITHUB_REPO} className="link">
             GitHub
           </a>
