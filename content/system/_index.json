@@ -627,6 +627,19 @@
         "Rules of thumb."
       ],
       "source": "system/decks/how-we-run-a-sprint"
+    },
+    {
+      "slug": "team-kickoff",
+      "title": "Team Kickoff: A Vision for Our Future",
+      "slides": 36,
+      "sections": [
+        "Set the room: more questions after today, how we got here, and how we'll work through this together.",
+        "The vision: six shifts in how we see and do our work, and why only 10% is different.",
+        "One service, one team, one roadmap: who leads what and how our time is split.",
+        "What starts now: planning, commitments, request review and next steps.",
+        "Where do we go now: role collaborations and the questions people ask."
+      ],
+      "source": "system/decks/team-kickoff"
     }
   ]
 }
