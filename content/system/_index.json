@@ -540,6 +540,44 @@
   },
   "decks": [
     {
+      "slug": "how-requests-are-reviewed",
+      "title": "How Requests Are Reviewed",
+      "slides": 16,
+      "sections": [
+        "Where we are and where we want to be.",
+        "The weekly triage review: five outcomes, who is in the room, bugs, and replies.",
+        "Future consideration and the large request intake conversation.",
+        "Small requests, balancing the work, and the idea log.",
+        "Practice with a DMV triage review, then rules of thumb."
+      ],
+      "source": "system/decks/how-requests-are-reviewed"
+    },
+    {
+      "slug": "how-we-learn-before-we-build",
+      "title": "How We Learn Before We Build",
+      "slides": 17,
+      "sections": [
+        "Where we are, where discovery fits, and the product trio.",
+        "The problem space: outcome, research plan, listening, and finding opportunities.",
+        "The solution space: the tree, assumptions, the decision, and handing off to slicing.",
+        "The discovery brief and rules of thumb."
+      ],
+      "source": "system/decks/how-we-learn-before-we-build"
+    },
+    {
+      "slug": "how-we-map-and-slice-the-work",
+      "title": "How We Map and Slice the Work",
+      "slides": 16,
+      "sections": [
+        "Why we map, and the three levels of a story map.",
+        "Activities, tasks and details, the So that what test, and five anti-patterns.",
+        "The grid, releases by target outcome, and vertical slices.",
+        "The DMV License Ready Check map, and from a detail to a story.",
+        "Coherence, who maps and when, and rules of thumb."
+      ],
+      "source": "system/decks/how-we-map-and-slice-the-work"
+    },
+    {
       "slug": "how-we-plan-the-quarter",
       "title": "How We Plan the Quarter",
       "slides": 19,
@@ -551,6 +589,20 @@
         "The trust this asks for, and living with productive tension."
       ],
       "source": "system/decks/how-we-plan-the-quarter"
+    },
+    {
+      "slug": "how-we-run-a-sprint",
+      "title": "How We Run a Sprint",
+      "slides": 21,
+      "sections": [
+        "Where the gaps were, the two-week rhythm, and who does what.",
+        "The sprint goal and sprint budgets.",
+        "Getting stories ready: INVEST, an example, refinement and spikes.",
+        "Definition of done, sprint review and the sprint report.",
+        "Release versus launch, the readiness check, enable, and the retro.",
+        "Rules of thumb."
+      ],
+      "source": "system/decks/how-we-run-a-sprint"
     }
   ]
 }
