@@ -540,6 +540,18 @@
   },
   "decks": [
     {
+      "slug": "a-new-way-of-working",
+      "title": "A New Way of Working",
+      "slides": 30,
+      "sections": [
+        "Where IT is today, the client-vendor model, and when it fits.",
+        "Digital services: four tenets and a new way of working, with proof it works.",
+        "Who does what, and the eight steps grouped in four stages, with the partner's part in each.",
+        "How partners bring us requests, what they will hear and when, and the loop that repeats."
+      ],
+      "source": "system/decks/a-new-way-of-working"
+    },
+    {
       "slug": "how-requests-are-reviewed",
       "title": "How Requests Are Reviewed",
       "slides": 16,
