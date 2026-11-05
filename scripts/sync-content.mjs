@@ -245,16 +245,51 @@ for (const ch of boardManifest.chapters) {
   }
 }
 
+const ICONS = {
+  CheckCircle: '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
+  Users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+  Chart: '<path d="M3 3v18h18"/><path d="M7 16v-5M12 16V8M17 16v-3"/>',
+  Search: '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  Chat: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  Lightning: '<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>',
+  Warning: '<path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3"/><path d="M12 9v4M12 17h.01"/>',
+  Lightbulb: '<path d="M15 14c.2-1 .7-1.7 1.5-2.5A6 6 0 1 0 6 11c0 1 .5 1.7 1.5 2.5.8.7 1.3 1.6 1.5 2.5h6z"/><path d="M9 18h6M10 22h4"/>',
+  Trust: '<path d="m11 17 2 2a1.4 1.4 0 1 0 2-2"/><path d="m14 14 2.5 2.5a1.4 1.4 0 1 0 2-2l-3.9-3.9a5 5 0 0 0-7 0l-.6.6"/><path d="M3 4h7l2 2"/><path d="M21 4h-7l-3 3"/><path d="M2 14l6.5 6.5a1.4 1.4 0 1 0 2-2"/>',
+};
+
+const SHAPES = {
+  "arrow-right": "polygon(0 25%, 60% 25%, 60% 0, 100% 50%, 60% 100%, 60% 75%, 0 75%)",
+  "arrow-left": "polygon(100% 25%, 40% 25%, 40% 0, 0 50%, 40% 100%, 40% 75%, 100% 75%)",
+  "arrow-up": "polygon(25% 100%, 25% 40%, 0 40%, 50% 0, 100% 40%, 75% 40%, 75% 100%)",
+  "arrow-down": "polygon(25% 0, 25% 60%, 0 60%, 50% 100%, 100% 60%, 75% 60%, 75% 0)",
+  diamond: "polygon(50% 0, 100% 50%, 50% 100%, 0 50%)",
+  ellipse: "ellipse(50% 50% at 50% 50%)",
+  line: "none",
+};
+
 // --- Decks ------------------------------------------------------------------
-// system/decks/<slug>/deck.json + slides/*.html (+ assets/), as exported from
-// the Slides artifacts and DMV-ified. Every text file is scanned.
+// system/decks/<slug>/deck.json + slides/*.html (+ assets/), as
+// exported from the Slides artifacts and DMV-ified; decks.json gives the
+// rollout order, audience and what each leaves behind. Every text file is
+// scanned. Each slide is rendered to a fragment the site can show: the
+// speaker notes come out, images point at public/, and the format's custom
+// elements (x-icon, x-shape, x-connector) become SVG.
 
 const DECKS_DIR = path.join(SRC, "decks");
+const OUT_DECKS = path.join(ROOT, "content", "decks");
+const OUT_DECK_IMAGES = path.join(ROOT, "public", "images", "system", "decks");
+const OUT_DECK_FILES = path.join(OUT_FILES, "decks");
 const decks = [];
+const deckFiles = [];
 if (fs.existsSync(DECKS_DIR)) {
-  for (const slug of fs.readdirSync(DECKS_DIR).sort()) {
+  const manifest = JSON.parse(fs.readFileSync(path.join(DECKS_DIR, "decks.json"), "utf8"));
+  manifest.decks.forEach((entry, i) => {
+    const slug = entry.slug;
     const dir = path.join(DECKS_DIR, slug);
-    if (!fs.statSync(dir).isDirectory()) continue;
+    if (!fs.existsSync(dir)) {
+      failures.push(`decks.json: no folder for "${slug}"`);
+      return;
+    }
     const deck = JSON.parse(fs.readFileSync(path.join(dir, "deck.json"), "utf8"));
     for (const file of walk(dir)) {
       if (!/\.(html|json|md)$/.test(file)) continue;
@@ -264,14 +299,40 @@ if (fs.existsSync(DECKS_DIR)) {
         if (hit) failures.push(`${path.relative(ROOT, file)} line ${text.slice(0, hit.index).split("\n").length}: "${hit[0]}"`);
       }
     }
-    decks.push({
+    const assetsDir = path.join(dir, "assets");
+    if (fs.existsSync(assetsDir)) {
+      for (const f of fs.readdirSync(assetsDir)) {
+        deckFiles.push({ dest: path.join(OUT_DECK_IMAGES, slug, f), text: fs.readFileSync(path.join(assetsDir, f)) });
+      }
+    }
+    const slides = deck.order.map((id) => {
+      const raw = fs.readFileSync(path.join(dir, "slides", `${id}.html`), "utf8");
+      return renderSlide(raw, id, slug);
+    }).filter(Boolean);
+    // The PDF is written by scripts/export-decks.mjs straight into public/files/decks/
+    // (one copy in the repo, not two); keep it across the reset below.
+    const pdfFile = path.join(OUT_DECK_FILES, `${slug}.pdf`);
+    let pdf = null;
+    if (fs.existsSync(pdfFile)) {
+      pdf = `/files/decks/${slug}.pdf`;
+      deckFiles.push({ dest: pdfFile, text: fs.readFileSync(pdfFile) });
+    }
+    const meta = {
       slug,
       title: deck.title,
-      slides: deck.order.length,
-      sections: Object.values(deck.sections || {}).map((s) => s.description),
+      order: i + 1,
+      step: entry.step,
+      audience: entry.audience,
+      leaves: entry.leaves,
+      run: entry.run || null,
+      slides: slides.length,
+      fonts: Object.values(deck.faces || {}).map((f) => f.href),
+      pdf,
       source: `system/decks/${slug}`,
-    });
-  }
+    };
+    decks.push(meta);
+    pending.push({ dest: path.join(OUT_DECKS, `${slug}.json`), text: JSON.stringify({ ...meta, sections: deck.sections || {}, slides }, null, 2) + "\n" });
+  });
 }
 
 // --- Report -----------------------------------------------------------------
@@ -288,7 +349,9 @@ resetDir(OUT_SYSTEM);
 resetDir(OUT_TEMPLATES);
 resetDir(OUT_FILES);
 resetDir(OUT_BOARD);
-for (const { dest, text } of [...pending, ...visualFiles, ...boardFiles]) {
+resetDir(OUT_DECKS);
+resetDir(OUT_DECK_IMAGES);
+for (const { dest, text } of [...pending, ...visualFiles, ...boardFiles, ...deckFiles]) {
   fs.mkdirSync(path.dirname(dest), { recursive: true });
   fs.writeFileSync(dest, text);
 }
@@ -308,7 +371,7 @@ fs.writeFileSync(
   ) + "\n",
 );
 console.log(
-  `sync: ${docs.length} docs, ${templates.length} templates, ${planned.length} planned docs, ${visualFiles.length} visuals, ${boardFiles.length} board chapters, ${decks.length} decks.`,
+  `sync: ${docs.length} docs, ${templates.length} templates, ${planned.length} planned docs, ${visualFiles.length} visuals, ${boardFiles.length} board chapters, ${decks.length} decks (${decks.reduce((n, d) => n + d.slides, 0)} slides, ${decks.filter((d) => d.pdf).length} PDFs).`,
 );
 
 // --- Helpers ----------------------------------------------------------------
@@ -422,6 +485,72 @@ function write(dest, meta, body, source) {
     "",
   ].join("\n");
   pending.push({ dest, text: fm + body });
+}
+
+// --- Slides -----------------------------------------------------------------
+
+function renderSlide(raw, id, slug) {
+  let html = raw.replace(/\r\n/g, "\n").trim();
+  if (/<section[^>]*\shidden[\s>]/.test(html)) return null;
+  // Speaker notes
+  let notes = "";
+  html = html.replace(/<aside>([\s\S]*?)<\/aside>\s*/g, (m, t) => {
+    notes = t.trim();
+    return "";
+  });
+  // Images
+  html = html.replace(/src="assets\/([^"]+)"/g, (m, f) => `src="/images/system/decks/${slug}/${f}"`);
+  // Icons
+  html = html.replace(/<x-icon name="([A-Za-z]+)"([^>]*)><\/x-icon>/g, (m, name, rest) => {
+    const paths = ICONS[name];
+    if (!paths) {
+      warnings.push(`${slug}/${id}: unknown icon "${name}"`);
+      return "";
+    }
+    return `<svg class="x-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"${rest}>${paths}</svg>`;
+  });
+  // Shapes: a painted box clipped to the kind
+  html = html.replace(/<x-shape kind="([a-z-]+)" style="([^"]*)"><\/x-shape>/g, (m, kind, style) => {
+    const clip = SHAPES[kind];
+    if (clip === undefined) warnings.push(`${slug}/${id}: unknown shape "${kind}"`);
+    return `<div class="x-shape" style="${style};clip-path:${clip || "none"}"></div>`;
+  });
+  // Connectors: a line with a head, drawn in the coordinates of the nearest
+  // positioned ancestor (the slide, or a position:relative div).
+  html = html.replace(/<x-connector ([^>]*)><\/x-connector>/g, (m, attrs) => {
+    const a = Object.fromEntries([...attrs.matchAll(/([\w-]+)="([^"]*)"/g)].map((x) => [x[1], x[2]]));
+    const [x1, y1, x2, y2] = [a.x1, a.y1, a.x2, a.y2].map(Number);
+    if ([x1, y1, x2, y2].some(Number.isNaN)) {
+      warnings.push(`${slug}/${id}: connector without coordinates`);
+      return "";
+    }
+    const color = (a.style || "").match(/color:([^;]+)/)?.[1]?.trim() || "#000";
+    const width = Number((a.style || "").match(/border-width:(\d+)/)?.[1] || 2);
+    const dash = /dashed/.test(a.style || "") ? ` stroke-dasharray="${width * 3} ${width * 2}"` : /dotted/.test(a.style || "") ? ` stroke-dasharray="${width} ${width * 2}"` : "";
+    let pts;
+    if (a.route === "hv") pts = [[x1, y1], [x2, y1], [x2, y2]];
+    else if (a.route === "vh") pts = [[x1, y1], [x1, y2], [x2, y2]];
+    else if (a.route === "elbow") pts = [[x1, y1], [(x1 + x2) / 2, y1], [(x1 + x2) / 2, y2], [x2, y2]];
+    else pts = [[x1, y1], [x2, y2]];
+    const head = a.head || "end";
+    const size = Math.max(10, width * 4);
+    const arrow = (from, to) => {
+      const ang = Math.atan2(to[1] - from[1], to[0] - from[0]);
+      const p = (d, s) => `${(to[0] - Math.cos(ang + d) * s).toFixed(1)},${(to[1] - Math.sin(ang + d) * s).toFixed(1)}`;
+      return `<polygon points="${to[0]},${to[1]} ${p(0.5, size)} ${p(-0.5, size)}" fill="${color}"/>`;
+    };
+    const d = pts.map((p, i) => `${i ? "L" : "M"}${p[0]} ${p[1]}`).join(" ");
+    let heads = "";
+    if (head === "end" || head === "both") heads += arrow(pts[pts.length - 2], pts[pts.length - 1]);
+    if (head === "both" || head === "start") heads += arrow(pts[1], pts[0]);
+    return `<svg class="x-connector" aria-hidden="true"><path d="${d}" fill="none" stroke="${color}" stroke-width="${width}" stroke-linejoin="round"${dash}/>${heads}</svg>`;
+  });
+  // The section itself becomes the slide box; SlideFrame supplies .slide.
+  html = html.replace(/^<section ([^>]*)>/, (m, attrs) => {
+    const style = attrs.match(/style="([^"]*)"/)?.[1] || "";
+    return `<div class="slide-body" style="${style};position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden">`;
+  }).replace(/<\/section>\s*$/, "</div>");
+  return { id, html, notes };
 }
 
 function walk(dir) {

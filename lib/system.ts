@@ -43,6 +43,36 @@ export interface BoardVisual {
   height: number;
 }
 
+// One of the eight decks, from content/decks/<slug>.json via the sync.
+export interface DeckMeta {
+  slug: string;
+  title: string;
+  // Position in the rollout order (doc 15).
+  order: number;
+  step: string;
+  audience: string;
+  leaves: string;
+  run: string | null;
+  slides: number;
+  // Google Fonts stylesheet URLs the slides use.
+  fonts: string[];
+  // /files/decks/<slug>.pdf, once exported.
+  pdf: string | null;
+  source: string;
+}
+
+export interface DeckSlide {
+  id: string;
+  // The slide's markup, every style inline, ready for SlideFrame.
+  html: string;
+  notes: string;
+}
+
+export interface Deck extends Omit<DeckMeta, "slides"> {
+  sections: Record<string, { description: string; start: string }>;
+  slides: DeckSlide[];
+}
+
 export interface BoardMeta {
   url: string;
   // Chapter 1, the system on one page, for /system.
@@ -74,6 +104,7 @@ interface SystemIndex {
   planned: PlannedDoc[];
   templates: TemplateMeta[];
   board: BoardMeta;
+  decks: DeckMeta[];
 }
 
 export function getIndex(): SystemIndex {
@@ -195,4 +226,10 @@ export async function renderMarkdown(md: string): Promise<string> {
     .use(rehypeStringify)
     .process(md);
   return String(file);
+}
+
+export function getDeck(slug: string): Deck | null {
+  const file = path.join(contentDir, "decks", `${slug}.json`);
+  if (!fs.existsSync(file)) return null;
+  return JSON.parse(fs.readFileSync(file, "utf-8")) as Deck;
 }

@@ -178,3 +178,40 @@
 .prose td:first-child {
   @apply min-w-32 font-medium text-paper;
 }
+
+/* Decks: one slide as exported from the Slides format (1920x1080, every
+   style inline). These are that format's defaults; SlideFrame scales the box. */
+.slide {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  text-align: left;
+}
+.slide * {
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+}
+.slide div {
+  display: flex;
+  flex-direction: column;
+}
+.slide h1 { font-size: 96px; font-weight: 600; line-height: 1.1; }
+.slide h2 { font-size: 64px; font-weight: 600; line-height: 1.15; }
+.slide h3 { font-size: 44px; font-weight: 600; line-height: 1.2; }
+.slide p { font-size: 32px; font-weight: 400; line-height: 1.4; }
+.slide ul, .slide ol { padding-left: 1.2em; }
+.slide ul { list-style: disc; }
+.slide ol { list-style: decimal; }
+.slide b { font-weight: 700; }
+.slide i { font-style: italic; }
+.slide img { display: block; flex: none; }
+.slide table { border-collapse: collapse; width: 100%; }
+.slide th, .slide td { padding: 0.35em 0.6em; border: 1px solid rgba(0, 0, 0, 0.18); text-align: left; vertical-align: top; }
+.slide th { font-weight: 700; }
+.slide svg.x-icon, .slide .x-shape { flex: none; }
+.slide .x-connector { position: absolute; left: 0; top: 0; width: 0; height: 0; overflow: visible; pointer-events: none; }

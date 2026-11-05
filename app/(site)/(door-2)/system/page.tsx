@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getIndex, getProcessMap } from "@/lib/system";
 import { BoardFigure } from "@/components/BoardFigure";
+import { DeckList } from "@/components/DeckList";
 import { CopyNeeded } from "@/components/CopyNeeded";
 import { PageHead } from "@/components/PageHead";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -24,7 +25,7 @@ const artifactChain = [
 
 // Door 2. First screen is wireframe sentences 12-15, verbatim.
 export default function SystemPage() {
-  const { docs, planned, templates, board } = getIndex();
+  const { docs, planned, templates, board, decks } = getIndex();
   const map = getProcessMap();
   const processFlow = map.map((s) => ({ label: s.step, href: `#step-${s.step.toLowerCase().replace(/\s+/g, "-")}` }));
 
@@ -108,6 +109,13 @@ export default function SystemPage() {
               Follow the DMV example through every template, in order
             </Link>
           </p>
+        </section>
+
+        <section id="decks" className="mt-16 scroll-mt-8">
+          <p className="max-w-measure font-display text-h4 font-extrabold text-paper">
+            The decks. What each audience hears, in the order they hear it.
+          </p>
+          <DeckList decks={decks} />
         </section>
 
         <div className="mt-16 max-w-measure">
