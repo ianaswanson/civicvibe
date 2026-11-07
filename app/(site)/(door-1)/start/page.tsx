@@ -4,7 +4,6 @@ import Link from "next/link";
 import { getIndex } from "@/lib/system";
 import { Arrow } from "@/components/Arrow";
 import { DeckList } from "@/components/DeckList";
-import { DraftCopy } from "@/components/DraftCopy";
 import { PageHead } from "@/components/PageHead";
 import { Shift } from "@/components/Shift";
 import { WhoIsWriting } from "@/components/WhoIsWriting";
@@ -61,11 +60,11 @@ export default function StartPage() {
           </p>
         </div>
 
-        {/* Beat 2: one person's week. Facts from docs 01, 08 and 13. */}
+        {/* Beat 2: one person's week. A draft from the DMV thread (docs 01, 08, 13),
+            not Ian's words yet; he rewrites it. Nothing on the page says so. */}
         <section className="mt-20 max-w-measure md:ml-portal">
           <h2 className="font-display text-h3 font-extrabold text-paper">One person&apos;s week</h2>
-          <DraftCopy>
-            <div className="space-y-4 text-body text-paper/85">
+          <div className="mt-6 space-y-4 text-body text-paper/85">
               <p className="font-display font-extrabold text-door-lit">Before</p>
               <p>
                 A counter clerk at a DMV field office. It&apos;s Wednesday and she has just sent
@@ -95,9 +94,8 @@ export default function StartPage() {
                 now see which documents were already checked. The eighth person that week stops
                 happening.
               </p>
-            </div>
-          </DraftCopy>
-          <p className="text-small text-paper/60">
+          </div>
+          <p className="mt-6 text-small text-paper/60">
             The same thread, artifact by artifact, is in{" "}
             <Link href="/system/shared-terms-and-artifacts#dmv-example" className="link">
               Shared terms and artifacts
