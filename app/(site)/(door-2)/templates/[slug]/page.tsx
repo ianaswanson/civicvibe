@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!template) return {};
   return {
     title: `${template.meta.title} template`,
-    description: template.meta.description || "[copy needed]",
+    description: template.meta.description || template.meta.title,
   };
 }
 

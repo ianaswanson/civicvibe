@@ -3,7 +3,6 @@ import Link from "next/link";
 import { getIndex, getProcessMap } from "@/lib/system";
 import { BoardFigure } from "@/components/BoardFigure";
 import { DeckList } from "@/components/DeckList";
-import { CopyNeeded } from "@/components/CopyNeeded";
 import { PageHead } from "@/components/PageHead";
 import { StatusBadge } from "@/components/StatusBadge";
 import { TemplateList } from "@/components/TemplateList";
@@ -132,7 +131,7 @@ export default function SystemPage() {
             </Link>{" "}
             What broke when it was used.
           </p>
-          <CopyNeeded what="what AI changes about the team, and the prompts that do it. Doc 16, Agent setup, is the next document" />
+          {/* "What AI changes about the team" has no page yet: doc 16, Agent setup, is the next document (cv-vy1.9). */}
           <div className="mt-8">
             <h2 className="font-display text-h4 font-extrabold text-paper">What broke when it was used</h2>
             <ul className="mt-3 space-y-3 text-small text-paper/85">

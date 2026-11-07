@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!doc) return {};
   return {
     title: doc.meta.title,
-    description: doc.meta.description || "[copy needed]",
+    description: doc.meta.description || doc.meta.title,
   };
 }
 

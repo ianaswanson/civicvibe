@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { CopyNeeded } from "@/components/CopyNeeded";
 
 export const metadata: Metadata = {
   title: "The story",
@@ -16,7 +15,7 @@ export default function StoryPage() {
           with AI. The story of how is here, if you want it. It&apos;s not
           required reading.
         </p>
-        <CopyNeeded what="the story" />
+        {/* The story itself is not written yet. Ian writes it; nothing on the page says so. */}
       </div>
     </div>
   );
