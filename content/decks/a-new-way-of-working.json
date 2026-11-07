@@ -2,6 +2,11 @@
   "slug": "a-new-way-of-working",
   "title": "A New Way of Working",
   "order": 2,
+  "kind": "room",
+  "docs": [
+    "why-digital-services",
+    "request-triage-and-idea-log"
+  ],
   "step": "Partner introduction",
   "audience": "Advisory group, partner managers, frequent requesters",
   "leaves": "Partners know how to work with the team: how requests get an answer, when planning happens, what they will hear and when.",

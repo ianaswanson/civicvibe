@@ -2,6 +2,10 @@
   "slug": "how-we-map-and-slice-the-work",
   "title": "How We Map and Slice the Work",
   "order": 5,
+  "kind": "practice",
+  "docs": [
+    "deliverables-and-user-stories"
+  ],
   "step": "Practice: mapping and slicing",
   "audience": "Product owner, UX, developers",
   "leaves": "Candidate Solutions arrive in pieces small enough to size.",

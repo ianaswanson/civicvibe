@@ -10,7 +10,8 @@
       "source": "system/00-glossary.md",
       "inlineTemplate": false,
       "templates": [],
-      "visuals": []
+      "visuals": [],
+      "decks": []
     },
     {
       "slug": "shared-terms-and-artifacts",
@@ -31,7 +32,8 @@
           "width": 2400,
           "height": 1170
         }
-      ]
+      ],
+      "decks": []
     },
     {
       "slug": "why-digital-services",
@@ -42,7 +44,12 @@
       "source": "system/02-why-digital-services.md",
       "inlineTemplate": false,
       "templates": [],
-      "visuals": []
+      "visuals": [],
+      "decks": [
+        "from-request-fulfillers-to-outcome-owners",
+        "a-new-way-of-working",
+        "team-kickoff"
+      ]
     },
     {
       "slug": "vision-and-strategy",
@@ -65,7 +72,8 @@
           "width": 1940,
           "height": 2301
         }
-      ]
+      ],
+      "decks": []
     },
     {
       "slug": "goals-and-goal-progress",
@@ -89,7 +97,8 @@
           "width": 1940,
           "height": 2301
         }
-      ]
+      ],
+      "decks": []
     },
     {
       "slug": "now-next-later-grid",
@@ -102,7 +111,8 @@
       "templates": [
         "roadmap"
       ],
-      "visuals": []
+      "visuals": [],
+      "decks": []
     },
     {
       "slug": "quarterly-planning-and-commitments",
@@ -125,6 +135,9 @@
           "width": 1940,
           "height": 2301
         }
+      ],
+      "decks": [
+        "how-we-plan-the-quarter"
       ]
     },
     {
@@ -148,6 +161,9 @@
           "width": 2400,
           "height": 1031
         }
+      ],
+      "decks": [
+        "how-we-run-a-sprint"
       ]
     },
     {
@@ -172,6 +188,10 @@
           "width": 2140,
           "height": 2451
         }
+      ],
+      "decks": [
+        "a-new-way-of-working",
+        "how-requests-are-reviewed"
       ]
     },
     {
@@ -196,7 +216,8 @@
           "width": 2400,
           "height": 695
         }
-      ]
+      ],
+      "decks": []
     },
     {
       "slug": "discovery",
@@ -220,6 +241,9 @@
           "width": 2400,
           "height": 695
         }
+      ],
+      "decks": [
+        "how-we-learn-before-we-build"
       ]
     },
     {
@@ -245,6 +269,10 @@
           "width": 2400,
           "height": 695
         }
+      ],
+      "decks": [
+        "how-we-map-and-slice-the-work",
+        "how-we-run-a-sprint"
       ]
     },
     {
@@ -270,6 +298,9 @@
           "width": 2400,
           "height": 695
         }
+      ],
+      "decks": [
+        "how-we-run-a-sprint"
       ]
     },
     {
@@ -300,6 +331,9 @@
           "width": 1960,
           "height": 1311
         }
+      ],
+      "decks": [
+        "how-we-run-a-sprint"
       ]
     },
     {
@@ -311,7 +345,10 @@
       "source": "system/14-roles-and-decision-rights.md",
       "inlineTemplate": true,
       "templates": [],
-      "visuals": []
+      "visuals": [],
+      "decks": [
+        "team-kickoff"
+      ]
     },
     {
       "slug": "leading-the-change",
@@ -322,7 +359,10 @@
       "source": "system/15-leading-the-change.md",
       "inlineTemplate": true,
       "templates": [],
-      "visuals": []
+      "visuals": [],
+      "decks": [
+        "team-kickoff"
+      ]
     }
   ],
   "planned": [
@@ -543,6 +583,10 @@
       "slug": "from-request-fulfillers-to-outcome-owners",
       "title": "From Request Fulfillers to Outcome Owners",
       "order": 1,
+      "kind": "room",
+      "docs": [
+        "why-digital-services"
+      ],
       "step": "Leadership session",
       "audience": "Executive steering group, functional managers",
       "leaves": "Agreement on the why. A named steering group and advisory group. A date for the first direction review.",
@@ -558,6 +602,11 @@
       "slug": "a-new-way-of-working",
       "title": "A New Way of Working",
       "order": 2,
+      "kind": "room",
+      "docs": [
+        "why-digital-services",
+        "request-triage-and-idea-log"
+      ],
       "step": "Partner introduction",
       "audience": "Advisory group, partner managers, frequent requesters",
       "leaves": "Partners know how to work with the team: how requests get an answer, when planning happens, what they will hear and when.",
@@ -574,6 +623,12 @@
       "slug": "team-kickoff",
       "title": "Team Kickoff: A Vision for Our Future",
       "order": 3,
+      "kind": "room",
+      "docs": [
+        "why-digital-services",
+        "roles-and-decision-rights",
+        "leading-the-change"
+      ],
       "step": "Team kickoff",
       "audience": "The whole team",
       "leaves": "The vision, the roles, what starts now, and the red flags written down.",
@@ -589,6 +644,10 @@
       "slug": "how-requests-are-reviewed",
       "title": "How Requests Are Reviewed",
       "order": 4,
+      "kind": "practice",
+      "docs": [
+        "request-triage-and-idea-log"
+      ],
       "step": "Practice: request triage",
       "audience": "The people who run triage",
       "leaves": "Every request gets an answer within five business days.",
@@ -604,6 +663,10 @@
       "slug": "how-we-map-and-slice-the-work",
       "title": "How We Map and Slice the Work",
       "order": 5,
+      "kind": "practice",
+      "docs": [
+        "deliverables-and-user-stories"
+      ],
       "step": "Practice: mapping and slicing",
       "audience": "Product owner, UX, developers",
       "leaves": "Candidate Solutions arrive in pieces small enough to size.",
@@ -619,6 +682,10 @@
       "slug": "how-we-plan-the-quarter",
       "title": "How We Plan the Quarter",
       "order": 6,
+      "kind": "practice",
+      "docs": [
+        "quarterly-planning-and-commitments"
+      ],
       "step": "Practice: quarterly planning",
       "audience": "The whole team",
       "leaves": "A plan the team believes it can keep, and the habit of making one.",
@@ -635,6 +702,13 @@
       "slug": "how-we-run-a-sprint",
       "title": "How We Run a Sprint",
       "order": 7,
+      "kind": "practice",
+      "docs": [
+        "sprint-report",
+        "team-rhythm",
+        "deliverables-and-user-stories",
+        "build-release-and-enable"
+      ],
       "step": "Practice: sprints and the sprint report",
       "audience": "The whole team",
       "leaves": "Ready stories, a sprint goal, and a sprint report everyone can read.",
@@ -651,6 +725,10 @@
       "slug": "how-we-learn-before-we-build",
       "title": "How We Learn Before We Build",
       "order": 8,
+      "kind": "practice",
+      "docs": [
+        "discovery"
+      ],
       "step": "Practice: discovery",
       "audience": "The product trio",
       "leaves": "A discovery brief with a decision in it.",

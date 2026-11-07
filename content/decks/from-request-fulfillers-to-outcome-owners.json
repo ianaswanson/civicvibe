@@ -2,6 +2,10 @@
   "slug": "from-request-fulfillers-to-outcome-owners",
   "title": "From Request Fulfillers to Outcome Owners",
   "order": 1,
+  "kind": "room",
+  "docs": [
+    "why-digital-services"
+  ],
   "step": "Leadership session",
   "audience": "Executive steering group, functional managers",
   "leaves": "Agreement on the why. A named steering group and advisory group. A date for the first direction review.",

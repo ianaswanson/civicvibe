@@ -29,6 +29,8 @@ export interface DocMeta {
   inlineTemplate: boolean;
   // Chapters of the FigJam board that illustrate this doc, in board order.
   visuals: BoardVisual[];
+  // Decks that teach this doc (system/decks/decks.json), in rollout order.
+  decks: string[];
 }
 
 // One chapter (or sub-chapter) of the board, exported as an image. From
@@ -49,6 +51,11 @@ export interface DeckMeta {
   title: string;
   // Position in the rollout order (doc 15).
   order: number;
+  // "room": brings a room along (decks 1-3, door 1). "practice": taught
+  // before first use (decks 4-8, on their doc pages).
+  kind: "room" | "practice";
+  // Docs this deck teaches.
+  docs: string[];
   step: string;
   audience: string;
   leaves: string;

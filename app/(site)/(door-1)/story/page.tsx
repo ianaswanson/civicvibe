@@ -3,7 +3,7 @@ import { CopyNeeded } from "@/components/CopyNeeded";
 
 export const metadata: Metadata = {
   title: "The story",
-  description: "[copy needed]",
+  description: "All of this came out of years of doing it inside government, after a long stretch doing it in a software company, and then relearning it with AI.",
 };
 
 export default function StoryPage() {

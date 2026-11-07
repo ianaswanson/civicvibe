@@ -2,6 +2,13 @@
   "slug": "how-we-run-a-sprint",
   "title": "How We Run a Sprint",
   "order": 7,
+  "kind": "practice",
+  "docs": [
+    "sprint-report",
+    "team-rhythm",
+    "deliverables-and-user-stories",
+    "build-release-and-enable"
+  ],
   "step": "Practice: sprints and the sprint report",
   "audience": "The whole team",
   "leaves": "Ready stories, a sprint goal, and a sprint report everyone can read.",

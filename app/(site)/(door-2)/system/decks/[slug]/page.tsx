@@ -20,7 +20,8 @@ export default async function DeckPage({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const deck = getDeck(slug);
   if (!deck) notFound();
-  const { decks } = getIndex();
+  const { decks, docs } = getIndex();
+  const teaches = deck.docs.map((d) => docs.find((x) => x.slug === d)!);
   const i = decks.findIndex((d) => d.slug === slug);
   const prev = decks[i - 1];
   const next = decks[i + 1];
@@ -50,6 +51,20 @@ export default async function DeckPage({ params }: { params: Promise<{ slug: str
           For {deck.audience.charAt(0).toLowerCase() + deck.audience.slice(1)}. What it should leave behind: {deck.leaves}
           {deck.run && <> Run it {deck.run.charAt(0).toLowerCase() + deck.run.slice(1)}</>}
         </p>
+        {teaches.length > 0 && (
+          <p className="mt-4 text-small text-paper/85">
+            Teaches{" "}
+            {teaches.map((d, n) => (
+              <span key={d.slug}>
+                {n > 0 && ", "}
+                <Link href={`/system/${d.slug}`} className="link">
+                  <span className="font-mono text-door-lit">{String(d.order).padStart(2, "0")}</span> {d.title}
+                </Link>
+              </span>
+            ))}
+            .
+          </p>
+        )}
         <p className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-small text-paper/60">
           <span>{deck.slides.length} slides</span>
           {deck.pdf ? (
