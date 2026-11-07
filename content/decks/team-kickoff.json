@@ -2,6 +2,12 @@
   "slug": "team-kickoff",
   "title": "Team Kickoff: A Vision for Our Future",
   "order": 3,
+  "kind": "room",
+  "docs": [
+    "why-digital-services",
+    "roles-and-decision-rights",
+    "leading-the-change"
+  ],
   "step": "Team kickoff",
   "audience": "The whole team",
   "leaves": "The vision, the roles, what starts now, and the red flags written down.",

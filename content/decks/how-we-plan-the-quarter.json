@@ -2,6 +2,10 @@
   "slug": "how-we-plan-the-quarter",
   "title": "How We Plan the Quarter",
   "order": 6,
+  "kind": "practice",
+  "docs": [
+    "quarterly-planning-and-commitments"
+  ],
   "step": "Practice: quarterly planning",
   "audience": "The whole team",
   "leaves": "A plan the team believes it can keep, and the habit of making one.",

@@ -2,6 +2,10 @@
   "slug": "how-we-learn-before-we-build",
   "title": "How We Learn Before We Build",
   "order": 8,
+  "kind": "practice",
+  "docs": [
+    "discovery"
+  ],
   "step": "Practice: discovery",
   "audience": "The product trio",
   "leaves": "A discovery brief with a decision in it.",

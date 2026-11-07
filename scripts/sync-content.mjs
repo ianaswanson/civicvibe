@@ -206,7 +206,10 @@ for (const [slug, files] of Object.entries(VISUALS)) {
 const boardManifest = JSON.parse(fs.readFileSync(path.join(BOARD_DIR, "board.json"), "utf8"));
 const board = { url: boardManifest.url };
 const boardFiles = [];
-for (const d of docs) d.visuals = [];
+for (const d of docs) {
+  d.visuals = [];
+  d.decks = [];
+}
 for (const ch of boardManifest.chapters) {
   const file = path.join(BOARD_DIR, ch.file);
   if (!fs.existsSync(file)) {
@@ -317,10 +320,17 @@ if (fs.existsSync(DECKS_DIR)) {
       pdf = `/files/decks/${slug}.pdf`;
       deckFiles.push({ dest: pdfFile, text: fs.readFileSync(pdfFile) });
     }
+    for (const docSlug of entry.docs || []) {
+      const d = docs.find((x) => x.slug === docSlug);
+      if (!d) failures.push(`decks.json "${slug}": no doc "${docSlug}"`);
+      else d.decks.push(slug);
+    }
     const meta = {
       slug,
       title: deck.title,
       order: i + 1,
+      kind: entry.kind || "practice",
+      docs: entry.docs || [],
       step: entry.step,
       audience: entry.audience,
       leaves: entry.leaves,

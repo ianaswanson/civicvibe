@@ -2,6 +2,10 @@
   "slug": "how-requests-are-reviewed",
   "title": "How Requests Are Reviewed",
   "order": 4,
+  "kind": "practice",
+  "docs": [
+    "request-triage-and-idea-log"
+  ],
   "step": "Practice: request triage",
   "audience": "The people who run triage",
   "leaves": "Every request gets an answer within five business days.",

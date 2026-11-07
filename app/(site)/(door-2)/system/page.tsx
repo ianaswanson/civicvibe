@@ -113,9 +113,15 @@ export default function SystemPage() {
 
         <section id="decks" className="mt-16 scroll-mt-8">
           <p className="max-w-measure font-display text-h4 font-extrabold text-paper">
-            The decks. What each audience hears, in the order they hear it.
+            The practice sessions. Each one taught the week before the team first uses it.
           </p>
-          <DeckList decks={decks} />
+          <DeckList decks={decks.filter((d) => d.kind === "practice")} />
+          <p className="mt-6 text-small">
+            <Link href="/system/decks" className="link">
+              All eight decks, in the order a team hears them
+            </Link>
+            , including the three that bring leaders, partners and the team along.
+          </p>
         </section>
 
         <div className="mt-16 max-w-measure">
@@ -126,8 +132,36 @@ export default function SystemPage() {
             </Link>{" "}
             What broke when it was used.
           </p>
-          <CopyNeeded what="what AI changes about the team, and the prompts that do it" />
-          <CopyNeeded what="what broke when it was used" />
+          <CopyNeeded what="what AI changes about the team, and the prompts that do it. Doc 16, Agent setup, is the next document" />
+          <div className="mt-8">
+            <h2 className="font-display text-h4 font-extrabold text-paper">What broke when it was used</h2>
+            <ul className="mt-3 space-y-3 text-small text-paper/85">
+              <li>
+                One early planning week gave the technical maintenance session an hour, and the foundation slipped.
+                The session is now a half day and the rule is don&apos;t skip it.{" "}
+                <Link href="/system/decks/how-we-plan-the-quarter#slide-8" className="link">
+                  Planning deck, slide 8
+                </Link>
+                .
+              </li>
+              <li>
+                A team that went through this before had no written definition of ready, no definition of done and
+                no sprint goal, so the gaps were agreements nobody had written down, not effort.{" "}
+                <Link href="/system/decks/how-we-run-a-sprint#slide-2" className="link">
+                  Sprint deck, slide 2
+                </Link>
+                .
+              </li>
+              <li>
+                The first quarter can miss. Teams new to planning don&apos;t know how to commit yet, and committing
+                is how they learn; the fix is to say what isn&apos;t ready, not to skip committing.{" "}
+                <Link href="/system/leading-the-change" className="link">
+                  Leading the change
+                </Link>
+                .
+              </li>
+            </ul>
+          </div>
         </div>
 
         <section id="documents" className="mt-16 scroll-mt-8">

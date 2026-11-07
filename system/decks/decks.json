@@ -1,58 +1,96 @@
 {
-  "_about": "The eight decks, in the order doc 15 rolls them out. Each folder holds deck.json, slides/, assets/; scripts/export-decks.mjs prints each to public/files/decks/<slug>.pdf. 'leaves' is what doc 15 says the session should leave behind; 'run' is when to run a practice deck.",
+  "_about": "The eight decks, in the order doc 15 rolls them out. Each folder holds deck.json, slides/, assets/; scripts/export-decks.mjs prints each to public/files/decks/<slug>.pdf. 'leaves' is what doc 15 says the session should leave behind; 'run' is when to run a practice deck. 'kind' is room (decks 1-3, the sessions that bring a room along; they live on door 1) or practice (decks 4-8, taught before first use; they live on their doc pages). 'docs' are the docs each deck teaches.",
   "decks": [
     {
       "slug": "from-request-fulfillers-to-outcome-owners",
       "step": "Leadership session",
       "audience": "Executive steering group, functional managers",
-      "leaves": "Agreement on the why. A named steering group and advisory group. A date for the first direction review."
+      "leaves": "Agreement on the why. A named steering group and advisory group. A date for the first direction review.",
+      "kind": "room",
+      "docs": [
+        "why-digital-services"
+      ]
     },
     {
       "slug": "a-new-way-of-working",
       "step": "Partner introduction",
       "audience": "Advisory group, partner managers, frequent requesters",
-      "leaves": "Partners know how to work with the team: how requests get an answer, when planning happens, what they will hear and when."
+      "leaves": "Partners know how to work with the team: how requests get an answer, when planning happens, what they will hear and when.",
+      "kind": "room",
+      "docs": [
+        "why-digital-services",
+        "request-triage-and-idea-log"
+      ]
     },
     {
       "slug": "team-kickoff",
       "step": "Team kickoff",
       "audience": "The whole team",
-      "leaves": "The vision, the roles, what starts now, and the red flags written down."
+      "leaves": "The vision, the roles, what starts now, and the red flags written down.",
+      "kind": "room",
+      "docs": [
+        "why-digital-services",
+        "roles-and-decision-rights",
+        "leading-the-change"
+      ]
     },
     {
       "slug": "how-requests-are-reviewed",
       "step": "Practice: request triage",
       "audience": "The people who run triage",
       "leaves": "Every request gets an answer within five business days.",
-      "run": "The week before the first weekly triage. It can start before the first quarter, and it is the fastest visible win."
+      "run": "The week before the first weekly triage. It can start before the first quarter, and it is the fastest visible win.",
+      "kind": "practice",
+      "docs": [
+        "request-triage-and-idea-log"
+      ]
     },
     {
       "slug": "how-we-map-and-slice-the-work",
       "step": "Practice: mapping and slicing",
       "audience": "Product owner, UX, developers",
       "leaves": "Candidate Solutions arrive in pieces small enough to size.",
-      "run": "Before the planning week."
+      "run": "Before the planning week.",
+      "kind": "practice",
+      "docs": [
+        "deliverables-and-user-stories"
+      ]
     },
     {
       "slug": "how-we-plan-the-quarter",
       "step": "Practice: quarterly planning",
       "audience": "The whole team",
       "leaves": "A plan the team believes it can keep, and the habit of making one.",
-      "run": "Day 1 of the planning week, before the first session."
+      "run": "Day 1 of the planning week, before the first session.",
+      "kind": "practice",
+      "docs": [
+        "quarterly-planning-and-commitments"
+      ]
     },
     {
       "slug": "how-we-run-a-sprint",
       "step": "Practice: sprints and the sprint report",
       "audience": "The whole team",
       "leaves": "Ready stories, a sprint goal, and a sprint report everyone can read.",
-      "run": "The week before Sprint 1 planning."
+      "run": "The week before Sprint 1 planning.",
+      "kind": "practice",
+      "docs": [
+        "sprint-report",
+        "team-rhythm",
+        "deliverables-and-user-stories",
+        "build-release-and-enable"
+      ]
     },
     {
       "slug": "how-we-learn-before-we-build",
       "step": "Practice: discovery",
       "audience": "The product trio",
       "leaves": "A discovery brief with a decision in it.",
-      "run": "When the first Initiative goes active and discovery starts on it."
+      "run": "When the first Initiative goes active and discovery starts on it.",
+      "kind": "practice",
+      "docs": [
+        "discovery"
+      ]
     }
   ]
 }

@@ -30,12 +30,13 @@ export default async function DocPage({ params }: Params) {
   const doc = getDoc(slug);
   if (!doc) notFound();
 
-  const { docs, templates } = getIndex();
+  const { docs, templates, decks } = getIndex();
   const i = docs.findIndex((d) => d.slug === slug);
   const meta = docs[i];
   const prev = docs[i - 1];
   const next = docs[i + 1];
   const files = meta.templates.map((t) => templates.find((x) => x.slug === t)!);
+  const taughtIn = meta.decks.map((d) => decks.find((x) => x.slug === d)!);
   const inline = meta.inlineTemplate ? getDocTemplate(doc.content) : null;
   const [html, blankHtml, exampleHtml, afterHtml] = await Promise.all(
     inline
@@ -91,6 +92,22 @@ export default async function DocPage({ params }: Params) {
             <h2 className="font-display text-h4 font-extrabold text-paper">Files for this chapter</h2>
             <p className="mt-2 text-small text-paper/60">Blank template plus a filled DMV example for each.</p>
             <TemplateList templates={files} />
+          </section>
+        )}
+
+        {taughtIn.length > 0 && (
+          <section className="mt-14">
+            <h2 className="font-display text-h4 font-extrabold text-paper">Taught in</h2>
+            <ul className="mt-3 space-y-2">
+              {taughtIn.map((d) => (
+                <li key={d.slug} className="text-small">
+                  <Link href={`/system/decks/${d.slug}`} className="link">
+                    {d.title}
+                  </Link>
+                  <span className="text-paper/60"> · {d.step}, {d.slides} slides</span>
+                </li>
+              ))}
+            </ul>
           </section>
         )}
 
